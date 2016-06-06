@@ -14,3 +14,4 @@ RUN apt-get update && \
 # If you supply your pre-bundled app, you do not need the
 # Meteor tool.
 RUN curl https://install.meteor.com/ |sh
+RUN mkdir /var/www -p
