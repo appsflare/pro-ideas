@@ -13,5 +13,5 @@ RUN apt-get update && \
 # Install Meteor -- now done on-demand to reduce image size
 # If you supply your pre-bundled app, you do not need the
 # Meteor tool.
-RUN curl https://install.meteor.com/ |sh
+RUN curl https://install.meteor.com/ | bash
 RUN mkdir /var/www -p
