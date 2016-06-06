@@ -1,6 +1,10 @@
 {
   "name": "pro-ideas",
   "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": "4.1.1"
+  },
   "scripts": {
     "start": "meteor run"
   },
