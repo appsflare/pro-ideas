@@ -1,11 +1,8 @@
-# Simple Todo List
+# Simple Ideas Dashboard
 
-The Meteor Tutorial app.
 
-Use it to share a single todo list with your friends. The list updates on everyone's screen in real time, and you can make tasks private if you don't want others to see them.
+Use it to share collect ideas from your friends, employees, students etc.
 
-Learn how to build this app by following the [Meteor Tutorial](http://www.meteor.com/install).
-
-Read more about building apps with Meteor in the [Meteor Guide](http://guide.meteor.com).
+ The list updates on everyone's screen in real time.
 
 ![screenshot](screenshot.png)
