@@ -1,4 +1,4 @@
-FROM node:jessie
+FROM debian:jessie
 
 RUN apt-get update
 
