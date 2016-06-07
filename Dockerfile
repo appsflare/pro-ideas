@@ -1,6 +1,11 @@
-FROM appsflare/pro-ideas:meteor
-COPY . /var/www/
-WORKDIR /var/www
+FROM appsflare/pro-ideas:node
+RUN mkdir /var/www -p
+COPY ./dist/pro-ideas.tar.gz /var/www/
+RUN cd /var/www/ && \
+    tar -xvzf pro-ideas.tar.gz && \
+    cd bundle/programs/server && \
+    npm install
+    
+WORKDIR /var/www/bundle
 EXPOSE 3000
-RUN npm install
-CMD ['/usr/local/bin/meteor']
+CMD ['node','main.js']
