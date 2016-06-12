@@ -100,7 +100,7 @@ export default class CreateIdeaForm extends Component {
               {this.state.isFundingRequired ?
                 <div className="form-group">
                   <div className="col-sm-12">
-                    <input type="number" name="requiredFund" value={this.state.requiredFund} onChange={this.onInputChange.bind(this)} className="form-control" placeholder="New Idea"/>
+                    <input type="number" name="requiredFund" value={this.state.requiredFund} onChange={this.onInputChange.bind(this)} className="form-control" placeholder="Required Fund"/>
                   </div>
                 </div>
                 : ''}
