@@ -6,19 +6,18 @@ import { Blaze } from 'meteor/blaze';
 export default class AccountsUIWrapper extends Component {
   componentDidMount() {
 
-    Template._loginButtons.events({
+    // Template._loginButtons.events({
 
-      'click': function (e, t) {
-        $('#signup-link').attr('href', '/register');
-        e.preventDefault();
-      }
-    });
+    //   'click': function (e, t) {
+    //     $('#signup-link').attr('href', '/register');
+    //     e.preventDefault();
+    //   }
+    // });
 
     // Use Meteor Blaze to render login buttons
-    this.view = Blaze.render(Template._loginButtons,
-      ReactDOM.findDOMNode(this.refs.container));
+    this.view = Blaze.render(Template.loginButtons, ReactDOM.findDOMNode(this.refs.container));
 
-    
+
   }
   componentWillUnmount() {
     // Clean up Blaze view
