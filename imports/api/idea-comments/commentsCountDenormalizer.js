@@ -22,7 +22,7 @@ const commentsCountDenormalizer = {
   // Here we need to take the list of todos being removed, selected *before* the update
   // because otherwise we can't figure out the relevant list id(s) (if the todo has been deleted)
   afterRemoveComments(comments) {
-    comments.forEach(comment => this._updateList(comment.ideaId))
+    comments.forEach(comment => this._updateIdea(comment.ideaId))
   },
 }
 

@@ -4,8 +4,7 @@ import { check } from 'meteor/check'
 import { Votes } from './votes'
 import { Ideas } from '../ideas/ideas'
 
-function getVotesCount (ideaId, isUpVote) {
-  console.log({ ideaId, isUpVote});
+function getVotesCount (ideaId, isUpVote) {  
   return Votes.find({ ideaId, isUpVote}).count()
 }
 

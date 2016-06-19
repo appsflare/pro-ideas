@@ -6,7 +6,7 @@ import { Session } from 'meteor/session'; // XXX: SESSION
 import { Ideas } from '../../api/ideas/ideas.js';
 import UserMenu from '../components/UserMenu.jsx';
 import {IdeasList} from '../components/ideas-list.jsx';
-import ConnectionNotification from '../components/ConnectionNotification.jsx';
+import ConnectionNotification from '../components/ConnectionNotification';
 import Loading from '../components/Loading.jsx';
 import IdeasContainer from '../containers/IdeasContainer.jsx';
 
@@ -64,10 +64,13 @@ export default class App extends React.Component {
 
     const closeMenu = this.toggleMenu.bind(this, false);
 
+
+    showConnectionIssue && !connected ? ConnectionNotification.notify() : ConnectionNotification.close();
+
     // clone route components with keys so that they can
     // have transitions   
-    
-    const clonedChildren = React.cloneElement(children || <IdeasContainer/>, {
+
+    const clonedChildren = React.cloneElement(children || <IdeasContainer route={{ params: { all: true } }}/>, {
       key: location.pathname,
     });
 
@@ -78,7 +81,10 @@ export default class App extends React.Component {
           <Navbar>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="#">Pro-Ideas</a>
+                <a href="/">
+                  <span><img src="/icons/logo.svg"/></span>
+                  Pro-Ideas
+                </a>
               </Navbar.Brand>
             </Navbar.Header>
             <Nav>
@@ -102,9 +108,6 @@ export default class App extends React.Component {
           <section id="menu">
 
           </section>
-          {showConnectionIssue && !connected
-            ? <ConnectionNotification/>
-            : null}
           <div className="content-overlay" onClick={closeMenu}></div>
           <section id="content-container">
             <ReactCSSTransitionGroup
