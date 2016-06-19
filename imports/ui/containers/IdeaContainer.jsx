@@ -6,7 +6,7 @@ import {IdeaPage} from '../pages/idea-page.jsx';
 export default createContainer(({ params: { id } }) => {
   const ideasHandle = Meteor.subscribe('ideas.public.findOne', id);
   const loading = !ideasHandle.ready();
-  const ideas = Ideas.find({}, { sort: { createdAt: -1 } }).fetch();
+  const ideas = Ideas.find({_id: id}, { sort: { createdAt: -1 } }).fetch();
   const ideasExists = !loading && !!ideas;
   return {
     loading,
