@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import {remove} from '../../api/idea-comments/methods';
 
 // Task component - represents a single todo item
 export default class IdeaComment extends Component {
 
   deleteThisComment() {
-    Meteor.call('idea-comments.remove', this.props.comment._id);
+    remove.call( {commentId:this.props.comment._id}, err=>{
+      err && console.error(err);
+    });
   }
 
   get currentUser() {

@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Ideas } from '../../api/ideas';
-import { IdeaComments } from '../../api/idea-comments';
-import IdeaCommentsListContainer from '../containers/idea-comments-list-container';
-import {IdeaCommentForm} from '../components/idea-comment-form';
+import { Ideas } from '../../api/ideas/ideas';
+import { IdeaComments } from '../../api/idea-comments/idea-comments';
+import IdeaCommentsListContainer from '../containers/idea-comments-list-container.jsx';
+import {IdeaCommentForm} from '../components/idea-comment-form.jsx';
+import {VoteIdea} from '../components/VoteIdea.jsx';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 
-class IdeaPage extends Component {
+export class IdeaPage extends Component {
 
   get currentUser() {
     return Meteor.userId();
@@ -25,15 +26,8 @@ class IdeaPage extends Component {
     this.castVote(false, idea);
   }
 
-  renderVoteControls(idea) {
-    return (<span> <button type="button" className={'btn btn-default' + (this.currentUser ? '' : 'disabled') } aria-label="Left Align" onClick={this.castVote.bind(this, true, idea) }>
-      <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true">{idea.upVotes ? ' ' + idea.upVotes : ''}</span>
-    </button>
-
-      <button type="button" className={'btn btn-default' + (this.currentUser ? '' : 'disabled') } aria-label="Left Align" onClick={this.castVote.bind(this, false, idea) }>
-        <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true">{idea.downVotes ? ' ' + idea.downVotes : ''}</span>
-      </button>
-    </span>);
+  _renderVoteControls(idea) {
+    return (<VoteIdea idea={idea}/>);
   }
 
   renderIdeaDetails(idea) {
@@ -41,7 +35,7 @@ class IdeaPage extends Component {
       <div key={idea._id}>
         <div class="page-header">
           <h1>{idea.name} <small>by {idea.ownerName}</small></h1>
-          {this.renderVoteControls(idea)}
+          {this._renderVoteControls(idea)}
         </div>
 
         <div className="bs-callout bs-callout-info">
@@ -59,7 +53,7 @@ class IdeaPage extends Component {
           { idea.requiredFund ? <h4>Funding Requirement  <span className="badge">{idea.comments}</span> </h4> : ''}
           <h4>Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''} </h4>
           <hr/>
-          <IdeaCommentForm ideaId={idea._id} />
+         {this.currentUser? <IdeaCommentForm ideaId={idea._id} />:''}
           <IdeaCommentsListContainer ideaId={idea._id}/>
         </div>
 
@@ -68,12 +62,12 @@ class IdeaPage extends Component {
   }
 
   renderIdea() {
-    return this.props.idea.map(idea => this.renderIdeaDetails(idea));
+    return this.props.ideas.map(idea => this.renderIdeaDetails(idea));
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         {this.renderIdea() }
       </div>
     );
@@ -83,13 +77,5 @@ class IdeaPage extends Component {
 
 
 IdeaPage.propTypes = {
-  idea: PropTypes.array.isRequired
+  ideas: PropTypes.array.isRequired
 };
-
-export default createContainer(function (params) {
-  let handle = Meteor.subscribe('ideas.public.findOne', params.ideaId);
-  handle.ready();
-  return {
-    idea: Ideas.find().fetch()
-  };
-}, IdeaPage)

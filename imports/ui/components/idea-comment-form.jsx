@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
+import {insert} from '../../api/idea-comments/methods';
 
 export class IdeaCommentForm extends Component {
 
@@ -10,9 +11,11 @@ export class IdeaCommentForm extends Component {
     // Find the text field via the React ref
     let textInput = ReactDOM.findDOMNode(this.refs.textInput);
 
-   let text = textInput.value.trim();
+    const text = textInput.value.trim();
 
-    Meteor.call('idea-comments.insert', this.props.ideaId, text);
+    insert.call({ ideaId: this.props.ideaId, text }, err=>{
+      err && console.error(err);
+    });
 
     // Clear form
     textInput.value = '';
@@ -24,12 +27,12 @@ export class IdeaCommentForm extends Component {
 
 
 
-  render() {    
+  render() {
     return (
       <div>
 
         <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
-       
+
           <div className="form-group">
             <div className="col-sm-12">
               <textarea ref="textInput" name="text" className="form-control" rows="3" placeholder=""></textarea>
