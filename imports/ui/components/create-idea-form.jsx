@@ -17,7 +17,7 @@ export default class CreateIdeaForm extends Component {
       businessValue: '',
       definitionOfSuccess: '',
       isFundingRequired: false,
-      requiredFund: 0,
+      fundingRequirement: '',
       error: ''
     };
   }
@@ -35,12 +35,11 @@ export default class CreateIdeaForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    debugger;
     const newIdea = {
       name: this.state.name.trim(),
       businessValue: this.state.businessValue.trim(),
       definitionOfSuccess: this.state.definitionOfSuccess.trim(),
-      requiredFund: parseFloat(this.state.requiredFund)
+      fundingRequirement: this.state.fundingRequirement.trim()
     };
 
 
@@ -89,7 +88,7 @@ export default class CreateIdeaForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <textarea ref="descInput" name="businessValue" value={this.state.businessValue} onChange={this.onInputChange.bind(this) } className="form-control" rows="3" placeholder="Business value"></textarea>
+              <textarea ref="descInput" name="businessValue" value={this.state.businessValue} onChange={this.onInputChange.bind(this) } className="form-control" rows="3" placeholder="Business value"></textarea>              
             </div>
           </div>
 
@@ -116,7 +115,7 @@ export default class CreateIdeaForm extends Component {
               {this.state.isFundingRequired ?
                 <div className="form-group">
                   <div className="col-sm-12">
-                    <input type="number" name="requiredFund" value={this.state.requiredFund} onChange={this.onInputChange.bind(this) } className="form-control" placeholder="Required Fund"/>
+                    <textarea ref="descInput" name="fundingRequirement" value={this.state.fundingRequirement} onChange={this.onInputChange.bind(this) } className="form-control" rows="3" placeholder="Explain your fuding requirement in detail"></textarea>
                   </div>
                 </div>
                 : ''}

@@ -44,10 +44,10 @@ Ideas.schema = new SimpleSchema({
     type: String,
     optional: true
   },  
-  requiredFund: {
-    type: Number,
+  fundingRequirement: {
+    type: String,
     optional: true,
-    defaultValue: 0
+    defaultValue: ''
   },
   createdAt: {
     type: Date
@@ -83,7 +83,7 @@ Ideas.publicFields = {
   name: 1,
   businessValue: 1,
   definitionOfSuccess: 1,
-  requiredFund: 1,
+  fundingRequirement: 1,
   createdAt: 1,
   ownerId: 1,
   ownerName: 1,
