@@ -1,46 +1,36 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import {VoteIdea} from './VoteIdea.jsx'
+import {remove} from '../../api/ideas/methods'
 
 // Task component - represents a single todo item
 export default class Idea extends Component {
 
   deleteThisIdea() {
-   this.currentUser && Meteor.call('ideas.remove', this.props.idea._id);
+    this.currentUser && remove.call({ ideaId: this.props.idea._id }, err => {
+      err && console.error(err);
+    });
   }
-
-  castVote(isUpVote) {
-    this.currentUser && Meteor.call('votes.cast', this.props.idea._id, isUpVote);
-  }
-
-  upVote() {
-    this.castVote(true);
-  }
-
-  downVote() {
-    this.castVote(false);
-  }
-
 
   get currentUser() {
     return Meteor.userId();
   }
 
-  renderVoteControls(idea) {    
+  renderVoteControls(idea) {
     return (<VoteIdea idea={idea}/>);
   }
 
 
   render() {
-    const idea = this.props.idea;    
+    const idea = this.props.idea;
     return (
       <div>
         <h4 className="list-group-item-heading">
 
-        <Link to={`idea/${idea._id}`}>
-          {idea.name}<small> by {idea.ownerName} </small>
-        </Link>        
-        
+          <Link to={`idea/${idea._id}`}>
+            {idea.name}<small> by {idea.ownerName} </small>
+          </Link>
+
         </h4>
         <p class="list-group-item-text">{idea.description}</p>
 
