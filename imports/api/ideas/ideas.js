@@ -18,8 +18,7 @@ class IdeasCollection extends Mongo.Collection {
 
     return super.insert(ourIdea, callback)
   }
-  remove (selector, callback) {
-    Ideas.remove({ IdeaId: selector })
+  remove (selector, callback) {    
     return super.remove(selector, callback)
   }
 }
