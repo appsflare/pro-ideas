@@ -26,7 +26,6 @@ export const cast = new ValidatedMethod({
       const vote = {ideaId, isUpVote, ownerId, ownerName}
       Votes.insert(vote)
     } else {
-      debugger;
       Votes.update({_id: castedVote._id}, { $set: { isUpVote} })
     }
   }
