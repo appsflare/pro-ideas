@@ -8,20 +8,20 @@ export class Register extends Component {
     event.preventDefault();
 
     // Find the text field via the React ref
-    let fullNameInput = ReactDOM.findDOMNode(this.refs.fullNameInput);
-    let emailInput = ReactDOM.findDOMNode(this.refs.emailInput);
-    let passwordInput = ReactDOM.findDOMNode(this.refs.passwordInput);   
+    let fullNameInput = this.refs.fullNameInput.value;
+    let emailInput = this.refs.emailInput.value;
+    let passwordInput = this.refs.passwordInput.value;   
 
 
     Accounts.createUser({
-       email: emailInput.value,
-       fullName: fullNameInput.value,
-       password: passwordInput.value
+       email: emailInput,
+       fullName: fullNameInput,
+       password: passwordInput
     });
     
     Accounts.login({
-       email: emailInput.value,       
-       password: passwordInput.value
+       email: emailInput,       
+       password: passwordInput
     });
 
     window.local.href = '/';

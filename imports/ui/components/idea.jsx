@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+import {VoteIdea} from './VoteIdea.jsx'
 
 // Task component - represents a single todo item
 export default class Idea extends Component {
@@ -25,22 +27,21 @@ export default class Idea extends Component {
   }
 
   renderVoteControls(idea) {    
-    return (<span> <button type="button" className={'btn btn-default' + (this.currentUser ? '' : 'disabled') } aria-label="Left Align" onClick={this.castVote.bind(this, true) }>
-      <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true">{idea.upVotes ? ' ' + idea.upVotes : ''}</span>
-    </button>
-
-      <button type="button" className={'btn btn-default' + (this.currentUser ? '' : 'disabled') } aria-label="Left Align" onClick={this.castVote.bind(this, false) }>
-        <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true">{idea.downVotes ? ' ' + idea.downVotes : ''}</span>
-      </button>
-    </span>);
+    return (<VoteIdea idea={idea}/>);
   }
 
 
   render() {
-    const idea = this.props.idea;
+    const idea = this.props.idea;    
     return (
       <div>
-        <h4 className="list-group-item-heading"> <a href={FlowRouter.path('/idea/:id', { id: idea._id }) }> {idea.name}<small> by {idea.ownerName} </small></a></h4>
+        <h4 className="list-group-item-heading">
+
+        <Link to={`idea/${idea._id}`}>
+          {idea.name}<small> by {idea.ownerName} </small>
+        </Link>        
+        
+        </h4>
         <p class="list-group-item-text">{idea.description}</p>
 
         <a href="#" >

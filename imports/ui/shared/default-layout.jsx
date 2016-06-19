@@ -37,7 +37,7 @@ export class DefaultLayout extends Component {
                         <Nav>
                             <NavItem eventKey={1} href="/ideas">Ideas</NavItem>
                             <NavItem>
-                                <AccountsUIWrapper />
+                                
                             </NavItem>
                         </Nav>
                     </Navbar>
