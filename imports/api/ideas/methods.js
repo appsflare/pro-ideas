@@ -58,9 +58,9 @@ export const remove = new ValidatedMethod({
   name: 'ideas.remove',
   validate: IDEA_ID_ONLY,
   run({ ideaId }) {
-    const list = Ideas.findOne(ideaId)
+    const idea = Ideas.findOne(ideaId)
 
-    if (!list.editableBy(this.userId)) {
+    if (!idea.editableBy(this.userId)) {
       throw new Meteor.Error('ideas.remove.accessDenied',
         "You don't have permission to remove this idea.")
     }
