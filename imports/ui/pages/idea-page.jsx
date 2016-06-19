@@ -35,7 +35,7 @@ export class IdeaPage extends Component {
       <div key={idea._id}>
         <div class="page-header">
           <h1>{idea.name} <small>by {idea.ownerName}</small></h1>
-          {this._renderVoteControls(idea)}
+          {this._renderVoteControls(idea) }
         </div>
 
         <div className="bs-callout bs-callout-info">
@@ -50,10 +50,14 @@ export class IdeaPage extends Component {
           </div>
           : ''}
         <div>
-          { idea.requiredFund ? <h4>Funding Requirement  <span className="badge">{idea.comments}</span> </h4> : ''}
+          { idea.fundingRequirement ?
+            <div>
+              <h4>Funding Requirement </h4>
+              <p>{idea.fundingRequirement}</p>
+            </div> : ''}
           <h4>Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''} </h4>
           <hr/>
-         {this.currentUser? <IdeaCommentForm ideaId={idea._id} />:''}
+          {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
           <IdeaCommentsListContainer ideaId={idea._id}/>
         </div>
 
