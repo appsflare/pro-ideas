@@ -51,15 +51,14 @@ export default class CreateIdeaForm extends Component {
 
       if (err) {
         this.setState({ error: err.reason });
-      }
-
-      // Clear form
-      this._setInitialState();
+      }      
 
       this.refs.businessValue.medium.setContent('')
       this.refs.definitionOfSuccess.medium.setContent('')
       this.refs.fundingRequirement.medium.setContent('')
       
+      // Clear form
+      this._setInitialState();
 
 
     });
