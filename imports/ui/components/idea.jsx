@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import {VoteIdea} from './VoteIdea.jsx'
 import {remove} from '../../api/ideas/methods'
+import textUtils from '../helpers/text'
 
 // Task component - represents a single todo item
 export default class Idea extends Component {
@@ -32,11 +33,8 @@ export default class Idea extends Component {
           </Link>
 
         </h4>
-        <p class="list-group-item-text">{idea.description}</p>
+        <p class="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue)}/>
 
-        <a href="#" >
-
-        </a>
         {idea.ownerId === this.currentUser ?
           <button type="button" className="btn btn-default" aria-label="Left Align" onClick={this.deleteThisIdea.bind(this) }>
             <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
