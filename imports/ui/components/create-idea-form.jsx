@@ -56,6 +56,12 @@ export default class CreateIdeaForm extends Component {
       // Clear form
       this._setInitialState();
 
+      this.refs.businessValue.medium.setContent('')
+      this.refs.definitionOfSuccess.medium.setContent('')
+      this.refs.fundingRequirement.medium.setContent('')
+      
+
+
     });
 
   }
@@ -105,7 +111,7 @@ export default class CreateIdeaForm extends Component {
             <div className="col-sm-12">
               <div className="form-control">
 
-                <ReactMarkdownMediumEditor
+                <ReactMarkdownMediumEditor ref="businessValue"                
                   options={{ placeholder: { text: 'Click here to describe Business value' } }}
                   markdown={this.state.businessValue}
                   onChange={this.businessValueUpdated}/>
@@ -124,7 +130,7 @@ export default class CreateIdeaForm extends Component {
               <div className="form-group">
                 <div className="col-sm-12">
                   <div className="form-control">
-                    <ReactMarkdownMediumEditor
+                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"  
                       options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
                       markdown={this.state.definitionOfSuccess}
                       onChange={this.definitionOfSuccessUpdated}/>
@@ -143,7 +149,7 @@ export default class CreateIdeaForm extends Component {
                 <div className="form-group">
                   <div className="col-sm-12">
                     <div className="form-control">
-                      <ReactMarkdownMediumEditor
+                      <ReactMarkdownMediumEditor ref="fundingRequirementUpdated"
                         options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
                         markdown={this.state.fundingRequirement}
                         onChange={this.fundingRequirementUpdated}/>

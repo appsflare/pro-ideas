@@ -97,7 +97,7 @@ export class IdeaPage extends Component {
         <div className="bs-callout bs-callout-info">
           <h4>Business value</h4>
           { isCurrentUserTheOwner ?
-            <ReactMarkdownMediumEditor
+            <ReactMarkdownMediumEditor ref="businessValue"
               options={{ placeholder: { text: 'Click here to describe Business value' } }}
               markdown={idea.businessValue}
               onChange={this.businessValueUpdated}/>
@@ -110,7 +110,7 @@ export class IdeaPage extends Component {
         <div className="bs-callout bs-callout-info">
           <h4>Definition of Success</h4>
           { isCurrentUserTheOwner ?
-            <ReactMarkdownMediumEditor
+            <ReactMarkdownMediumEditor ref="definitionOfSuccess"
               options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
               markdown={idea.definitionOfSuccess}
               onChange={this.definitionOfSuccessUpdated}/>
@@ -124,7 +124,7 @@ export class IdeaPage extends Component {
         <div className="bs-callout bs-callout-info">
           <h4>Funding Requirement </h4>
 
-          { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor
+          { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
             options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
             markdown={idea.fundingRequirement}
             onChange={this.fundingRequirementUpdated}/>
