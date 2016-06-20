@@ -1,7 +1,7 @@
 import {Showdown} from 'meteor/markdown';
 const converter = new Showdown.converter();
 export default {
-    toHtml(markdown) {
+    toHtml(markdown='') {
         return converter.makeHtml(markdown)
     },
     createMarkup(markdown) {

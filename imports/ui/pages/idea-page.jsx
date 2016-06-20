@@ -19,8 +19,9 @@ export class IdeaPage extends Component {
     super(...arguments)
     this.state = {};
     this.dataChanged = this.dataChanged.bind(this)
-    this.businessValueUpdated = this.businessValueUpdated.bind(this)
-    this.definitionOfSuccessUpdated = this.definitionOfSuccessUpdated.bind(this)
+    this.businessValueUpdated = _.debounce(this.businessValueUpdated.bind(this), 1000)
+    this.definitionOfSuccessUpdated = _.debounce(this.definitionOfSuccessUpdated.bind(this), 1000)
+    this.fundingRequirementUpdated = _.debounce(this.fundingRequirementUpdated.bind(this), 1000)
     window.ReactDOM = ReactDOM;
     window.ReactMarkdownMediumEditor = ReactMarkdownMediumEditor;
   }
@@ -64,6 +65,10 @@ export class IdeaPage extends Component {
     this._updateIdea({ definitionOfSuccess: data })
   }
 
+  fundingRequirementUpdated(data) {
+    this._updateIdea({ fundingRequirement: data })
+  }
+
   _renderVoteControls(idea) {
     return (<VoteIdea idea={idea}/>);
   }
@@ -92,28 +97,42 @@ export class IdeaPage extends Component {
         <div className="bs-callout bs-callout-info">
           <h4>Business value</h4>
           { isCurrentUserTheOwner ?
-            <ReactMarkdownMediumEditor markdown={idea.businessValue} onChange={this.businessValueUpdated}/>
+            <ReactMarkdownMediumEditor
+              options={{ placeholder: { text: 'Click here to describe Business value' } }}
+              markdown={idea.businessValue}
+              onChange={this.businessValueUpdated}/>
             :
-            <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue)}/>
+            <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
           }
         </div>
 
-        {idea.definitionOfSuccess ?
-          <div className="bs-callout bs-callout-info">
-            <h4>Definition of Success</h4>
-            { isCurrentUserTheOwner ?
-              <ReactMarkdownMediumEditor markdown={idea.definitionOfSuccess} onChange={this.definitionOfSuccessUpdated}/>
-              :
-              <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess)}/>
-            }
-          </div>
-          : ''}
+
+        <div className="bs-callout bs-callout-info">
+          <h4>Definition of Success</h4>
+          { isCurrentUserTheOwner ?
+            <ReactMarkdownMediumEditor
+              options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
+              markdown={idea.definitionOfSuccess}
+              onChange={this.definitionOfSuccessUpdated}/>
+            :
+            <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
+          }
+        </div>
+
+
+
+        <div className="bs-callout bs-callout-info">
+          <h4>Funding Requirement </h4>
+
+          { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor
+            options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
+            markdown={idea.fundingRequirement}
+            onChange={this.fundingRequirementUpdated}/>
+            :
+            <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
+          }          
+        </div>
         <div>
-          { idea.fundingRequirement ?
-            <div>
-              <h4>Funding Requirement </h4>
-              <p>{idea.fundingRequirement}</p>
-            </div> : ''}
           <h4>Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''} </h4>
           <hr/>
           {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}

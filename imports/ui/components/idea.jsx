@@ -28,7 +28,7 @@ export default class Idea extends Component {
       <div>
         <h4 className="list-group-item-heading">
 
-          <Link to={`idea/${idea._id}`}>
+          <Link to={`/idea/${idea._id}`}>
             {idea.name}<small> by {idea.ownerName} </small>
           </Link>
 
