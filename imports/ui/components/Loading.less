@@ -1,8 +1,35 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
+
+@-webkit-keyframes color_change {
+	from { fill: #009cdc; }
+	to { fill: #000; }
+}
+@-moz-keyframes color_change {
+  from { fill: #009cdc; }
+	to { fill: #000; }
+}
+@-ms-keyframes color_change {
+  from { fill: #009cdc; }
+	to { fill: #000; }
+}
+@-o-keyframes color_change {
+  from { fill: #009cdc; }
+	to { fill: #000; }
+}
+@keyframes color_change {
+	from { fill: #009cdc; }
+	to { fill: #000; }
+}
+
 .loading-app {
   .position(absolute, 50%, 50%, auto, auto, 50%);
   transform: translate3d(50%, -50%, 0);
   min-width: 160px;
   max-width: 320px;
+  -webkit-animation: color_change 1s infinite alternate;
+	-moz-animation: color_change 1s infinite alternate;
+	-ms-animation: color_change 1s infinite alternate;
+	-o-animation: color_change 1s infinite alternate;
+	animation: color_change 1s infinite alternate;
 }

@@ -36,12 +36,15 @@ IdeaComments.schema = new SimpleSchema({
     denyUpdate: true,
   },
   text: {
-    type: String,
-    denyUpdate: true,
+    type: String    
   },
   createdAt: {
     type: Date,
     denyUpdate: true,
+  },
+  updatedOn: {
+    type: Date,
+    optional: true
   },
   ownerId: {
     type: String,

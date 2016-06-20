@@ -2,23 +2,32 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/idea-comments/methods';
+import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 
 export class IdeaCommentForm extends Component {
 
+  constructor() {
+    super(...arguments);
+    this.commentTextUpdated = this.commentTextUpdated.bind(this)
+    this.state = { text: '' }    
+  }
+
+  commentTextUpdated(data) {
+    this.setState({ text: data })
+  }
+
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault();    
 
-    // Find the text field via the React ref
-    let textInput = ReactDOM.findDOMNode(this.refs.textInput);
+    const text = this.state.text.trim();      
 
-    const text = textInput.value.trim();
+    insert.call({ ideaId: this.props.ideaId, text }, err => {
+      err && console.error(err);      
+      this.refs.editor.medium.setContent('')
+      this.setState({text:''})      
+    });    
 
-    insert.call({ ideaId: this.props.ideaId, text }, err=>{
-      err && console.error(err);
-    });
-
-    // Clear form
-    textInput.value = '';
+    
   }
 
   get currentUser() {
@@ -35,7 +44,12 @@ export class IdeaCommentForm extends Component {
 
           <div className="form-group">
             <div className="col-sm-12">
-              <textarea ref="textInput" name="text" className="form-control" rows="3" placeholder=""></textarea>
+              <div className="form-control">
+                <ReactMarkdownMediumEditor ref="editor"
+                  options={{ placeholder: { text: 'Click here to add your comment' } }}
+                  markdown={this.state.text}
+                  onChange={this.commentTextUpdated}/>
+              </div>
             </div>
           </div>
           <div className="form-group">
