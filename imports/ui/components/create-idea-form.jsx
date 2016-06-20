@@ -149,7 +149,7 @@ export default class CreateIdeaForm extends Component {
                 <div className="form-group">
                   <div className="col-sm-12">
                     <div className="form-control">
-                      <ReactMarkdownMediumEditor ref="fundingRequirementUpdated"
+                      <ReactMarkdownMediumEditor ref="fundingRequirement"
                         options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
                         markdown={this.state.fundingRequirement}
                         onChange={this.fundingRequirementUpdated}/>
