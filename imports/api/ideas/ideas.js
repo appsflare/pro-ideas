@@ -37,11 +37,13 @@ Ideas.schema = new SimpleSchema({
     type: String
   },
   businessValue: {
-    type: String
+    type: String,
+    defaultValue:''
   },
   definitionOfSuccess: {
     type: String,
-    optional: true
+    optional: true,
+    defaultValue:''
   },  
   fundingRequirement: {
     type: String,
