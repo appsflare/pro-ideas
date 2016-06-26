@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/ideas/methods';
 import uuid from 'uuid';
+import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 
 export default class CreateIdeaForm extends Component {
 
   constructor() {
     super(...arguments);
+    this.businessValueUpdated = this.businessValueUpdated.bind(this)
+    this.definitionOfSuccessUpdated = this.definitionOfSuccessUpdated.bind(this)
+    this.fundingRequirementUpdated = this.fundingRequirementUpdated.bind(this)
     this._setInitialState();
   }
 
@@ -47,14 +51,30 @@ export default class CreateIdeaForm extends Component {
 
       if (err) {
         this.setState({ error: err.reason });
-      }
+      }      
 
+      this.refs.businessValue.medium.setContent('')
+      this.refs.definitionOfSuccess.medium.setContent('')
+      this.refs.fundingRequirement.medium.setContent('')
+      
       // Clear form
       this._setInitialState();
 
+
     });
 
+  }
 
+  businessValueUpdated(data) {
+    this.setState({ businessValue: data })
+  }
+
+  definitionOfSuccessUpdated(data) {
+    this.setState({ definitionOfSuccess: data })
+  }
+
+  fundingRequirementUpdated(data) {
+    this.setState({ fundingRequirement: data })
   }
 
 
@@ -88,7 +108,13 @@ export default class CreateIdeaForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <textarea ref="descInput" name="businessValue" value={this.state.businessValue} onChange={this.onInputChange.bind(this) } className="form-control" rows="3" placeholder="Business value"></textarea>              
+              <div className="form-control">
+
+                <ReactMarkdownMediumEditor ref="businessValue"                
+                  options={{ placeholder: { text: 'Click here to describe Business value' } }}
+                  markdown={this.state.businessValue}
+                  onChange={this.businessValueUpdated}/>
+              </div>
             </div>
           </div>
 
@@ -102,7 +128,13 @@ export default class CreateIdeaForm extends Component {
             <div className="well">
               <div className="form-group">
                 <div className="col-sm-12">
-                  <textarea ref="dosInput" name="definitionOfSuccess" value={this.state.definitionOfSuccess} onChange={this.onInputChange.bind(this) } className="form-control" rows="3" placeholder="Definition of Success"></textarea>
+                  <div className="form-control">
+                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"  
+                      options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
+                      markdown={this.state.definitionOfSuccess}
+                      onChange={this.definitionOfSuccessUpdated}/>
+                  </div>
+
                 </div>
               </div>
               <div className="form-group">
@@ -115,7 +147,12 @@ export default class CreateIdeaForm extends Component {
               {this.state.isFundingRequired ?
                 <div className="form-group">
                   <div className="col-sm-12">
-                    <textarea ref="descInput" name="fundingRequirement" value={this.state.fundingRequirement} onChange={this.onInputChange.bind(this) } className="form-control" rows="3" placeholder="Explain your fuding requirement in detail"></textarea>
+                    <div className="form-control">
+                      <ReactMarkdownMediumEditor ref="fundingRequirement"
+                        options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
+                        markdown={this.state.fundingRequirement}
+                        onChange={this.fundingRequirementUpdated}/>
+                    </div>
                   </div>
                 </div>
                 : ''}

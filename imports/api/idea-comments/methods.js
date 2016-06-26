@@ -17,35 +17,37 @@ export const insert = new ValidatedMethod({
   run({ ideaId, text }) {
     const list = Ideas.findOne(ideaId);
 
-  const idea = Ideas.findOne(ideaId)
-      if (!idea) {
-        throw new Meteor.Error('idea-not-found')
-      }
+    const idea = Ideas.findOne(ideaId)
+    if (!idea) {
+      throw new Meteor.Error('idea-not-found')
+    }
 
-      const ownerName = Meteor.user().profile.fullName;
+    const ownerName = Meteor.user().profile.fullName;
 
-      IdeaComments.insert({ideaId, text, ownerId: this.userId, ownerName: ownerName})
+    IdeaComments.insert({ ideaId, text, ownerId: this.userId, ownerName: ownerName })
   }
 });
 
 export const updateText = new ValidatedMethod({
   name: 'idea-comments.updateText',
   validate: new SimpleSchema({
-    ideaId: { type: String },
+    commentId: { type: String },
     text: { type: String },
   }).validator(),
-  run({ ideaId, newText }) {
+  run({ commentId, text }) {
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
     // would be correct here?
-    const ideaComment = IdeaComments.findOne(ideaId);
+    const ideaComment = IdeaComments.findOne(commentId);
 
     if (!ideaComment.editableBy(this.userId)) {
       throw new Meteor.Error('ideaComments.updateText.accessDenied',
         'Cannot edit comment that is not yours');
     }
 
-    IdeaComments.update(ideaId, {
-      $set: { text: newText },
+    const updatedOn = Date.now();
+
+    IdeaComments.update(commentId, {
+      $set: { text, updatedOn },
     });
   },
 });
@@ -69,7 +71,7 @@ export const remove = new ValidatedMethod({
 
 // Get list of all method names on Todos
 const IDEA_COMMENTS_METHODS = _.pluck([
-  insert,  
+  insert,
   updateText,
   remove,
 ], 'name');

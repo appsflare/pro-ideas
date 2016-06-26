@@ -18,8 +18,7 @@ class IdeasCollection extends Mongo.Collection {
 
     return super.insert(ourIdea, callback)
   }
-  remove (selector, callback) {
-    Ideas.remove({ IdeaId: selector })
+  remove (selector, callback) {    
     return super.remove(selector, callback)
   }
 }
@@ -38,11 +37,13 @@ Ideas.schema = new SimpleSchema({
     type: String
   },
   businessValue: {
-    type: String
+    type: String,
+    defaultValue:''
   },
   definitionOfSuccess: {
     type: String,
-    optional: true
+    optional: true,
+    defaultValue:''
   },  
   fundingRequirement: {
     type: String,
