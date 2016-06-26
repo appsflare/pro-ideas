@@ -26,8 +26,12 @@ Teams.schema = new SimpleSchema({
   name: {
     type: String
   },
-  members: {
-    type: Array
+  'members.$.memberId': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
+  'members.$.memberName': {
+    type: String
   },
   ideaId: {
     type: String,

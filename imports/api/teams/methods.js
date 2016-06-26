@@ -4,6 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
 import { _ } from 'meteor/underscore'
 
+import { Ideas } from '../ideas/ideas.js'
 import { Teams } from './teams.js'
 
 const TEAM_ID_ONLY = new SimpleSchema({
@@ -18,32 +19,40 @@ export const insert = new ValidatedMethod({
       type: String,
       regEx: SimpleSchema.RegEx.Id
     },
-    createdAt: {
-      type: Date
-    },
-    memebers: {
-      type: Array
-    },
-    ownerId: {
+    'members.$.memberId': {
       type: String,
       regEx: SimpleSchema.RegEx.Id
     }
   }).validator(),
-  run(newteam) {
+  run({name, ideaId, members}) {
     if (!this.userId) { throw new Error('not-authorized'); }
 
-    if (!team.editableBy(this.userId)) {
+    const idea = Ideas.findOne(ideaId)
+
+    if (!idea) {
+      throw new Meteor.Error('team.create.ideaNotFound', 'idea not found')
+    }
+
+    if (!idea.editableBy(this.userId)) {
       throw new Meteor.Error('teams.update.accessDenied',
         "You don't have permission to edit this team.")
     }
 
+    const existingTeam = Teams.findOne({ideaId})
+    if (existingTeam) {
+      throw new Meteor.Error('teams.insert.alreadyExist',
+        'The team is already been formed for this idea, please delete the existing team.')
+    }
+
+    const newteam = {name,ideaId}
     newteam.ownerId = this.userId
     newteam.ownerName = Meteor.user().profile.fullName
     newteam.createdAt = Date.now()
-    newteam.members = Meteor.users()
-      .find({members: {$in: newteam.members}}, {fields: {_id: 1, profile: 1}})
+    newteam.members = Meteor.users
+      .find({_id: {$in: members.map(mem => mem.memberId)}}, {fields: {_id: 1, profile: 1}})
+      .fetch()
       .map(member => {
-        return {memberName: user.profile.name, memberId: user._id}
+        return {memberName: member.profile.fullName, memberId: member._id}
       })
 
     return Teams.insert(newteam)
@@ -54,9 +63,14 @@ export const update = new ValidatedMethod({
   name: 'teams.update',
   validate: new SimpleSchema({
     teamId: { type: String, regEx: SimpleSchema.RegEx.Id },
-    name: { type: String, optional: true }
+    name: { type: String, optional: true },
+    'members.$.memberId': {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id,
+      optional: true
+    }
   }).validator(),
-  run(data) {
+  run({teamId, name, members}) {
     if (!this.userId) { throw new Error('not-authorized'); }
 
     const team = Teams.findOne(teamId)
@@ -64,6 +78,17 @@ export const update = new ValidatedMethod({
     if (!team.editableBy(this.userId)) {
       throw new Meteor.Error('teams.update.accessDenied',
         "You don't have permission to edit this team.")
+    }
+
+    const data = { name: name}
+
+    if (members) {
+      data.members = Meteor.users
+        .find({_id: {$in: members.map(mem => mem.memberId)}}, {fields: {_id: 1, profile: 1}})
+        .fetch()
+        .map(member => {
+          return {memberName: member.profile.fullName, memberId: member._id}
+        })
     }
 
     // XXX the security check above is not atomic, so in theory a race condition could

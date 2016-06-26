@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Factory } from 'meteor/factory'
+import { Teams } from '../teams/teams'
 
 class IdeasCollection extends Mongo.Collection {
   insert (Idea, callback) {
@@ -18,7 +19,7 @@ class IdeasCollection extends Mongo.Collection {
 
     return super.insert(ourIdea, callback)
   }
-  remove (selector, callback) {    
+  remove (selector, callback) {
     return super.remove(selector, callback)
   }
 }
@@ -38,13 +39,13 @@ Ideas.schema = new SimpleSchema({
   },
   businessValue: {
     type: String,
-    defaultValue:''
+    defaultValue: ''
   },
   definitionOfSuccess: {
     type: String,
     optional: true,
-    defaultValue:''
-  },  
+    defaultValue: ''
+  },
   fundingRequirement: {
     type: String,
     optional: true,
@@ -79,7 +80,6 @@ Ideas.schema = new SimpleSchema({
 
 Ideas.attachSchema(Ideas.schema)
 
-
 Ideas.publicFields = {
   name: 1,
   businessValue: 1,
@@ -99,6 +99,9 @@ Ideas.helpers({
   // A Idea is considered to be private if it has a userId set
   isPrivate() {
     return !!this.ownerId
+  },
+  getTeam() {
+    return Teams.find({ideaId: this._id})
   },
   editableBy(userId) {
     if (!this.ownerId) {

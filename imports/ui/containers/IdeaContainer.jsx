@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Ideas } from '../../api/ideas/ideas';
 import { createContainer } from 'meteor/react-meteor-data';
-import {IdeaPage} from '../pages/idea-page.jsx';
+import {IdeaPage} from '../pages/IdeaPage.jsx';
 
 export default createContainer(({ params: { id } }) => {
   const ideasHandle = Meteor.subscribe('ideas.public.findOne', id);
