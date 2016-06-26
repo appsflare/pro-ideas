@@ -7,6 +7,13 @@ import { _ } from 'meteor/underscore'
 import { Ideas } from '../ideas/ideas.js'
 import { Teams } from './teams.js'
 
+function validateTeamName (name) {
+  const count = Teams.find({name}).count()
+  if (count > 1) {
+    throw new Meteor.Error('team.name.alreadyExist', 'Team with the specified name already exist')
+  }
+}
+
 const TEAM_ID_ONLY = new SimpleSchema({
   teamId: { type: String },
 }).validator()
@@ -44,6 +51,8 @@ export const insert = new ValidatedMethod({
         'The team is already been formed for this idea, please delete the existing team.')
     }
 
+    validateTeamName(name)
+
     const newteam = {name,ideaId}
     newteam.ownerId = this.userId
     newteam.ownerName = Meteor.user().profile.fullName
@@ -80,6 +89,10 @@ export const update = new ValidatedMethod({
         "You don't have permission to edit this team.")
     }
 
+    if (name !== team.name) {
+      validateTeamName(name)
+    }
+    
     const data = { name: name}
 
     if (members) {

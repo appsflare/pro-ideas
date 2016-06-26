@@ -35,7 +35,8 @@ Teams.schema = new SimpleSchema({
   },
   ideaId: {
     type: String,
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    denyUpdate: true
   },
   createdAt: {
     type: Date
