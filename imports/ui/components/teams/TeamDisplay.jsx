@@ -10,13 +10,24 @@ export class TeamDisplayComponent extends Component {
         super(...arguments)
     }
 
+    get currentUser() {
+        return Meteor.userId();
+    }
+
+
     renderTeamInfo(team) {
         return <EditTeamForm team={team}/>
     }
 
+
+
     renderContent(idea, team) {
+
+        const isCurrentUserTheOwner = currentUser === idea.ownerId;
+
         return team ? this.renderTeamInfo(team) :
-            <CreateTeamForm ideaId={idea._id}/>
+            (isCurrentUserTheOwner ? <CreateTeamForm ideaId={idea._id}/>
+                : <p>Team has not been formed yet!!</p>)
     }
 
     render() {
