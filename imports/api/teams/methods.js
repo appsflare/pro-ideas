@@ -4,7 +4,15 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
 import { _ } from 'meteor/underscore'
 
+import { Ideas } from '../ideas/ideas.js'
 import { Teams } from './teams.js'
+
+function validateTeamName (name) {
+  const count = Teams.find({name}).count()
+  if (count > 1) {
+    throw new Meteor.Error('team.name.alreadyExist', 'Team with the specified name already exist')
+  }
+}
 
 const TEAM_ID_ONLY = new SimpleSchema({
   teamId: { type: String },
@@ -18,21 +26,44 @@ export const insert = new ValidatedMethod({
       type: String,
       regEx: SimpleSchema.RegEx.Id
     },
-    createdAt: {
-      type: Date
-    },
-    ownerId: {
+    'members.$.memberId': {
       type: String,
       regEx: SimpleSchema.RegEx.Id
     }
   }).validator(),
-  run(newteam) {
+  run({name, ideaId, members}) {
     if (!this.userId) { throw new Error('not-authorized'); }
 
+    const idea = Ideas.findOne(ideaId)
+
+    if (!idea) {
+      throw new Meteor.Error('team.create.ideaNotFound', 'idea not found')
+    }
+
+    if (!idea.editableBy(this.userId)) {
+      throw new Meteor.Error('teams.update.accessDenied',
+        "You don't have permission to edit this team.")
+    }
+
+    const existingTeam = Teams.findOne({ideaId})
+    if (existingTeam) {
+      throw new Meteor.Error('teams.insert.alreadyExist',
+        'The team is already been formed for this idea, please delete the existing team.')
+    }
+
+    validateTeamName(name)
+
+    const newteam = {name,ideaId}
     newteam.ownerId = this.userId
     newteam.ownerName = Meteor.user().profile.fullName
     newteam.createdAt = Date.now()
-    newteam.members = [newteam.ownerId]
+    newteam.members = Meteor.users
+      .find({_id: {$in: members.map(mem => mem.memberId)}}, {fields: {_id: 1, profile: 1}})
+      .fetch()
+      .map(member => {
+        return {memberName: member.profile.fullName, memberId: member._id}
+      })
+
     return Teams.insert(newteam)
   },
 })
@@ -40,15 +71,37 @@ export const insert = new ValidatedMethod({
 export const update = new ValidatedMethod({
   name: 'teams.update',
   validate: new SimpleSchema({
-    teamId: { type: String },
-    name: { type: String, optional: true }
+    teamId: { type: String, regEx: SimpleSchema.RegEx.Id },
+    name: { type: String, optional: true },
+    'members.$.memberId': {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id,
+      optional: true
+    }
   }).validator(),
-  run(data) {
+  run({teamId, name, members}) {
+    if (!this.userId) { throw new Error('not-authorized'); }
+
     const team = Teams.findOne(teamId)
 
     if (!team.editableBy(this.userId)) {
       throw new Meteor.Error('teams.update.accessDenied',
         "You don't have permission to edit this team.")
+    }
+
+    if (name !== team.name) {
+      validateTeamName(name)
+    }
+    
+    const data = { name: name}
+
+    if (members) {
+      data.members = Meteor.users
+        .find({_id: {$in: members.map(mem => mem.memberId)}}, {fields: {_id: 1, profile: 1}})
+        .fetch()
+        .map(member => {
+          return {memberName: member.profile.fullName, memberId: member._id}
+        })
     }
 
     // XXX the security check above is not atomic, so in theory a race condition could
@@ -60,13 +113,15 @@ export const update = new ValidatedMethod({
   },
 })
 
-
 export const addMember = new ValidatedMethod({
   name: 'teams.addMember',
   validate: new SimpleSchema({
-    'userId': { type: String }
+    'teamId': { type: String, regEx: SimpleSchema.RegEx.Id },
+    'userId': { type: String, regEx: SimpleSchema.RegEx.Id }
   }).validator(),
-  run({userId}) {
+  run({teamId, userId}) {
+    if (!this.userId) { throw new Error('not-authorized'); }
+
     const team = Teams.findOne(teamId)
 
     if (!team.editableBy(this.userId)) {
@@ -81,7 +136,7 @@ export const addMember = new ValidatedMethod({
     }
 
     if (!_.contains(team.members, userToAdd._id)) {
-      team.members.push(userToAdd._id);
+      team.members.push({memberName: userToAdd.profile.fullName,memberId: userToAdd._id})
     }
 
     // XXX the security check above is not atomic, so in theory a race condition could
@@ -96,9 +151,12 @@ export const addMember = new ValidatedMethod({
 export const removeMember = new ValidatedMethod({
   name: 'teams.removeMember',
   validate: new SimpleSchema({
-    'userId': { type: String }
+    'teamId': { type: String, regEx: SimpleSchema.RegEx.Id },
+    'userId': { type: String, regEx: SimpleSchema.RegEx.Id }
   }).validator(),
-  run({userId}) {
+  run({teamId, userId}) {
+    if (!this.userId) { throw new Error('not-authorized'); }
+
     const team = Teams.findOne(teamId)
 
     if (!team.editableBy(this.userId)) {
@@ -116,9 +174,10 @@ export const removeMember = new ValidatedMethod({
       throw new Error('user not a member already')
     }
 
-    const index = team.members.indexOf(userToRemove._id);
-    team.members.splice(index, 1);
+    const memberToRemove = _.findWhere(team.members, {memberId: userToRemove._id})
+    const index = team.members.indexOf(memberToRemove)
 
+    team.members.splice(index, 1)
 
     // XXX the security check above is not atomic, so in theory a race condition could
     // result in exposing private data
@@ -133,6 +192,8 @@ export const remove = new ValidatedMethod({
   name: 'teams.remove',
   validate: TEAM_ID_ONLY,
   run({ teamId }) {
+    if (!this.userId) { throw new Error('not-authorized'); }
+
     const team = Teams.findOne(teamId)
 
     if (!team.editableBy(this.userId)) {

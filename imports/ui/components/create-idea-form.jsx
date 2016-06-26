@@ -4,6 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/ideas/methods';
 import uuid from 'uuid';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
+import './CreateIdeaForm.less'
 
 export default class CreateIdeaForm extends Component {
 
@@ -108,10 +109,10 @@ export default class CreateIdeaForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <div className="form-control">
+              <div className="form-control auto-height">
 
                 <ReactMarkdownMediumEditor ref="businessValue"                
-                  options={{ placeholder: { text: 'Click here to describe Business value' } }}
+                  options={{ toolbar:{ static : true}, placeholder: { text: 'Click here to describe Business value' } }}
                   markdown={this.state.businessValue}
                   onChange={this.businessValueUpdated}/>
               </div>
@@ -128,7 +129,7 @@ export default class CreateIdeaForm extends Component {
             <div className="well">
               <div className="form-group">
                 <div className="col-sm-12">
-                  <div className="form-control">
+                  <div className="form-control auto-height">
                     <ReactMarkdownMediumEditor ref="definitionOfSuccess"  
                       options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
                       markdown={this.state.definitionOfSuccess}
@@ -147,7 +148,7 @@ export default class CreateIdeaForm extends Component {
               {this.state.isFundingRequired ?
                 <div className="form-group">
                   <div className="col-sm-12">
-                    <div className="form-control">
+                    <div className="form-control auto-height">
                       <ReactMarkdownMediumEditor ref="fundingRequirement"
                         options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
                         markdown={this.state.fundingRequirement}
