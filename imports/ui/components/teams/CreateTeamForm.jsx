@@ -75,9 +75,7 @@ export class CreateTeamForm extends Component {
   }
 
   render() {
-    let panelId = `panel-${uuid.v1()}`,
-      panelSel = `#${panelId}`,
-      {error} = this.state;
+    let {members, error} = this.state;
 
 
 
@@ -97,7 +95,7 @@ export class CreateTeamForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-6">
-              <UserPicker multi={true} onChange={this.memberSelected} />
+              <UserPicker multi={true} value={members} onChange={this.memberSelected} />
             </div>
           </div>
 
