@@ -52,12 +52,12 @@ export default class CreateIdeaForm extends Component {
 
       if (err) {
         this.setState({ error: err.reason });
-      }      
+      }
 
-      this.refs.businessValue.medium.setContent('')
-      this.refs.definitionOfSuccess.medium.setContent('')
-      this.refs.fundingRequirement.medium.setContent('')
-      
+      this.refs.businessValue && this.refs.businessValue.medium.setContent('')
+      this.refs.definitionOfSuccess && this.refs.definitionOfSuccess.medium.setContent('')
+      this.refs.fundingRequirement && this.refs.fundingRequirement.medium.setContent('')
+
       // Clear form
       this._setInitialState();
 
@@ -111,8 +111,8 @@ export default class CreateIdeaForm extends Component {
             <div className="col-sm-12">
               <div className="form-control auto-height">
 
-                <ReactMarkdownMediumEditor ref="businessValue"                
-                  options={{ toolbar:{ static : true}, placeholder: { text: 'Click here to describe Business value' } }}
+                <ReactMarkdownMediumEditor ref="businessValue"
+                  options={{ toolbar: { static: true }, placeholder: { text: 'Click here to describe Business value' } }}
                   markdown={this.state.businessValue}
                   onChange={this.businessValueUpdated}/>
               </div>
@@ -130,7 +130,7 @@ export default class CreateIdeaForm extends Component {
               <div className="form-group">
                 <div className="col-sm-12">
                   <div className="form-control auto-height">
-                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"  
+                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"
                       options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
                       markdown={this.state.definitionOfSuccess}
                       onChange={this.definitionOfSuccessUpdated}/>

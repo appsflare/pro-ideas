@@ -11,6 +11,7 @@
   "dependencies": {
     "collapse-whitespace": "1.1.2",
     "component-classes": "^1.2.6",
+    "d3": "^3.5.17",
     "faker": "^3.1.0",
     "medium-editor": "5.x",
     "meteor-node-stubs": "^0.2.3",
@@ -21,6 +22,7 @@
     "react-addons-linked-state-mixin": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
     "react-bootstrap": "^0.29.5",
+    "react-bubble-chart": "^0.4.0",
     "react-dom": "^15.1.0",
     "react-edit-inline": "^1.0.7",
     "react-mounter": "^1.2.0",
