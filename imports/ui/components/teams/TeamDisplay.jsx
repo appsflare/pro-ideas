@@ -23,7 +23,7 @@ export class TeamDisplayComponent extends Component {
 
     renderContent(idea, team) {
 
-        const isCurrentUserTheOwner = currentUser === idea.ownerId;
+        const isCurrentUserTheOwner = this.currentUser === idea.ownerId;
 
         return team ? this.renderTeamInfo(team) :
             (isCurrentUserTheOwner ? <CreateTeamForm ideaId={idea._id}/>
