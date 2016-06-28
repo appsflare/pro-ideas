@@ -97,7 +97,7 @@ export class IdeaPage extends Component {
           {this._renderVoteControls(idea) }
         </div>
 
-        <Tabs defaultActiveKey={1} id="ideaDetailsTab">
+        <Tabs defaultActiveKey={2} id="ideaDetailsTab">
           <Tab eventKey={1} title="Idea">
             <Grid>
               <Row className="show-grid">
