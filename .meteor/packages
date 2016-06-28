@@ -49,7 +49,7 @@ mobile-experience                   # Packages for a great mobile UX
 chriswessels:hammer
 
 # production
-juliancwirko:postcss@1.0.0-beta.11
+#juliancwirko:postcss@1.0.0-beta.11
 #standard-minifier-css               # CSS minifier run for production mode
 standard-minifier-js                # JS minifier run for production mode
 es5-shim                            # ECMAScript 5 compatibility for older browsers.
@@ -71,3 +71,5 @@ hwillson:stub-collections
 mouse0270:bootstrap-notify
 universe:react-markdown-wysiwyg
 universe:modules
+seba:minifiers-autoprefixer
+fourseven:scss

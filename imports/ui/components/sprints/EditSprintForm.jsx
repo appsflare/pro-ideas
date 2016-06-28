@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
-import {update} from '../../../api/teams/methods';
+import {update} from '../../../api/sprints/methods';
 import uuid from 'uuid';
-import Select from 'react-select';
-import UserPicker from '../UserPicker'
-import InlineEdit from 'react-edit-inline';
+import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 
 // Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css';

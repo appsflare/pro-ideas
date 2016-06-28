@@ -4,7 +4,6 @@ import {BubbleChart} from './BubbleChart.jsx'
 import {EditTeamForm} from './EditTeamForm.jsx'
 import {CreateTeamForm} from './CreateTeamForm.jsx'
 import { createContainer } from 'meteor/react-meteor-data';
-import SprintRoadMap from '../sprints/SprintRoadMap.jsx';
 
 export class TeamDisplayComponent extends Component {
     constructor() {
@@ -17,12 +16,7 @@ export class TeamDisplayComponent extends Component {
 
 
     renderTeamInfo(team) {
-
-
-        return <div>
-            <EditTeamForm team={team}/>
-            <SprintRoadMap teamId={team._id}/>
-        </div>
+        return <EditTeamForm team={team}/>
     }
 
 
@@ -38,11 +32,9 @@ export class TeamDisplayComponent extends Component {
 
     render() {
         const {loading, idea, team} = this.props;
-        return <div>
-            <h3>Team Information</h3>
-            
+        return <Panel header="Team Info" bsStyle="primary">
             {loading ? <p>Checking...</p> : this.renderContent(idea, team) }
-        </div>
+        </Panel>
 
     }
 }

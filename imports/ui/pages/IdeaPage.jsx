@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, Tab, Tabs} from 'react-bootstrap';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Ideas } from '../../api/ideas/ideas';
 import { update } from '../../api/ideas/methods';
@@ -97,53 +97,64 @@ export class IdeaPage extends Component {
           {this._renderVoteControls(idea) }
         </div>
 
-        <Grid>
-          <Row className="show-grid">
-            <Col md={6} mdPush={6}>
-              <TeamDisplay multi={true} idea={idea}/>
-            </Col>
-            <Col md={6} mdPull={6}>
-              <div className="bs-callout bs-callout-info">
-                <h4>Business value</h4>
-                { isCurrentUserTheOwner ?
-                  <ReactMarkdownMediumEditor ref="businessValue"
-                    options={{ placeholder: { text: 'Click here to describe Business value' } }}
-                    markdown={idea.businessValue}
-                    onChange={this.businessValueUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
-                }
-              </div>
+        <Tabs defaultActiveKey={1} id="ideaDetailsTab">
+          <Tab eventKey={1} title="Idea">
+            <Grid>
+              <Row className="show-grid">
+                <Col md={12}>                
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Business value</h4>
+                    { isCurrentUserTheOwner ?
+                      <ReactMarkdownMediumEditor ref="businessValue"
+                        options={{ placeholder: { text: 'Click here to describe Business value' } }}
+                        markdown={idea.businessValue}
+                        onChange={this.businessValueUpdated}/>
+                      :
+                      <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
+                    }
+                  </div>
 
 
-              <div className="bs-callout bs-callout-info">
-                <h4>Definition of Success</h4>
-                { isCurrentUserTheOwner ?
-                  <ReactMarkdownMediumEditor ref="definitionOfSuccess"
-                    options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
-                    markdown={idea.definitionOfSuccess}
-                    onChange={this.definitionOfSuccessUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
-                }
-              </div>
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Definition of Success</h4>
+                    { isCurrentUserTheOwner ?
+                      <ReactMarkdownMediumEditor ref="definitionOfSuccess"
+                        options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
+                        markdown={idea.definitionOfSuccess}
+                        onChange={this.definitionOfSuccessUpdated}/>
+                      :
+                      <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
+                    }
+                  </div>
 
 
 
-              <div className="bs-callout bs-callout-info">
-                <h4>Funding Requirement </h4>
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Funding Requirement </h4>
 
-                { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
-                  options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
-                  markdown={idea.fundingRequirement}
-                  onChange={this.fundingRequirementUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
-                }
-              </div>
-            </Col>
-          </Row>
-        </Grid>
+                    { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
+                      options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
+                      markdown={idea.fundingRequirement}
+                      onChange={this.fundingRequirementUpdated}/>
+                      :
+                      <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
+                    }
+                  </div>
+                </Col>
+              </Row>
+            </Grid>
+          </Tab>
+          <Tab eventKey={2} title="Implementation">
+            <Grid>
+              <Row className="show-grid">
+                <Col md={12}>
+                  <TeamDisplay multi={true} idea={idea}/>
+                </Col>
+              </Row>
+            </Grid>
+          </Tab>
+        </Tabs>
+
 
 
         <div>

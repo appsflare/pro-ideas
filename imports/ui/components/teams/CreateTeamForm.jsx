@@ -89,12 +89,12 @@ export class CreateTeamForm extends Component {
 
         <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
           <div className="form-group">
-            <div className="col-sm-6">
+            <div className="col-sm-12">
               <input type="text" name="name" value={this.state.name} onChange={this.onInputChange.bind(this) } ref="nameInput" className="form-control" placeholder="Name your team"/>
             </div>
           </div>
           <div className="form-group">
-            <div className="col-sm-6">
+            <div className="col-sm-12">
               <UserPicker multi={true} value={members} onChange={this.memberSelected} />
             </div>
           </div>
