@@ -115,6 +115,11 @@ export class EditTeamForm extends Component {
           <div className="form-group">
             <div className="col-sm-12">
               <h4>
+                <span className="upper-case bottom-border">
+                Team Name
+                </span>
+              </h4>
+              <div>
                 { isCurrentUserTheOwner ?
                   (<InlineEdit
                     text={this.state.name}
@@ -124,11 +129,12 @@ export class EditTeamForm extends Component {
                   :
                   <span>{team.name}</span>
                 }
-              </h4>
+              </div>
             </div>
           </div>
           <div className="form-group">
             <div className="col-sm-12">
+              <h4><span className="upper-case bottom-border">Memebers</span></h4>
               <UserPicker multi={true} value={members} disabled={!isCurrentUserTheOwner} onChange={this.memberSelected} />
             </div>
           </div>

@@ -39,8 +39,6 @@ export class TeamDisplayComponent extends Component {
     render() {
         const {loading, idea, team} = this.props;
         return <div>
-            <h3>Team Information</h3>
-            
             {loading ? <p>Checking...</p> : this.renderContent(idea, team) }
         </div>
 

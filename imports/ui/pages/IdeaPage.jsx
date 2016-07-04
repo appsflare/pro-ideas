@@ -14,6 +14,7 @@ import {Meteor} from 'meteor/meteor';
 import InlineEdit from 'react-edit-inline';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import textUtils from '../helpers/text'
+import './IdeaPage.less'
 
 export class IdeaPage extends Component {
 
@@ -97,13 +98,13 @@ export class IdeaPage extends Component {
           {this._renderVoteControls(idea) }
         </div>
 
-        <Tabs defaultActiveKey={2} id="ideaDetailsTab">
+        <Tabs className="idea-details-container" defaultActiveKey={2} id="ideaDetailsTab">
           <Tab eventKey={1} title="Idea">
-            <Grid>
+            <Grid className="idea-details-content-container">
               <Row className="show-grid">
-                <Col md={12}>                
+                <Col md={12}>
                   <div className="bs-callout bs-callout-info">
-                    <h4>Business value</h4>
+                    <h4><span className="upper-case bottom-border">Business value</span></h4>
                     { isCurrentUserTheOwner ?
                       <ReactMarkdownMediumEditor ref="businessValue"
                         options={{ placeholder: { text: 'Click here to describe Business value' } }}
@@ -113,10 +114,11 @@ export class IdeaPage extends Component {
                       <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
                     }
                   </div>
-
-
+                </Col></Row>
+              <Row className="show-grid">
+                <Col md={12}>
                   <div className="bs-callout bs-callout-info">
-                    <h4>Definition of Success</h4>
+                    <h4><span className="upper-case bottom-border">Definition of Success</span></h4>
                     { isCurrentUserTheOwner ?
                       <ReactMarkdownMediumEditor ref="definitionOfSuccess"
                         options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
@@ -126,11 +128,13 @@ export class IdeaPage extends Component {
                       <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
                     }
                   </div>
-
-
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col md={12}>
 
                   <div className="bs-callout bs-callout-info">
-                    <h4>Funding Requirement </h4>
+                    <h4><span className="upper-case bottom-border">Funding Requirement</span></h4>
 
                     { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
                       options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
@@ -145,7 +149,7 @@ export class IdeaPage extends Component {
             </Grid>
           </Tab>
           <Tab eventKey={2} title="Implementation">
-            <Grid>
+            <Grid className="idea-details-content-container">
               <Row className="show-grid">
                 <Col md={12}>
                   <TeamDisplay multi={true} idea={idea}/>
@@ -158,7 +162,10 @@ export class IdeaPage extends Component {
 
 
         <div>
-          <h4>Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''} </h4>
+          <h4>
+            <span className="upper-case bottom-border">Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''}
+            </span>
+          </h4>
           <hr/>
           {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
           <IdeaCommentsListContainer ideaId={idea._id}/>
