@@ -67,7 +67,7 @@ export default class SignInPage extends React.Component {
               <input type="password" name="password"  ref="password" className="form-control" placeholder="Password"/>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">Sign in</button>
+          <button type="submit" className="btn btn-raised btn-primary">Sign in</button>
         </form>
       </div>
     );

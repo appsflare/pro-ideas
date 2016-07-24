@@ -8,6 +8,7 @@ import IdeasContainer from '../../ui/containers/IdeasContainer.jsx';
 import IdeaContainer from '../../ui/containers/IdeaContainer.jsx';
 import AuthPageSignIn from '../../ui/pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../../ui/pages/AuthPageJoin.jsx';
+import ChangePasswordPage from '../../ui/pages/ChangePasswordPage.jsx';
 import NotFoundPage from '../../ui/pages/NotFoundPage.jsx';
 
 export const renderRoutes = () => {
@@ -19,6 +20,7 @@ export const renderRoutes = () => {
         <Route name="idea" path="idea/:id" component={IdeaContainer}/>
         <Route path="signin" component={AuthPageSignIn}/>
         <Route path="join" component={AuthPageJoin}/>
+        <Route path="change-password" component={ChangePasswordPage}/>
         <Route path="*" component={NotFoundPage}/>
       </Route>
     </Router>

@@ -98,7 +98,7 @@ export default class JoinPage extends React.Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <button type="submit" className="btn btn-primary">Join Now</button>
+              <button type="submit" className="btn btn-raised btn-primary">Join Now</button>
             </div>
           </div>
         </form>
