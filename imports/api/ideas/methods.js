@@ -67,6 +67,23 @@ export const update = new ValidatedMethod({
   },
 })
 
+export const markAsCompleted = new ValidatedMethod({
+  name: 'ideas.markAsCompleted',
+  validate: IDEA_ID_ONLY,
+  run({ ideaId }) {
+    const idea = Ideas.findOne(ideaId)
+
+    if (!idea.editableBy(this.userId)) {
+      throw new Meteor.Error('ideas.remove.accessDenied',
+        "You don't have permission to mark this idea as completed.")
+    }
+
+    Ideas.update(ideaId, {
+      $set: {status:'completed'}
+    })
+  }
+})
+
 export const remove = new ValidatedMethod({
   name: 'ideas.remove',
   validate: IDEA_ID_ONLY,
@@ -87,6 +104,7 @@ const ideas_METHODS = _.pluck([
   insert,
   update,
   remove,
+  markAsCompleted
 ], 'name')
 
 if (Meteor.isServer) {

@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import {Grid, Row, Col, Tab, Tabs} from 'react-bootstrap';
+import {Grid, Row, Col, Well} from 'react-bootstrap';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Ideas } from '../../api/ideas/ideas';
 import { update } from '../../api/ideas/methods';
 import {TeamDisplay} from '../components/teams/TeamDisplay.jsx';
+import SprintRoadMap from '../components/sprints/SprintRoadMap.jsx';
 import {VoteIdea} from '../components/VoteIdea.jsx';
+import {MarkIdeaAsCompleted} from '../components/MarkIdeaAsCompleted.jsx';
 import { IdeaComments } from '../../api/idea-comments/idea-comments';
 import IdeaCommentsListContainer from '../containers/idea-comments-list-container.jsx';
 import {IdeaCommentForm} from '../components/idea-comment-form.jsx';
@@ -77,7 +79,7 @@ export class IdeaPage extends Component {
     return (<VoteIdea idea={idea}/>);
   }
 
-  renderIdeaDetails(idea) {
+  renderIdeaDetails(idea, team) {
     this.state = idea;
     const isCurrentUserTheOwner = this.currentUser === idea.ownerId
     return (
@@ -95,94 +97,88 @@ export class IdeaPage extends Component {
             }
 
             <small> by {idea.ownerName}</small></h1>
-          {this._renderVoteControls(idea) }
+          {this._renderVoteControls(idea) } 
+          {<MarkIdeaAsCompleted idea={idea}/>}
         </div>
 
-        <Tabs className="idea-details-container" defaultActiveKey={2} id="ideaDetailsTab">
-          <Tab eventKey={1} title="Idea">
-            <Grid className="idea-details-content-container">
-              <Row className="show-grid">
-                <Col md={12}>
-                  <div className="bs-callout bs-callout-info">
-                    <h4><span className="upper-case bottom-border">Business value</span></h4>
-                    { isCurrentUserTheOwner ?
-                      <ReactMarkdownMediumEditor ref="businessValue"
-                        options={{ placeholder: { text: 'Click here to describe Business value' } }}
-                        markdown={idea.businessValue}
-                        onChange={this.businessValueUpdated}/>
-                      :
-                      <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
-                    }
-                  </div>
-                </Col></Row>
-              <Row className="show-grid">
-                <Col md={12}>
-                  <div className="bs-callout bs-callout-info">
-                    <h4><span className="upper-case bottom-border">Definition of Success</span></h4>
-                    { isCurrentUserTheOwner ?
-                      <ReactMarkdownMediumEditor ref="definitionOfSuccess"
-                        options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
-                        markdown={idea.definitionOfSuccess}
-                        onChange={this.definitionOfSuccessUpdated}/>
-                      :
-                      <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
-                    }
-                  </div>
-                </Col>
-              </Row>
-              <Row className="show-grid">
-                <Col md={12}>
+        <div className="idea-details-container">
 
-                  <div className="bs-callout bs-callout-info">
-                    <h4><span className="upper-case bottom-border">Funding Requirement</span></h4>
+          <Grid className="idea-details-content-container">
+            <Row className="show-grid">
+              <Col md={8}>
+                <div className="bs-callout bs-callout-info">
+                  <h4><span className="upper-case bottom-border">Business value</span></h4>
+                  { isCurrentUserTheOwner ?
+                    <ReactMarkdownMediumEditor ref="businessValue"
+                      options={{ placeholder: { text: 'Click here to describe Business value' } }}
+                      markdown={idea.businessValue}
+                      onChange={this.businessValueUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
+                  }
+                </div>
+                <div className="bs-callout bs-callout-info">
+                  <h4><span className="upper-case bottom-border">Definition of Success</span></h4>
+                  { isCurrentUserTheOwner ?
+                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"
+                      options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
+                      markdown={idea.definitionOfSuccess}
+                      onChange={this.definitionOfSuccessUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
+                  }
+                </div>
+                <div className="bs-callout bs-callout-info">
+                  <h4><span className="upper-case bottom-border">Funding Requirement</span></h4>
 
-                    { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
-                      options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
-                      markdown={idea.fundingRequirement}
-                      onChange={this.fundingRequirementUpdated}/>
-                      :
-                      <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
-                    }
-                  </div>
-                </Col>
-              </Row>
-            </Grid>
-          </Tab>
-          <Tab eventKey={2} title="Implementation">
-            <Grid className="idea-details-content-container">
-              <Row className="show-grid">
-                <Col md={12}>
+                  { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
+                    options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
+                    markdown={idea.fundingRequirement}
+                    onChange={this.fundingRequirementUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
+                  }
+                </div>
+              </Col>
+              <Col md={4}>
+                <Well>
                   <TeamDisplay multi={true} idea={idea}/>
+                </Well>
+              </Col>
+            </Row>
+            {team ?
+              <Row className="show-grid">
+                <Col md={12}>
+                  <SprintRoadMap teamId={team._id}/>
                 </Col>
               </Row>
-            </Grid>
-          </Tab>
-        </Tabs>
-
-
-
-        <div>
-          <h4>
-            <span className="upper-case bottom-border">Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''}
-            </span>
-          </h4>
-          <hr/>
-          {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
-          <IdeaCommentsListContainer ideaId={idea._id}/>
+              : ''}
+            <Row className="show-grid">
+              <Col md={12}>
+                <h4>
+                  <span className="upper-case bottom-border">Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''}
+                  </span>
+                </h4>
+                <hr/>
+                {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
+                <IdeaCommentsListContainer ideaId={idea._id}/>
+              </Col>
+            </Row>
+          </Grid>
         </div>
 
       </div>
     );
   }
 
-  renderIdea() {
-    return this.props.ideas.map(idea => this.renderIdeaDetails(idea));
+  renderIdea(idea, team) {
+    return this.renderIdeaDetails(idea, team);
   }
 
   render() {
     return (
       <div className="container">
-        {this.renderIdea() }
+        {this.renderIdea(this.props.idea, this.props.team) }
       </div>
     );
   }
@@ -191,5 +187,5 @@ export class IdeaPage extends Component {
 
 
 IdeaPage.propTypes = {
-  ideas: PropTypes.array.isRequired
+  idea: PropTypes.object.isRequired
 };

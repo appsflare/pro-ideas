@@ -65,7 +65,7 @@ class SprintRoadMapComponent extends Component {
         const {isAddFormOpen} = this.state;
         return (
             <ButtonToolbar>
-                <Button bsStyle="default" onClick={this.showAddForm}>
+                <Button bsStyle="default" className="btn-raised" onClick={this.showAddForm}>
                     Add Sprint
                 </Button>
                 <Modal

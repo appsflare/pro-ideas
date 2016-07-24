@@ -39,9 +39,9 @@ export default class IdeaComment extends Component {
           {comment.ownerName}
 
           {comment.updatedOn ?
-            <small>commented {moment(comment.updatedOn).fromNow() }</small>
+            <small> commented {moment(comment.updatedOn).fromNow() }</small>
             :
-            <small>commented {moment(comment.createdAt).fromNow() }</small>
+            <small> commented {moment(comment.createdAt).fromNow() }</small>
           }
 
           {isCurrentUserTheOwner ?

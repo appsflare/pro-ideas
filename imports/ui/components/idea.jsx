@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import {VoteIdea} from './VoteIdea.jsx'
+import {MarkIdeaAsCompleted} from './MarkIdeaAsCompleted.jsx'
 import {remove} from '../../api/ideas/methods'
 import textUtils from '../helpers/text'
 
@@ -43,6 +44,8 @@ export default class Idea extends Component {
         }
 
         {this.renderVoteControls(idea) }
+
+        {<MarkIdeaAsCompleted idea={idea}/>}
 
         <span className="pull-right badge">{idea.comments}</span>
 

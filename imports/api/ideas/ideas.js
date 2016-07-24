@@ -61,6 +61,11 @@ Ideas.schema = new SimpleSchema({
   ownerName: {
     type: String
   },
+  status:{
+    type: String,
+    allowedValues: ['new','completed'],
+    defaultValue: 'new'
+  },
   comments: {
     type: Number,
     optional: true,
@@ -88,6 +93,7 @@ Ideas.publicFields = {
   createdAt: 1,
   ownerId: 1,
   ownerName: 1,
+  status: 1,
   comments: 1,
   upVotes: 1,
   downVotes: 1
@@ -99,6 +105,9 @@ Ideas.helpers({
   // A Idea is considered to be private if it has a userId set
   isPrivate() {
     return !!this.ownerId
+  },
+  isCompleted(){
+    return this.status === 'completed';
   },
   getTeam() {
     return Teams.find({ideaId: this._id})

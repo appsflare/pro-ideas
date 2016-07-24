@@ -95,13 +95,13 @@ export class CreateTeamForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <UserPicker multi={true} value={members} onChange={this.memberSelected} />
+              <UserPicker multi={true} placeholder="Select team members" value={members} onChange={this.memberSelected} />
             </div>
           </div>
 
           <div className="form-group">
             <div className="col-sm-12">
-              <button type="submit" className="btn btn-primary">Create Team!</button>
+              <button type="submit" className="btn btn-raised btn-primary">Create Team!</button>
             </div>
           </div>
         </form>

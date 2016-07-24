@@ -1,0 +1,131 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/home/srinath/.meteor/packages/meteor-tool/.1.3.4_1.1dqu50x++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'T00rk/bootstrap-material-datetimepicker' ]
+2 info using npm@3.9.6
+3 info using node@v0.10.45
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData T00rk/bootstrap-material-datetimepicker
+8 silly fetchOtherPackageData T00rk/bootstrap-material-datetimepicker
+9 silly cache add args [ 'T00rk/bootstrap-material-datetimepicker', null ]
+10 verbose cache add spec T00rk/bootstrap-material-datetimepicker
+11 silly cache add parsed spec { raw: 'T00rk/bootstrap-material-datetimepicker',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'T00rk/bootstrap-material-datetimepicker',
+11 silly cache add   spec: 'github:t00rk/bootstrap-material-datetimepicker',
+11 silly cache add   type: 'hosted',
+11 silly cache add   hosted:
+11 silly cache add    { type: 'github',
+11 silly cache add      ssh: 'git@github.com:t00rk/bootstrap-material-datetimepicker.git',
+11 silly cache add      sshUrl: 'git+ssh://git@github.com/t00rk/bootstrap-material-datetimepicker.git',
+11 silly cache add      httpsUrl: 'git+https://github.com/t00rk/bootstrap-material-datetimepicker.git',
+11 silly cache add      gitUrl: 'git://github.com/t00rk/bootstrap-material-datetimepicker.git',
+11 silly cache add      shortcut: 'github:t00rk/bootstrap-material-datetimepicker',
+11 silly cache add      directUrl: 'https://raw.githubusercontent.com/t00rk/bootstrap-material-datetimepicker/master/package.json' } }
+12 verbose addRemoteGit caching T00rk/bootstrap-material-datetimepicker
+13 verbose addRemoteGit t00rk/bootstrap-material-datetimepicker is a repository hosted by github
+14 silly tryGitProto attempting to clone git://github.com/t00rk/bootstrap-material-datetimepicker.git
+15 silly tryClone cloning t00rk/bootstrap-material-datetimepicker via git://github.com/t00rk/bootstrap-material-datetimepicker.git
+16 verbose tryClone git-github-com-t00rk-bootstrap-material-datetimepicker-git-40dbf788 not in flight; caching
+17 verbose correctMkdir /home/srinath/.npm/_git-remotes correctMkdir not in flight; initializing
+18 info git [ 'config', '--get', 'remote.origin.url' ]
+19 silly validateExistingRemote t00rk/bootstrap-material-datetimepicker remote.origin.url: git://github.com/t00rk/bootstrap-material-datetimepicker.git
+20 verbose validateExistingRemote t00rk/bootstrap-material-datetimepicker is updating existing cached remote /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-40dbf788
+21 info git [ 'fetch', '-a', 'origin' ]
+22 verbose updateRemote git fetch -a origin (git://github.com/t00rk/bootstrap-material-datetimepicker.git)
+23 verbose correctMkdir /home/srinath/.npm/_git-remotes correctMkdir not in flight; initializing
+24 verbose setPermissions t00rk/bootstrap-material-datetimepicker set permissions on /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-40dbf788
+25 verbose resolveHead t00rk/bootstrap-material-datetimepicker original treeish: master
+26 info git [ 'rev-list', '-n1', 'master' ]
+27 error git rev-list -n1 master: fatal: ambiguous argument 'master': unknown revision or path not in the working tree.
+27 error git rev-list -n1 master: Use '--' to separate paths from revisions, like this:
+27 error git rev-list -n1 master: 'git <command> [<revision>...] -- [<file>...]'
+28 silly tryHTTPS attempting to clone git+https://github.com/t00rk/bootstrap-material-datetimepicker.git
+29 silly tryClone cloning t00rk/bootstrap-material-datetimepicker via git+https://github.com/t00rk/bootstrap-material-datetimepicker.git
+30 verbose tryClone git-https-github-com-t00rk-bootstrap-material-datetimepicker-git-5032f60d not in flight; caching
+31 verbose correctMkdir /home/srinath/.npm/_git-remotes correctMkdir not in flight; initializing
+32 info git [ 'config', '--get', 'remote.origin.url' ]
+33 silly validateExistingRemote t00rk/bootstrap-material-datetimepicker remote.origin.url: https://github.com/t00rk/bootstrap-material-datetimepicker.git
+34 verbose validateExistingRemote t00rk/bootstrap-material-datetimepicker is updating existing cached remote /home/srinath/.npm/_git-remotes/git-https-github-com-t00rk-bootstrap-material-datetimepicker-git-5032f60d
+35 info git [ 'fetch', '-a', 'origin' ]
+36 verbose updateRemote git fetch -a origin (https://github.com/t00rk/bootstrap-material-datetimepicker.git)
+37 verbose correctMkdir /home/srinath/.npm/_git-remotes correctMkdir not in flight; initializing
+38 verbose setPermissions t00rk/bootstrap-material-datetimepicker set permissions on /home/srinath/.npm/_git-remotes/git-https-github-com-t00rk-bootstrap-material-datetimepicker-git-5032f60d
+39 verbose resolveHead t00rk/bootstrap-material-datetimepicker original treeish: master
+40 info git [ 'rev-list', '-n1', 'master' ]
+41 error git rev-list -n1 master: fatal: ambiguous argument 'master': unknown revision or path not in the working tree.
+41 error git rev-list -n1 master: Use '--' to separate paths from revisions, like this:
+41 error git rev-list -n1 master: 'git <command> [<revision>...] -- [<file>...]'
+42 silly trySSH attempting to clone git@github.com:t00rk/bootstrap-material-datetimepicker.git
+43 silly tryClone cloning t00rk/bootstrap-material-datetimepicker via git@github.com:t00rk/bootstrap-material-datetimepicker.git
+44 verbose tryClone git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370 not in flight; caching
+45 verbose correctMkdir /home/srinath/.npm/_git-remotes correctMkdir not in flight; initializing
+46 info git [ 'clone',
+46 info git   '--template=/home/srinath/.npm/_git-remotes/_templates',
+46 info git   '--mirror',
+46 info git   'git@github.com:t00rk/bootstrap-material-datetimepicker.git',
+46 info git   '/home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370' ]
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370: Cloning into bare repository '/home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370'...
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370: Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370: Permission denied (publickey).
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370: fatal: Could not read from remote repository.
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370:
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370: Please make sure you have the correct access rights
+47 error git clone --template=/home/srinath/.npm/_git-remotes/_templates --mirror git@github.com:t00rk/bootstrap-material-datetimepicker.git /home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370: and the repository exists.
+48 silly fetchPackageMetaData Error: Command failed: Cloning into bare repository '/home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370'...
+48 silly fetchPackageMetaData Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
+48 silly fetchPackageMetaData Permission denied (publickey).
+48 silly fetchPackageMetaData fatal: Could not read from remote repository.
+48 silly fetchPackageMetaData
+48 silly fetchPackageMetaData Please make sure you have the correct access rights
+48 silly fetchPackageMetaData and the repository exists.
+48 silly fetchPackageMetaData
+48 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:658:15)
+48 silly fetchPackageMetaData     at ChildProcess.emit (events.js:98:17)
+48 silly fetchPackageMetaData     at maybeClose (child_process.js:766:16)
+48 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (child_process.js:833:5)
+48 silly fetchPackageMetaData  error for T00rk/bootstrap-material-datetimepicker { [Error: Command failed: Cloning into bare repository '/home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370'...
+48 silly fetchPackageMetaData Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
+48 silly fetchPackageMetaData Permission denied (publickey).
+48 silly fetchPackageMetaData fatal: Could not read from remote repository.
+48 silly fetchPackageMetaData
+48 silly fetchPackageMetaData Please make sure you have the correct access rights
+48 silly fetchPackageMetaData and the repository exists.
+48 silly fetchPackageMetaData ] killed: false, code: 128, signal: null }
+49 silly rollbackFailedOptional Starting
+50 silly rollbackFailedOptional Finishing
+51 silly runTopLevelLifecycles Starting
+52 silly runTopLevelLifecycles Finishing
+53 silly install printInstalled
+54 verbose stack Error: Command failed: Cloning into bare repository '/home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370'...
+54 verbose stack Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
+54 verbose stack Permission denied (publickey).
+54 verbose stack fatal: Could not read from remote repository.
+54 verbose stack
+54 verbose stack Please make sure you have the correct access rights
+54 verbose stack and the repository exists.
+54 verbose stack
+54 verbose stack     at ChildProcess.exithandler (child_process.js:658:15)
+54 verbose stack     at ChildProcess.emit (events.js:98:17)
+54 verbose stack     at maybeClose (child_process.js:766:16)
+54 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:833:5)
+55 verbose cwd /home/srinath/dev/pro-ideas
+56 error Linux 4.4.0-31-generic
+57 error argv "node" "/home/srinath/.meteor/packages/meteor-tool/.1.3.4_1.1dqu50x++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm" "install" "T00rk/bootstrap-material-datetimepicker"
+58 error node v0.10.45
+59 error npm  v3.9.6
+60 error code 128
+61 error Command failed: Cloning into bare repository '/home/srinath/.npm/_git-remotes/git-github-com-t00rk-bootstrap-material-datetimepicker-git-02390370'...
+61 error Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
+61 error Permission denied (publickey).
+61 error fatal: Could not read from remote repository.
+61 error
+61 error Please make sure you have the correct access rights
+61 error and the repository exists.
+62 error If you need help, you may report this error at:
+62 error     <https://github.com/npm/npm/issues>
+63 verbose exit [ 1, true ]

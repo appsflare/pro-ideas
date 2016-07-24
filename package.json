@@ -9,6 +9,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "bootstrap-material-design": "^0.5.10",
     "collapse-whitespace": "1.1.2",
     "component-classes": "^1.2.6",
     "d3": "^3.5.17",

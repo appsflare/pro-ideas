@@ -1,6 +1,9 @@
+import './App.less';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
+import 'bootstrap-material-design/dist/js/material.js';
+import 'bootstrap-material-design/dist/js/ripples.js';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Ideas } from '../../api/ideas/ideas.js';
@@ -20,10 +23,11 @@ export default class App extends React.Component {
       showConnectionIssue: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.logout = this.logout.bind(this);
+    this.logout = this.logout.bind(this);    
   }
 
   componentDidMount() {
+    $.material.init();
     setTimeout(() => {
       /* eslint-disable react/no-did-mount-set-state */
       this.setState({ showConnectionIssue: true });

@@ -9,7 +9,7 @@ export class IdeaCommentForm extends Component {
   constructor() {
     super(...arguments);
     this.commentTextUpdated = this.commentTextUpdated.bind(this)
-    this.state = { text: '' }    
+    this.state = { text: '' }
   }
 
   commentTextUpdated(data) {
@@ -17,17 +17,17 @@ export class IdeaCommentForm extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();    
+    event.preventDefault();
 
-    const text = this.state.text.trim();      
+    const text = this.state.text.trim();
 
     insert.call({ ideaId: this.props.ideaId, text }, err => {
-      err && console.error(err);      
+      err && console.error(err);
       this.refs.editor.medium.setContent('')
-      this.setState({text:''})      
-    });    
+      this.setState({ text: '' })
+    });
 
-    
+
   }
 
   get currentUser() {
@@ -43,18 +43,16 @@ export class IdeaCommentForm extends Component {
         <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
 
           <div className="form-group">
-            <div className="col-sm-12">
-              <div className="form-control">
+            <div className="col-sm-10">
+              <div className="form-control auto-height">
                 <ReactMarkdownMediumEditor ref="editor"
                   options={{ placeholder: { text: 'Click here to add your comment' } }}
                   markdown={this.state.text}
                   onChange={this.commentTextUpdated}/>
               </div>
             </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <button type="submit" className="btn btn-primary">Comment</button>
+            <div className="col-sm-2">
+              <button type="submit" className="btn btn-raised btn-default">Comment</button>
             </div>
           </div>
         </form>
