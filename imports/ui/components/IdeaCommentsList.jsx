@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
-import IdeaComment from './idea-comment.jsx';
+import IdeaComment from './IdeaComment.jsx';
 
 export class IdeaCommentsList extends Component {
 

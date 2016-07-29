@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/idea-comments/methods';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
+import './IdeaCommentForm.less';
 
 export class IdeaCommentForm extends Component {
 
@@ -43,7 +44,7 @@ export class IdeaCommentForm extends Component {
         <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
 
           <div className="form-group">
-            <div className="col-sm-10">
+            <div className="col-sm-10 comment-box-container">
               <div className="form-control auto-height">
                 <ReactMarkdownMediumEditor ref="editor"
                   options={{ placeholder: { text: 'Click here to add your comment' } }}

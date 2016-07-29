@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Ideas } from '../../api/ideas/ideas';
 import { createContainer } from 'meteor/react-meteor-data';
-import {IdeasPage} from '../pages/ideas-page';
+import {IdeasPage} from '../pages/IdeasPage';
 
 export default createContainer(({ route: { params: { all } }}) => {
   const ideasHandle = Meteor.subscribe('ideas.public');

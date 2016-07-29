@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import CreateIdeaForm from '../components/create-idea-form';
+import CreateIdeaForm from '../components/CreateIdeaForm';
 import { Ideas } from '../../api/ideas/ideas';
-import {IdeasList} from '../components/ideas-list';
+import {IdeasList} from '../components/IdeasList';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import Message from '../components/Message.jsx';

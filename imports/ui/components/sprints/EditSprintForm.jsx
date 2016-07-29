@@ -4,6 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import {update} from '../../../api/sprints/methods';
 import uuid from 'uuid';
 import InlineEdit from 'react-edit-inline';
+import textUtils from '../../helpers/text'
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 
 // Be sure to include styles at some point, probably during your bootstrapping
@@ -118,7 +119,7 @@ export class EditSprintForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              
+              <p className="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(sprint.goals)}/>
             </div>
           </div>
         </form>

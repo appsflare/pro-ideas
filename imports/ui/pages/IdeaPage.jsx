@@ -1,5 +1,11 @@
+
+import { IdeaComments } from '../../api/idea-comments/idea-comments';
+
 import React, { Component, PropTypes } from 'react';
-import {Grid, Row, Col, Well} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import {Meteor} from 'meteor/meteor';
+
+import {Grid, Row, Col, Well, ButtonGroup} from 'react-bootstrap';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Ideas } from '../../api/ideas/ideas';
 import { update } from '../../api/ideas/methods';
@@ -7,12 +13,11 @@ import {TeamDisplay} from '../components/teams/TeamDisplay.jsx';
 import SprintRoadMap from '../components/sprints/SprintRoadMap.jsx';
 import {VoteIdea} from '../components/VoteIdea.jsx';
 import {MarkIdeaAsCompleted} from '../components/MarkIdeaAsCompleted.jsx';
-import { IdeaComments } from '../../api/idea-comments/idea-comments';
-import IdeaCommentsListContainer from '../containers/idea-comments-list-container.jsx';
-import {IdeaCommentForm} from '../components/idea-comment-form.jsx';
 
-import ReactDOM from 'react-dom';
-import {Meteor} from 'meteor/meteor';
+import IdeaCommentsListContainer from '../containers/IdeaCommentsListContainer.jsx';
+import {IdeaCommentForm} from '../components/IdeaCommentForm.jsx';
+
+
 import InlineEdit from 'react-edit-inline';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import textUtils from '../helpers/text'
@@ -34,18 +39,6 @@ export class IdeaPage extends Component {
 
   get currentUser() {
     return Meteor.userId();
-  }
-
-  castVote(isUpVote, idea) {
-    idea && this.currentUser && Meteor.call('votes.cast', idea._id, isUpVote);
-  }
-
-  upVote() {
-    this.castVote(true, idea);
-  }
-
-  downVote() {
-    this.castVote(false, idea);
   }
 
   validate(text) {
@@ -84,7 +77,7 @@ export class IdeaPage extends Component {
     const isCurrentUserTheOwner = this.currentUser === idea.ownerId
     return (
       <div key={idea._id}>
-        <div class="page-header">
+        <div className="page-header">
           <h1>
             { isCurrentUserTheOwner ?
               (<InlineEdit
@@ -97,17 +90,19 @@ export class IdeaPage extends Component {
             }
 
             <small> by {idea.ownerName}</small></h1>
+            <ButtonGroup className="btn-group-raised">
           {this._renderVoteControls(idea) } 
-          {<MarkIdeaAsCompleted idea={idea}/>}
+          </ButtonGroup>
+          {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
         </div>
 
         <div className="idea-details-container">
 
           <Grid className="idea-details-content-container">
             <Row className="show-grid">
-              <Col md={8}>
-                <div className="bs-callout bs-callout-info">
-                  <h4><span className="upper-case bottom-border">Business value</span></h4>
+              <Col md={8} className="idea-details-contents">
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Business value</h4>
                   { isCurrentUserTheOwner ?
                     <ReactMarkdownMediumEditor ref="businessValue"
                       options={{ placeholder: { text: 'Click here to describe Business value' } }}
@@ -117,8 +112,8 @@ export class IdeaPage extends Component {
                     <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
                   }
                 </div>
-                <div className="bs-callout bs-callout-info">
-                  <h4><span className="upper-case bottom-border">Definition of Success</span></h4>
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Definition of Success</h4>
                   { isCurrentUserTheOwner ?
                     <ReactMarkdownMediumEditor ref="definitionOfSuccess"
                       options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
@@ -128,8 +123,8 @@ export class IdeaPage extends Component {
                     <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
                   }
                 </div>
-                <div className="bs-callout bs-callout-info">
-                  <h4><span className="upper-case bottom-border">Funding Requirement</span></h4>
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Funding Requirement</h4>
 
                   { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
                     options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
@@ -141,9 +136,9 @@ export class IdeaPage extends Component {
                 </div>
               </Col>
               <Col md={4}>
-                <Well>
+                <div>
                   <TeamDisplay multi={true} idea={idea}/>
-                </Well>
+                </div>
               </Col>
             </Row>
             {team ?

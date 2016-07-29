@@ -17,10 +17,10 @@ export default class UserMenu extends React.Component {
 
 
     return (<NavDropdown eventKey={4} title={fullName} id="nav-dropdown">
-      <MenuItem eventKey="4.1" href="/my-ideas">My Ideas</MenuItem>
+      <MenuItem href="/my-ideas">My Ideas</MenuItem>
       <MenuItem divider />
-      <MenuItem eventKey="4.1" href="/change-password">Change Password</MenuItem>
-      <MenuItem eventKey="4.2" onClick={logout}>Sign Out</MenuItem>
+      <MenuItem href="/change-password">Change Password</MenuItem>
+      <MenuItem onClick={logout}>Sign Out</MenuItem>
     </NavDropdown>);
   }
 

@@ -8,7 +8,6 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Ideas } from '../../api/ideas/ideas.js';
 import UserMenu from '../components/UserMenu.jsx';
-import {IdeasList} from '../components/ideas-list.jsx';
 import ConnectionNotification from '../components/ConnectionNotification';
 import Loading from '../components/Loading.jsx';
 import IdeasContainer from '../containers/IdeasContainer.jsx';
@@ -103,11 +102,6 @@ export default class App extends React.Component {
         <section className="container">
           {this.props.content}
         </section>
-        <footer>
-          {this.props.footer || ''}
-        </footer>
-
-
         <div id="container" className={menuOpen ? 'menu-open' : ''}>
           <section id="menu">
 
@@ -125,6 +119,9 @@ export default class App extends React.Component {
             </ReactCSSTransitionGroup>
           </section>
         </div>
+         <footer>
+          {this.props.footer || ''}
+        </footer>
       </div>
     );
   }
