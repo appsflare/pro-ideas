@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Button, Icon, Input, Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/ideas/methods';
 import uuid from 'uuid';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
-import './CreateIdeaForm.less'
+import './CreateIdeaForm.scss'
 
 export default class CreateIdeaForm extends Component {
 
@@ -84,92 +85,72 @@ export default class CreateIdeaForm extends Component {
   }
 
   componentDidMount() {
-    const $formContainer = $(ReactDOM.findDOMNode(this.refs.formContainer));
-    $formContainer.find('[data-toggle="collapse"]').collapse();
+    const $formContainer = $(ReactDOM.findDOMNode(this.refs.formContainer));    
   }
 
   render() {
     let panelId = `panel-${uuid.v1()}`,
       panelSel = `#${panelId}`,
       {error} = this.state;
-
-      setTimeout(()=> {
-        $.material.init();
-      });
     return (
-      <div ref="formContainer">
+      <div className="create-idea-form" ref="formContainer">
 
         {error ?
           <div className="alert alert-danger" role="alert">
             {error}
           </div> : ''}
 
-        <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="text" name="name" value={this.state.name} onChange={this.onInputChange.bind(this) } ref="nameInput" className="form-control" placeholder="New Idea"/>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <div className="form-control auto-height">
+        <Row>
+          <form onSubmit={this.handleSubmit.bind(this) } >
 
-                <ReactMarkdownMediumEditor ref="businessValue"
-                  options={{ toolbar: { static: true }, placeholder: { text: 'Click here to describe Business value' } }}
-                  markdown={this.state.businessValue}
-                  onChange={this.businessValueUpdated}/>
-              </div>
-            </div>
-          </div>
+            <Input s={12} type="text" name="name" value={this.state.name} onChange={this.onInputChange.bind(this) } label="New Idea"/>
 
-          <div className="form-group">
-            <div className="col-sm-12">
-              <button type="button" className="btn btn-link pull-right" data-toggle="collapse" data-target={panelSel}>Add more details</button>
-            </div>
-          </div>
 
-          <div className="collapse" id={panelId}>
-            <div className="well">
-              <div className="form-group">
-                <div className="col-sm-12">
-                  <div className="form-control auto-height">
-                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"
+            <Col s={12} className="input-field">
+              <Icon className="prefix">business</Icon>
+              <ReactMarkdownMediumEditor className="md-editor" ref="businessValue"
+                options={{ toolbar: { static: true }, placeholder: { text: 'Click here to describe Business value' } }}
+                markdown={this.state.businessValue}
+                onChange={this.businessValueUpdated}/>
+            </Col>
+
+
+            <Col s={12}>
+              <Collapsible popout>
+                <CollapsibleItem header='I have more details!' icon='speaker_notes'>
+                  <Col s={12} className="input-field">
+                    <Icon className="prefix">done_all</Icon>
+                    <ReactMarkdownMediumEditor className="md-editor" ref="definitionOfSuccess"
                       options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
                       markdown={this.state.definitionOfSuccess}
                       onChange={this.definitionOfSuccessUpdated}/>
-                  </div>
+                  </Col>
 
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-12">
-                  <div className="checkbox">
-                    <label><input type="checkbox" onChange={this.onIsFundingRequiredChanged.bind(this) } checked={this.state.isFundingRequired}/> Funding required?</label>
-                  </div>
-                </div>
-              </div>
-              {this.state.isFundingRequired ?
-                <div className="form-group">
-                  <div className="col-sm-12">
-                    <div className="form-control auto-height">
-                      <ReactMarkdownMediumEditor ref="fundingRequirement"
+                  <Col s={12}>
+                    <Input type='checkbox' value='red' label="Funding required?"
+                      checked={this.state.isFundingRequired}
+                      onChange={this.onIsFundingRequiredChanged.bind(this) } />
+                  </Col>
+                  {this.state.isFundingRequired ?
+                    <Col s={12} className="input-field">
+                      <Icon className="prefix">receipt</Icon>
+                      <ReactMarkdownMediumEditor className="md-editor" ref="fundingRequirement"
                         options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
                         markdown={this.state.fundingRequirement}
                         onChange={this.fundingRequirementUpdated}/>
-                    </div>
-                  </div>
-                </div>
-                : ''}
-
+                    </Col>
+                    : ''}
+                </CollapsibleItem>
+              </Collapsible>
+            </Col>
+            <div className="form-group">
+              <div className="col-sm-12">
+                <Button>Post it!</Button>
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <button type="submit" className="btn btn-raised btn-primary">Post it!</button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </Row>
+      </div >
     );
   }
 }

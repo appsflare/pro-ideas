@@ -1,0 +1,17 @@
+@import '{}/imports/ui/stylesheets/utils.scss';
+
+// Empty states and 404 messages
+.wrapper-message {
+  @include position(absolute, 45%, 0, auto, 0);
+  transform: translate3d(0, -50%, 0);
+  text-align: center;
+
+  .title-message {
+    color: $color-ancillary;
+    margin-bottom: .5em;
+  }
+
+  .subtitle-message {    
+    color: $color-medium;
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import {Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
+import {Navbar, Dropdown, NavItem} from 'react-materialize';
 
 export default class UserMenu extends React.Component {
   constructor(props) {
@@ -16,20 +16,20 @@ export default class UserMenu extends React.Component {
     const fullName = user.profile.fullName;
 
 
-    return (<NavDropdown eventKey={4} title={fullName} id="nav-dropdown">
-      <MenuItem href="/my-ideas">My Ideas</MenuItem>
-      <MenuItem divider />
-      <MenuItem href="/change-password">Change Password</MenuItem>
-      <MenuItem onClick={logout}>Sign Out</MenuItem>
-    </NavDropdown>);
+    return (<Dropdown eventKey={4} title={fullName} id="nav-dropdown">
+      <NavItem href="/my-ideas">My Ideas</NavItem>
+      <NavItem divider />
+      <NavItem href="/change-password">Change Password</NavItem>
+      <NavItem onClick={logout}>Sign Out</NavItem>
+    </Dropdown>);
   }
 
   renderLoggedOut() {
     return (
-      <Nav>
-        <NavItem eventKey="4.1" href="/join">Join</NavItem>
-        <NavItem eventKey="4.2" href="/signin">Sign In</NavItem>
-      </Nav>
+      <Navbar>
+        <NavItem href="/join">Join</NavItem>
+        <NavItem href="/signin">Sign In</NavItem>
+      </Navbar>
     );
   }
 

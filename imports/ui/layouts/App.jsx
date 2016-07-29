@@ -1,9 +1,8 @@
-import './App.less';
+import './App.scss';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
-import 'bootstrap-material-design/dist/js/material.js';
-import 'bootstrap-material-design/dist/js/ripples.js';
+import {Nav, NavItem, Navbar, NavDropdown, MenuItem, Footer} from 'react-materialize';
+
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Ideas } from '../../api/ideas/ideas.js';
@@ -22,7 +21,7 @@ export default class App extends React.Component {
       showConnectionIssue: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.logout = this.logout.bind(this);    
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -77,25 +76,19 @@ export default class App extends React.Component {
       key: location.pathname,
     });
 
+
+    let logo = (<span><img src="/icons/logo.svg"/>Pro-Ideas</span>);
+
     return (
 
       <div>
         <header>
-          <Navbar>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">
-                  <span><img src="/icons/logo.svg"/></span>
-                  Pro-Ideas
-                </a>
-              </Navbar.Brand>
-            </Navbar.Header>
-            <Nav>
-              <NavItem eventKey={1} href="/ideas">Ideas</NavItem>
-            </Nav>
-            <Nav pullRight>
+
+          <Navbar brand={logo} right>
+            <NavItem href="/ideas">Ideas</NavItem>
+            <NavItem>
               <UserMenu user={user} logout={this.logout}/>
-            </Nav>
+            </NavItem>
           </Navbar>
 
         </header>
@@ -119,9 +112,10 @@ export default class App extends React.Component {
             </ReactCSSTransitionGroup>
           </section>
         </div>
-         <footer>
+
+        <Footer copyrights="&copy; 2016 Copyright Text">
           {this.props.footer || ''}
-        </footer>
+        </Footer>
       </div>
     );
   }

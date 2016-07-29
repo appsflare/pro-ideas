@@ -1,16 +1,16 @@
-@color:#337ab7;
+$color:#337ab7;
 
 .react-calendar-timeline{
      .rct-sidebar { 
          .rct-sidebar-header{
-             background:@color;
+             background:$color;
          }
      }
 
      .rct-header{ 
          .rct-label-group
          {
-            background: @color;
+            background: $color;
          }
     }
 }

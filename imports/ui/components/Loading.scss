@@ -1,4 +1,4 @@
-@import '{}/imports/ui/stylesheets/utils.less';
+@import '{}/imports/ui/stylesheets/utils.scss';
 
 @-webkit-keyframes sk-cubeGridScaleDelay {
   0%, 70%, 100% {
@@ -21,7 +21,7 @@
 }
 
 .loading-app {
-  .position(absolute, 50%, 50%, auto, auto, 50%);
+  @include position(absolute, 50%, 50%, auto, auto, 50%);
   transform: translate3d(50%, -50%, 0);
   
 

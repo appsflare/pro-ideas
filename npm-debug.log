@@ -1,0 +1,198 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.15.1
+3 info using node@v0.10.45
+4 verbose readDependencies loading dependencies from /home/srinath/dev/pro-ideas/package.json
+5 verbose install where, deps [ '/home/srinath/dev/pro-ideas',
+5 verbose install   [ 'collapse-whitespace',
+5 verbose install     'component-classes',
+5 verbose install     'd3',
+5 verbose install     'faker',
+5 verbose install     'interact.js',
+5 verbose install     'jquery',
+5 verbose install     'materialize-css',
+5 verbose install     'medium-editor',
+5 verbose install     'meteor-node-stubs',
+5 verbose install     'moment',
+5 verbose install     'parse5',
+5 verbose install     'rc-tabs',
+5 verbose install     'react',
+5 verbose install     'react-addons-css-transition-group',
+5 verbose install     'react-addons-linked-state-mixin',
+5 verbose install     'react-addons-pure-render-mixin',
+5 verbose install     'react-bootstrap',
+5 verbose install     'react-bootstrap-date-picker',
+5 verbose install     'react-bubble-chart',
+5 verbose install     'react-calendar-timeline',
+5 verbose install     'react-dom',
+5 verbose install     'react-edit-inline',
+5 verbose install     'react-materialize',
+5 verbose install     'react-mounter',
+5 verbose install     'react-router',
+5 verbose install     'react-select',
+5 verbose install     'to-markdown',
+5 verbose install     'uuid' ] ]
+6 verbose install where, peers [ '/home/srinath/dev/pro-ideas', [] ]
+7 verbose installManyTop reading for lifecycle /home/srinath/dev/pro-ideas/package.json
+8 info preinstall pro-ideas@0.1.0
+9 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/collapse-whitespace/package.json
+10 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/component-classes/package.json
+11 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/d3/package.json
+12 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/faker/package.json
+13 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/interact.js/package.json
+14 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/jquery/package.json
+15 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/materialize-css/package.json
+16 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/medium-editor/package.json
+17 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/meteor-node-stubs/package.json
+18 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/moment/package.json
+19 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/parse5/package.json
+20 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/rc-tabs/package.json
+21 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react/package.json
+22 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-addons-css-transition-group/package.json
+23 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-addons-linked-state-mixin/package.json
+24 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-addons-pure-render-mixin/package.json
+25 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-bootstrap/package.json
+26 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-bootstrap-date-picker/package.json
+27 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-bubble-chart/package.json
+28 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-calendar-timeline/package.json
+29 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-dom/package.json
+30 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-edit-inline/package.json
+31 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-materialize/package.json
+32 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-mounter/package.json
+33 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-router/package.json
+34 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/react-select/package.json
+35 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/to-markdown/package.json
+36 verbose installManyTop reading scoped package data from /home/srinath/dev/pro-ideas/node_modules/uuid/package.json
+37 info package.json rc-tabs@5.8.3 No license field.
+38 info package.json parse5@1.3.1 No license field.
+39 info package.json to-markdown@1.3.0 No license field.
+40 verbose readDependencies loading dependencies from /home/srinath/dev/pro-ideas/package.json
+41 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/collapse-whitespace/package.json
+42 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/component-classes/package.json
+43 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/d3/package.json
+44 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/faker/package.json
+45 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/interact.js/package.json
+46 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/jquery/package.json
+47 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/materialize-css/package.json
+48 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/medium-editor/package.json
+49 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/meteor-node-stubs/package.json
+50 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/moment/package.json
+51 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/parse5/package.json
+52 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/rc-tabs/package.json
+53 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react/package.json
+54 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-addons-css-transition-group/package.json
+55 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-addons-linked-state-mixin/package.json
+56 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-addons-pure-render-mixin/package.json
+57 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-bootstrap/package.json
+58 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-bootstrap-date-picker/package.json
+59 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-bubble-chart/package.json
+60 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-calendar-timeline/package.json
+61 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-dom/package.json
+62 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-edit-inline/package.json
+63 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-materialize/package.json
+64 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-mounter/package.json
+65 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-router/package.json
+66 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/react-select/package.json
+67 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/to-markdown/package.json
+68 verbose targetResolver reading package data from /home/srinath/dev/pro-ideas/node_modules/uuid/package.json
+69 verbose already installed skipping meteor-node-stubs@^0.2.3 /home/srinath/dev/pro-ideas
+70 verbose already installed skipping moment@^2.13.0 /home/srinath/dev/pro-ideas
+71 verbose already installed skipping parse5@1.3.1 /home/srinath/dev/pro-ideas
+72 verbose already installed skipping rc-tabs@5.8.x /home/srinath/dev/pro-ideas
+73 verbose already installed skipping react@^15.1.0 /home/srinath/dev/pro-ideas
+74 verbose already installed skipping react-addons-css-transition-group@^15.1.0 /home/srinath/dev/pro-ideas
+75 verbose already installed skipping react-addons-linked-state-mixin@^15.1.0 /home/srinath/dev/pro-ideas
+76 verbose already installed skipping react-addons-pure-render-mixin@^15.1.0 /home/srinath/dev/pro-ideas
+77 verbose already installed skipping react-bootstrap@^0.29.5 /home/srinath/dev/pro-ideas
+78 verbose already installed skipping react-bootstrap-date-picker@^3.1.0 /home/srinath/dev/pro-ideas
+79 verbose already installed skipping react-bubble-chart@^0.4.0 /home/srinath/dev/pro-ideas
+80 verbose already installed skipping react-calendar-timeline@^0.8.1 /home/srinath/dev/pro-ideas
+81 verbose already installed skipping react-dom@^15.1.0 /home/srinath/dev/pro-ideas
+82 verbose already installed skipping react-edit-inline@^1.0.7 /home/srinath/dev/pro-ideas
+83 verbose already installed skipping react-materialize@^0.14.6 /home/srinath/dev/pro-ideas
+84 verbose already installed skipping react-mounter@^1.2.0 /home/srinath/dev/pro-ideas
+85 verbose already installed skipping react-router@^2.4.1 /home/srinath/dev/pro-ideas
+86 verbose already installed skipping react-select@^1.0.0-beta13 /home/srinath/dev/pro-ideas
+87 verbose already installed skipping to-markdown@1.3.0 /home/srinath/dev/pro-ideas
+88 verbose already installed skipping uuid@^2.0.2 /home/srinath/dev/pro-ideas
+89 verbose already installed skipping collapse-whitespace@1.1.2 /home/srinath/dev/pro-ideas
+90 verbose already installed skipping component-classes@^1.2.6 /home/srinath/dev/pro-ideas
+91 verbose already installed skipping d3@^3.5.17 /home/srinath/dev/pro-ideas
+92 verbose already installed skipping faker@^3.1.0 /home/srinath/dev/pro-ideas
+93 verbose already installed skipping interact.js@^1.2.6 /home/srinath/dev/pro-ideas
+94 verbose already installed skipping jquery@^2.1.4 /home/srinath/dev/pro-ideas
+95 verbose already installed skipping materialize-css@^0.97.7 /home/srinath/dev/pro-ideas
+96 verbose already installed skipping medium-editor@5.x /home/srinath/dev/pro-ideas
+97 silly install resolved []
+98 info build /home/srinath/dev/pro-ideas
+99 info linkStuff pro-ideas@0.1.0
+100 silly linkStuff pro-ideas@0.1.0 has /home/srinath/dev as its parent node_modules
+101 verbose linkBins pro-ideas@0.1.0
+102 verbose linkMans pro-ideas@0.1.0
+103 verbose rebuildBundles pro-ideas@0.1.0
+104 verbose rebuildBundles [ 'collapse-whitespace',
+104 verbose rebuildBundles   'component-classes',
+104 verbose rebuildBundles   'd3',
+104 verbose rebuildBundles   'faker',
+104 verbose rebuildBundles   'interact.js',
+104 verbose rebuildBundles   'jquery',
+104 verbose rebuildBundles   'materialize-css',
+104 verbose rebuildBundles   'medium-editor',
+104 verbose rebuildBundles   'meteor-node-stubs',
+104 verbose rebuildBundles   'moment',
+104 verbose rebuildBundles   'parse5',
+104 verbose rebuildBundles   'rc-tabs',
+104 verbose rebuildBundles   'react',
+104 verbose rebuildBundles   'react-addons-css-transition-group',
+104 verbose rebuildBundles   'react-addons-linked-state-mixin',
+104 verbose rebuildBundles   'react-addons-pure-render-mixin',
+104 verbose rebuildBundles   'react-bootstrap',
+104 verbose rebuildBundles   'react-bootstrap-date-picker',
+104 verbose rebuildBundles   'react-bubble-chart',
+104 verbose rebuildBundles   'react-calendar-timeline',
+104 verbose rebuildBundles   'react-dom',
+104 verbose rebuildBundles   'react-edit-inline',
+104 verbose rebuildBundles   'react-materialize',
+104 verbose rebuildBundles   'react-mounter',
+104 verbose rebuildBundles   'react-router',
+104 verbose rebuildBundles   'react-select',
+104 verbose rebuildBundles   'to-markdown',
+104 verbose rebuildBundles   'uuid' ]
+105 info install pro-ideas@0.1.0
+106 info postinstall pro-ideas@0.1.0
+107 info prepublish pro-ideas@0.1.0
+108 verbose validateInstall loading /home/srinath/dev/pro-ideas/package.json for validation
+109 verbose stack Error: The package react@15.1.0 does not satisfy its siblings' peerDependencies requirements!
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/lib/install.js:125:32
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/lib/install.js:268:7
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+109 verbose stack     at cb (/home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+109 verbose stack     at cb (/home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+109 verbose stack     at cb (/home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+109 verbose stack     at /home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+110 verbose cwd /home/srinath/dev/pro-ideas
+111 error Linux 4.4.0-31-generic
+112 error argv "node" "/home/srinath/.meteor/packages/meteor-tool/.1.3.3_1.r81jsx++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm" "install"
+113 error node v0.10.45
+114 error npm  v2.15.1
+115 error code EPEERINVALID
+116 error peerinvalid The package react@15.1.0 does not satisfy its siblings' peerDependencies requirements!
+116 error peerinvalid Peer react-addons-css-transition-group@15.1.0 wants react@^15.1.0
+116 error peerinvalid Peer react-addons-linked-state-mixin@15.1.0 wants react@^15.1.0
+116 error peerinvalid Peer react-addons-pure-render-mixin@15.1.0 wants react@^15.1.0
+116 error peerinvalid Peer react-bootstrap@0.29.5 wants react@>=0.14.0
+116 error peerinvalid Peer react-bootstrap-date-picker@3.1.0 wants react@>=0.14.0
+116 error peerinvalid Peer react-bubble-chart@0.4.0 wants react@>=0.14.x
+116 error peerinvalid Peer react-calendar-timeline@0.8.6 wants react@^0.14.8 || ^15.0.1
+116 error peerinvalid Peer react-dom@15.3.0 wants react@^15.3.0
+116 error peerinvalid Peer react-edit-inline@1.0.7 wants react@^0.14.6 || 15.x.x
+116 error peerinvalid Peer react-materialize@0.14.6 wants react@>=0.14.0
+116 error peerinvalid Peer react-mounter@1.2.0 wants react@0.14.x || 15.x.x
+116 error peerinvalid Peer react-router@2.6.0 wants react@^0.14.0 || ^15.0.0
+116 error peerinvalid Peer react-select@1.0.0-beta14 wants react@^0.14 || ^15.0.0-rc || ^15.0
+117 verbose exit [ 1, true ]
