@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Icon, Badge } from 'react-materialize';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router';
 import {VoteIdea} from './VoteIdea.jsx'
 import {MarkIdeaAsCompleted} from './MarkIdeaAsCompleted.jsx'
@@ -28,29 +28,28 @@ export default class Idea extends Component {
     const idea = this.props.idea;
     return (
       <div>
-        <h5>
+        <h4 className="list-group-item-heading">
 
           <Link to={`/idea/${idea._id}`}>
-            <Icon>{idea.isCompleted() ? 'done' : 'hourglass_empty'}</Icon> {idea.name}<small> by {idea.ownerName} </small>
+            <i className="material-icons">{idea.isCompleted()?'done':'hourglass_empty'}</i> {idea.name}<small> by {idea.ownerName} </small>
           </Link>
 
-        </h5>
-        <p dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue) }/>
+        </h4>
+        <p className="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue) }/>
 
-        {idea.ownerId === this.currentUser ?
-          <Button waves="light" onClick={this.deleteThisIdea.bind(this) }>
-            <Icon>delete </Icon>
-          </Button>
-          : ''
-        }
+        <ButtonGroup className="btn-group-raised">
+          {idea.ownerId === this.currentUser ?
+            <Button bsSize="xs" onClick={this.deleteThisIdea.bind(this) }>
+              <i className="material-icons">delete</i>
+            </Button>
+            : ''
+          }
 
-        {this.renderVoteControls(idea) }
+          {this.renderVoteControls(idea) }          
+        </ButtonGroup>
+        {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
 
-        {<MarkIdeaAsCompleted className="right" idea={idea}/>}
-
-        {idea.comments > 0 ?
-          <Badge className="right" data-badge-caption=" Comments" newIcon>{idea.comments}</Badge>
-          : ''}
+        <span className="pull-right badge">{idea.comments}</span>
 
       </div>
     );

@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import {CardPanel, Card, Button, Icon} from 'react-materialize';
-
 import {remove, updateText} from '../../api/idea-comments/methods';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
-
 import textUtils from '../helpers/text'
 
 // Task component - represents a single todo item
@@ -37,7 +34,7 @@ export default class IdeaComment extends Component {
     const isCurrentUserTheOwner = comment.ownerId === this.currentUser;
     return (
 
-      <Card>
+      <div className="panel panel-default">
         <div className="panel-heading">
           {comment.ownerName}
 
@@ -48,21 +45,23 @@ export default class IdeaComment extends Component {
           }
 
           {isCurrentUserTheOwner ?
-            <Button className="right close" onClick={this.deleteThisComment.bind(this) }>
-              <Icon>delete</Icon>
-            </Button>
+            <button type="button" className="close" aria-label="Close" onClick={this.deleteThisComment.bind(this) }>
+              <span aria-hidden="true">&times; </span>
+            </button>
             : ''
           }
         </div>
+        <div className="panel-body">
 
-        { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor
-          options={{ placeholder: { text: 'Click here to add your comment' } }}
-          markdown={this.state.comment.text || '' }
-          onChange={this.commentTextUpdated}/>
-          :
-          <div dangerouslySetInnerHTML={textUtils.createMarkup(this.state.comment.text) }/>
-        }
-      </Card>
+          { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor
+            options={{ placeholder: { text: 'Click here to add your comment' } }}
+            markdown={this.state.comment.text || '' }
+            onChange={this.commentTextUpdated}/>
+            :
+            <div dangerouslySetInnerHTML={textUtils.createMarkup(this.state.comment.text) }/>
+          }
+        </div>
+      </div>
     );
   }
 }

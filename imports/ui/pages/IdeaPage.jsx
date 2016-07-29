@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 
-import {Grid, Row, Col} from 'react-materialize';
+import {Grid, Row, Col, Well, ButtonGroup} from 'react-bootstrap';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Ideas } from '../../api/ideas/ideas';
 import { update } from '../../api/ideas/methods';
@@ -21,7 +21,7 @@ import {IdeaCommentForm} from '../components/IdeaCommentForm.jsx';
 import InlineEdit from 'react-edit-inline';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import textUtils from '../helpers/text'
-import './IdeaPage.scss'
+import './IdeaPage.less'
 
 export class IdeaPage extends Component {
 
@@ -90,70 +90,76 @@ export class IdeaPage extends Component {
             }
 
             <small> by {idea.ownerName}</small></h1>
-
-          {this._renderVoteControls(idea) }
+            <ButtonGroup className="btn-group-raised">
+          {this._renderVoteControls(idea) } 
+          </ButtonGroup>
           {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
         </div>
 
         <div className="idea-details-container">
-          <Row className="row idea-details-content-container">
-            <Col m={8} className="idea-details-contents">
-              <div className="idea-details-content">
-                <h4 className="idea-detail-heading upper-case bottom-border">Business value</h4>
-                { isCurrentUserTheOwner ?
-                  <ReactMarkdownMediumEditor ref="businessValue"
-                    options={{ placeholder: { text: 'Click here to describe Business value' } }}
-                    markdown={idea.businessValue}
-                    onChange={this.businessValueUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
-                }
-              </div>
-              <div className="idea-details-content">
-                <h4 className="idea-detail-heading upper-case bottom-border">Definition of Success</h4>
-                { isCurrentUserTheOwner ?
-                  <ReactMarkdownMediumEditor ref="definitionOfSuccess"
-                    options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
-                    markdown={idea.definitionOfSuccess}
-                    onChange={this.definitionOfSuccessUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
-                }
-              </div>
-              <div className="idea-details-content">
-                <h4 className="idea-detail-heading upper-case bottom-border">Funding Requirement</h4>
 
-                { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
-                  options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
-                  markdown={idea.fundingRequirement}
-                  onChange={this.fundingRequirementUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
-                }
-              </div>
-            </Col>
-            <Col m={4}>
-              <TeamDisplay multi={true} idea={idea}/>
-            </Col>
-          </Row>
-          {team ?
-            <Row>
-              <Col m={12}>
-                <SprintRoadMap teamId={team._id}/>
+          <Grid className="idea-details-content-container">
+            <Row className="show-grid">
+              <Col md={8} className="idea-details-contents">
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Business value</h4>
+                  { isCurrentUserTheOwner ?
+                    <ReactMarkdownMediumEditor ref="businessValue"
+                      options={{ placeholder: { text: 'Click here to describe Business value' } }}
+                      markdown={idea.businessValue}
+                      onChange={this.businessValueUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
+                  }
+                </div>
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Definition of Success</h4>
+                  { isCurrentUserTheOwner ?
+                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"
+                      options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
+                      markdown={idea.definitionOfSuccess}
+                      onChange={this.definitionOfSuccessUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
+                  }
+                </div>
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Funding Requirement</h4>
+
+                  { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
+                    options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
+                    markdown={idea.fundingRequirement}
+                    onChange={this.fundingRequirementUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
+                  }
+                </div>
+              </Col>
+              <Col md={4}>
+                <div>
+                  <TeamDisplay multi={true} idea={idea}/>
+                </div>
               </Col>
             </Row>
-            : ''}
-          <Row>
-            <Col m={12}>
-              <h4>
-                <span className="upper-case bottom-border">Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''}
-                </span>
-              </h4>
-              <hr/>
-              {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
-              <IdeaCommentsListContainer ideaId={idea._id}/>
-            </Col>
-          </Row>
+            {team ?
+              <Row className="show-grid">
+                <Col md={12}>
+                  <SprintRoadMap teamId={team._id}/>
+                </Col>
+              </Row>
+              : ''}
+            <Row className="show-grid">
+              <Col md={12}>
+                <h4>
+                  <span className="upper-case bottom-border">Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''}
+                  </span>
+                </h4>
+                <hr/>
+                {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
+                <IdeaCommentsListContainer ideaId={idea._id}/>
+              </Col>
+            </Row>
+          </Grid>
         </div>
 
       </div>

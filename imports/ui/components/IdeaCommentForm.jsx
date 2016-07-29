@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {Row, Col} from 'react-materialize';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/idea-comments/methods';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
-import './IdeaCommentForm.scss';
+import './IdeaCommentForm.less';
 
 export class IdeaCommentForm extends Component {
 
@@ -40,22 +39,25 @@ export class IdeaCommentForm extends Component {
 
   render() {
     return (
-      <Row>
-        <form onSubmit={this.handleSubmit.bind(this) }>
-          <Col s="10" className="comment-box-container">
-            <div className="input-field">
-              <ReactMarkdownMediumEditor className="md-editor" ref="editor"
-                options={{ placeholder: { text: 'Click here to add your comment' } }}
-                markdown={this.state.text}
-                onChange={this.commentTextUpdated}/>
-            </div>
+      <div>
 
+        <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
+
+          <div className="form-group">
+            <div className="col-sm-10 comment-box-container">
+              <div className="form-control auto-height">
+                <ReactMarkdownMediumEditor ref="editor"
+                  options={{ placeholder: { text: 'Click here to add your comment' } }}
+                  markdown={this.state.text}
+                  onChange={this.commentTextUpdated}/>
+              </div>
+            </div>
             <div className="col-sm-2">
               <button type="submit" className="btn btn-raised btn-default">Comment</button>
             </div>
-          </Col>
+          </div>
         </form>
-      </Row>
+      </div>
     );
   }
 }

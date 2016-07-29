@@ -6,7 +6,7 @@ import moment from 'moment'
 import {Sprints} from '../../../api/sprints/sprints';
 import {CreateSprintForm} from './CreateSprintForm.jsx';
 import {EditSprintForm} from './EditSprintForm.jsx';
-import './SprintRoadMap.scss'
+import './SprintRoadMap.less'
 
 const items = [
     { id: 1, group: 1, title: 'item 1', start_time: moment(), end_time: moment().add(1, 'hour') },

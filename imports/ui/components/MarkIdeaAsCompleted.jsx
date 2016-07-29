@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Icon } from 'react-materialize';
+import {Button} from 'react-bootstrap';
 import {markAsCompleted} from '../../api/ideas/methods'
 
 export class MarkIdeaAsCompleted extends Component {
@@ -18,8 +18,8 @@ export class MarkIdeaAsCompleted extends Component {
 
     _renderControl(idea) {
         return (<span className={this.props.className || ''}>
-            <Button onClick={this.markAsCompleted.bind(this, true) }>
-                <Icon>done</Icon>
+            <Button  bsSize="xs" bsStyle="success" className="btn-raised" onClick={this.markAsCompleted.bind(this, true) }>
+                <i className="material-icons">done</i>
                 <span> Mark As Done</span>
             </Button>
         </span>);

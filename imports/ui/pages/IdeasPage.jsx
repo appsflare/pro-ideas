@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, CardTitle } from 'react-materialize';
 import CreateIdeaForm from '../components/CreateIdeaForm';
 import { Ideas } from '../../api/ideas/ideas';
 import {IdeasList} from '../components/IdeasList';
@@ -25,9 +24,13 @@ export class IdeasPage extends Component {
     const {ideas} = this.props;
     return (
       <div className="container">      
-        <Card title="Have an idea flashing in your head?">
+        <div className="panel panel-primary">
+          <div className="panel-heading">
+            <h3 className="panel-title">Have an idea flashing in your head?</h3> </div>
+          <div className="panel-body">
             {this.currentUser ? <CreateIdeaForm/> : 'Please login to start posting ideas!!!'}
-        </Card>
+          </div>
+        </div>
         {this.renderIdeasList(ideas) }
       </div>
     );

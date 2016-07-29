@@ -26,6 +26,7 @@ less
 # ui
 #static-html
 react-meteor-data
+twbs:bootstrap
 
 # data
 mongo                               # The database Meteor supports right now
