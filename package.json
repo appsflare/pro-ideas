@@ -15,6 +15,7 @@
     "d3": "^3.5.17",
     "faker": "^3.1.0",
     "interact.js": "^1.2.6",
+    "jquery": "^2.1.4",
     "medium-editor": "5.x",
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.13.0",
