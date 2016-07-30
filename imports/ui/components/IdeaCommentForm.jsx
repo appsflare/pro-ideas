@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/idea-comments/methods';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
-import './IdeaCommentForm.less';
+import './IdeaCommentForm.scss';
 
 export class IdeaCommentForm extends Component {
 

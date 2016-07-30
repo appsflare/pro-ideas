@@ -4,7 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import {insert} from '../../api/ideas/methods';
 import uuid from 'uuid';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
-import './CreateIdeaForm.less'
+import './CreateIdeaForm.scss'
 
 export default class CreateIdeaForm extends Component {
 

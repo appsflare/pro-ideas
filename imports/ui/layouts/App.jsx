@@ -1,4 +1,4 @@
-import './App.less';
+import './App.scss';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';

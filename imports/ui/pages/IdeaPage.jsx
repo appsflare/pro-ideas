@@ -21,7 +21,7 @@ import {IdeaCommentForm} from '../components/IdeaCommentForm.jsx';
 import InlineEdit from 'react-edit-inline';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import textUtils from '../helpers/text'
-import './IdeaPage.less'
+import './IdeaPage.scss'
 
 export class IdeaPage extends Component {
 

@@ -1,4 +1,4 @@
-import './IdeasList.less';
+import './IdeasList.scss';
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
