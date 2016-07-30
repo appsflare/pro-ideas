@@ -32,7 +32,7 @@ export class TeamDisplayComponent extends Component {
 
     render() {
         const {loading, idea, team} = this.props;
-        return <div>
+        return <div className="idea-details-content">
             {loading ? <p>Checking...</p> : this.renderContent(idea, team) }
         </div>
 

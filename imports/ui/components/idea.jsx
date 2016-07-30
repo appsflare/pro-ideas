@@ -46,8 +46,7 @@ export default class Idea extends Component {
           }
 
           {this.renderVoteControls(idea) }          
-        </ButtonGroup>
-        {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
+        </ButtonGroup>       
 
         <span className="pull-right badge">{idea.comments}</span>
 

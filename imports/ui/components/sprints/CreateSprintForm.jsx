@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {insert} from '../../../api/sprints/methods';
 import uuid from 'uuid';
-import DatePicker from 'react-bootstrap-date-picker';
+import {DateField} from 'react-date-picker';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 
 function formateDate(date) {
@@ -120,13 +120,13 @@ export class CreateSprintForm extends Component {
               onChange={this.goalsUpdated}/>
           </FormGroup>
           <FormGroup>
-            <DatePicker className="form-control auto-height" ref="startDate"
+            <DateField className="form-control auto-height" ref="startDate"
               placeholder="Select sprint start date"
               value={ this.state.startDateStr}
               onChange={this.startDateSelected}/>
           </FormGroup>
           <FormGroup>
-            <DatePicker className="form-control auto-height" ref="endDate"
+            <DateField className="form-control auto-height" ref="endDate"
               placeholder="Select sprint end date"
               value={this.state.endDateStr}
               onChange={this.endDateSelected}/>

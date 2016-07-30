@@ -135,7 +135,7 @@ export class IdeaPage extends Component {
                   }
                 </div>
               </Col>
-              <Col md={4}>
+              <Col md={4} className="idea-details-contents">
                 <div>
                   <TeamDisplay multi={true} idea={idea}/>
                 </div>

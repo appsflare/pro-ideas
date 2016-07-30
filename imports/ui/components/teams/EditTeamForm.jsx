@@ -116,7 +116,7 @@ export class EditTeamForm extends Component {
           <FormGroup>
             <div className="col-sm-12">
               <h4>
-                <span className="upper-case bottom-border">
+                <span className="idea-detail-heading upper-case bottom-border">
                   Team Name
                 </span>
               </h4>
@@ -135,7 +135,7 @@ export class EditTeamForm extends Component {
           </FormGroup>
           <FormGroup>
             <div className="col-sm-12">
-              <h4><span className="upper-case bottom-border">Members</span></h4>
+              <h4><span className="idea-detail-heading upper-case bottom-border">Members</span></h4>
               <UserPicker multi={true} placeholder="Select team members" value={members} disabled={!isCurrentUserTheOwner} onChange={this.memberSelected} />
             </div>
           </FormGroup>
