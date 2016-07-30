@@ -8,9 +8,7 @@ export class MarkIdeaAsCompleted extends Component {
 
         });
     }
-
-
-
+    
     get currentUser() {
         return Meteor.userId();
     }

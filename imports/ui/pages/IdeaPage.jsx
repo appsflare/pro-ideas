@@ -90,8 +90,8 @@ export class IdeaPage extends Component {
             }
 
             <small> by {idea.ownerName}</small></h1>
-            <ButtonGroup className="btn-group-raised">
-          {this._renderVoteControls(idea) } 
+          <ButtonGroup className="btn-group-raised">
+            {this._renderVoteControls(idea) }
           </ButtonGroup>
           {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
         </div>
