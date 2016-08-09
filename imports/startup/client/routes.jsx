@@ -10,6 +10,7 @@ import AuthPageSignIn from '../../ui/pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../../ui/pages/AuthPageJoin.jsx';
 import ChangePasswordPage from '../../ui/pages/ChangePasswordPage.jsx';
 import NotFoundPage from '../../ui/pages/NotFoundPage.jsx';
+import TasksPage from '../../ui/pages/TasksPage.jsx';
 
 export const renderRoutes = () => {
   return (
@@ -21,6 +22,7 @@ export const renderRoutes = () => {
         <Route path="signin" component={AuthPageSignIn}/>
         <Route path="join" component={AuthPageJoin}/>
         <Route path="change-password" component={ChangePasswordPage}/>
+        <Route path="tasks" component={TasksPage}/>        
         <Route path="*" component={NotFoundPage}/>
       </Route>
     </Router>

@@ -68,8 +68,13 @@ xolvio:cleaner
 dispatch:mocha-phantomjs
 practicalmeteor:mocha@2.1.1-rc.1
 hwillson:stub-collections
+
+#ui
 mouse0270:bootstrap-notify
 universe:react-markdown-wysiwyg
 universe:modules
 seba:minifiers-autoprefixer
 fourseven:scss
+
+#local packages
+pro-ideas:kanban

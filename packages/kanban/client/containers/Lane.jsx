@@ -25,7 +25,7 @@ const laneTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
     const sourceType = monitor.getItemType();
-    if((!targetProps.lane.notes.length) && sourceType === itemTypes.NOTE) {
+    if((!targetProps.lane.tasks.length) && sourceType === itemTypes.TASK) {
       targetProps.attachToLane(targetId, sourceId);
     } else if((targetId !== sourceId) && (sourceType === itemTypes.LANE)) {
       targetProps.onMoveLane(sourceId, targetId);
@@ -48,15 +48,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCreateNote(laneId) {
-    const newNote = notesActions.createNote('New note');
+  onCreateTask(laneId) {
+    const newNote = notesActions.createNote('New task');
     dispatch(newNote);
     dispatch(lanesActions.attachToLane(laneId, newNote.payload.id));
   },
 
   // Used both to detach a note from a lane and delete all the notes when a
   // lane is removed
-  onDeleteNote(laneId, noteId) {
+  onDeleteTask(laneId, noteId) {
     dispatch(notesActions.deleteNote(noteId));
 
     if(laneId) {
@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
   },
 
-  onEditNote(noteId, value) {
+  onEditTask(noteId, value) {
     const updatedNote = {
       id: noteId,
     };
@@ -79,7 +79,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(notesActions.updateNote(updatedNote));
   },
 
-  onMoveNote(sourceId, targetId) {
+  onMoveTask(sourceId, targetId) {
     dispatch(lanesActions.move('note', sourceId, targetId));
   },
 
@@ -90,6 +90,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   DragSource(itemTypes.LANE, laneSource, collectDragSource)(
-    DropTarget([itemTypes.NOTE, itemTypes.LANE], laneTarget, collectDropTarget)(Lane)
+    DropTarget([itemTypes.TASK, itemTypes.LANE], laneTarget, collectDropTarget)(Lane)
   )
 );

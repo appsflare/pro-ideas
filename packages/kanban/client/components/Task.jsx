@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-export default class Note extends React.Component {
+export default class Task extends React.Component {
   render() {
     const connectDragSource = this.props.connectDragSource;
     const connectDropTarget = this.props.connectDropTarget;
@@ -16,7 +16,7 @@ export default class Note extends React.Component {
   }
 }
 
-Note.propTypes = {
+Task.propTypes = {
   children: PropTypes.node,
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,

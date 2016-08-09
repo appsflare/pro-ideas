@@ -1,9 +1,8 @@
-import Note from '../components/Note.jsx';
-import { DragSource } from 'react-dnd';
-import { DropTarget } from 'react-dnd';
+import Task from '../components/Task.jsx';
+import { DragSource, DropTarget } from 'react-dnd';
 import * as itemTypes from '../constants/itemTypes';
 
-const noteSource = {
+const taskSource = {
   beginDrag(props) {
     const item = {
       id: props.id,
@@ -16,14 +15,14 @@ const noteSource = {
   },
 };
 
-const noteTarget = {
+const taskTarget = {
   hover(targetProps, monitor) {
     const targetId = targetProps.id;
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
 
     if(sourceId !== targetId) {
-      targetProps.onMoveNote(sourceId, targetId);
+      targetProps.onMoveTask(sourceId, targetId);
     }
   },
 };
@@ -37,6 +36,6 @@ const collectDropTarget = (connect) => ({
   connectDropTarget: connect.dropTarget(),
 });
 
-export default DragSource(itemTypes.NOTE, noteSource, collectDragSource)(
-  DropTarget(itemTypes.NOTE, noteTarget, collectDropTarget)(Note)
+export default DragSource(itemTypes.TASK, taskSource, collectDragSource)(
+  DropTarget(itemTypes.TASK, taskTarget, collectDropTarget)(Task)
 );
