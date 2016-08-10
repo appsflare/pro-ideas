@@ -26,8 +26,7 @@ function createTask(text) {
 
   return {
     type: actionTypes.CREATE_NOTE,
-    payload: {
-      id: uuid.v4(),
+    payload: {      
       editing: false,
       text,
     },

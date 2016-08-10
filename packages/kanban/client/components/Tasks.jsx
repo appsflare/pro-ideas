@@ -6,13 +6,13 @@ export default class Tasks extends React.Component {
   render() {
     const tasks = this.props.tasks.map(task => (
       <Task
-        id={task.id}
-        key={task.id}
+        id={task._id}
+        key={task._id}
         onMoveNote={this.props.onMoveTask}
       >
         <Editable
           editing={task.editing}
-          id={task.id}
+          id={task._id}
           value={task.title}
           onDelete={this.props.onDeleteTask}
           onEdit={this.props.onEditTask}

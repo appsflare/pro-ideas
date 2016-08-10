@@ -11,17 +11,17 @@ export default class Lane extends React.Component {
   }
 
   handleCreateTask() {
-    this.props.onCreateTask(this.props.lane.id);
+    this.props.onCreateTask(this.props.lane._id);
   }
 
   handleDeleteLane() {
     const lane = this.props.lane;
-    this.props.onDeleteLane(lane.id);
+    this.props.onDeleteLane(lane._id);
     lane.notes.forEach((noteId) => this.props.onDeleteTask(null, noteId));
   }
 
   handleDeleteTask(noteId) {
-    this.props.onDeleteTask(this.props.lane.id, noteId);
+    this.props.onDeleteTask(this.props.lane._id, noteId);
   }
 
   render() {

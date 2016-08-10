@@ -24,29 +24,29 @@ export const insert = new ValidatedMethod({
     name: 'tasks.insert',
     validate: new SimpleSchema({
         title: { type: String },
-        details: { type: String, optional: true }
+        details: { type: String, optional: true },
+        laneId: { type: String }
     }).validator(),
     run({title, details, laneId}) {
         if (!this.userId) { throw new Error('not-authorized'); }
 
         validations.validateTaskTitle(title)
 
-        const ownerId = this.userId
+        const createdBy = this.userId        
         const createdAt = Date.now()
 
-        return Tasks.insert({ title, details, laneId, ownerId, createdAt })
+        return Tasks.insert({ title, details, laneId, createdAt, createdBy })
     },
 })
 
 export const update = new ValidatedMethod({
     name: 'tasks.update',
     validate: new SimpleSchema({
-        taskId: { type: String },
-        laneId: { type: String },
+        taskId: { type: String },        
         title: { type: String, optional: true },
         details: { type: String, optional: true }
     }).validator(),
-    run({taskId, laneId, title, details}) {
+    run({taskId, title, details}) {
 
         const task = Tasks.findOne(taskId)
 
@@ -55,16 +55,12 @@ export const update = new ValidatedMethod({
                 "You don't have permission to edit this lane.")
         }
 
-        if(!title){
+        if (!title) {
             title = task.title;
         }
 
-        if(!details){
+        if (!details) {
             details = task.details;
-        }
-
-        if(!laneId){
-            laneId = task.laneId;
         }
 
         if (title && task.title !== title) {
@@ -74,7 +70,7 @@ export const update = new ValidatedMethod({
         // result in exposing private data
 
         Tasks.update(taskId, {
-            $set: { title, details, laneId }
+            $set: { title, details }
         })
     },
 })
