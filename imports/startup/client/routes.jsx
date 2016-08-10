@@ -22,7 +22,7 @@ export const renderRoutes = () => {
         <Route path="signin" component={AuthPageSignIn}/>
         <Route path="join" component={AuthPageJoin}/>
         <Route path="change-password" component={ChangePasswordPage}/>
-        <Route path="kanban/:ideaId" component={KanbanPageContainer}/>        
+        <Route path="idea/:ideaId/kanban" component={KanbanPageContainer}/>        
         <Route path="*" component={NotFoundPage}/>
       </Route>
     </Router>

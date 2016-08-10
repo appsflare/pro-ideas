@@ -1,6 +1,6 @@
 import Lane from '../components/Lane.jsx';
 import lanesActions from '../actions/lanes';
-import notesActions from '../actions/notes';
+import tasksActions from '../actions/tasks';
 import { connect } from 'react-redux';
 import { DragSource } from 'react-dnd';
 import { DropTarget } from 'react-dnd';
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onCreateTask(laneId) {
-    const newNote = notesActions.createNote('New task');
+    const newNote = tasksActions.createNote('New task');
     dispatch(newNote);
     dispatch(lanesActions.attachToLane(laneId, newNote.payload.id));
   },
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
   // Used both to detach a note from a lane and delete all the notes when a
   // lane is removed
   onDeleteTask(laneId, noteId) {
-    dispatch(notesActions.deleteNote(noteId));
+    dispatch(tasksActions.deleteNote(noteId));
 
     if(laneId) {
       dispatch(lanesActions.detachFromLane(laneId, noteId));
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
       updatedNote.editing = true;
     }
 
-    dispatch(notesActions.updateNote(updatedNote));
+    dispatch(tasksActions.updateNote(updatedNote));
   },
 
   onMoveTask(sourceId, targetId) {

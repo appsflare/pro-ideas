@@ -19,7 +19,7 @@ function isV4(id) {
  * @param  {String} text Note text
  * @return {Object}
  */
-function createNote(text) {
+function createTask(text) {
   if(typeof text !== 'string') {
     throw new Error(`params ${text}`);
   }
@@ -40,7 +40,7 @@ function createNote(text) {
  * have a valid id.
  * @return {Object}
  */
-function updateNote(updatedNote) {
+function updateTask(updatedNote) {
   if((typeof updatedNote !== 'object') || (!isV4(updatedNote.id))) {
     throw new Error(`params ${updatedNote}`);
   }
@@ -56,7 +56,7 @@ function updateNote(updatedNote) {
  * @param  {String} id Note id
  * @return {Object}
  */
-function deleteNote(id) {
+function deleteTask(id) {
   if(!isV4(id)) {
     throw new Error(`params ${id}`);
   }
@@ -70,7 +70,7 @@ function deleteNote(id) {
 }
 
 export default {
-  createNote,
-  updateNote,
-  deleteNote,
+  createTask,
+  updateTask,
+  deleteTask,
 };
