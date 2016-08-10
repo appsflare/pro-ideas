@@ -31,7 +31,7 @@ class App extends React.Component {
         </button>
         <Lanes
           lanes={this.props.lanes}
-          taksByLaneId={this.props.taksByLaneId}
+          allTasks={this.props.allTasks}
           onEditLane={this.props.onEditLane}
           onDeleteLane={this.props.onDeleteLane}
           onMoveLane={this.props.onMoveLane}
@@ -43,7 +43,7 @@ class App extends React.Component {
 
 App.propTypes = {
   lanes: PropTypes.array.isRequired,
-  taksByLaneId: PropTypes.func.isRequired,
+  allTasks: PropTypes.array.isRequired,
   onCreateLane: PropTypes.func.isRequired,
   onDeleteLane: PropTypes.func.isRequired,
   onEditLane: PropTypes.func.isRequired,
@@ -88,30 +88,27 @@ const mapDispatchToProps = (dispatch) => ({
 const AppContainer = createContainer(({onCreateLane, onDeleteLane, onEditLane, onMoveLane, onReset, boardId}) => {
   const taskStatesSub = Meteor.subscribe('taskstates.public', boardId);
 
-  let taksByLaneId = (id) => {
-    return Tasks.find({ laneId: id }).fetch() || []
-  }
+  let allTasks = []
 
+  let lanes = TaskStates.find({}, { limit: 10 }).fetch()
 
-
-  let lanes = TaskStates.find({}, { limit: 10 }).fetch();
-
-  let lanesSubReady = taskStatesSub.ready();
+  let lanesSubReady = taskStatesSub.ready()
 
   if (lanes.length) {
-    const tasksSub = Meteor.subscribe('tasks.public', lanes.map(lane => lane._id));
+    const tasksSub = Meteor.subscribe('tasks.public', lanes.map(lane => lane._id))
     if (tasksSub.ready()) {
-      lanesSubReady = true;
+      lanesSubReady = true
+      allTasks = Tasks.find({ }).fetch()
     }
   }
 
   return {
     lanesSubReady,
     lanes,
-    taksByLaneId,
+    allTasks,
     onCreateLane, onDeleteLane, onEditLane, onMoveLane, onReset, boardId
-  };
-}, App);
+  }
+}, App)
 
 export default DragDropContext(HTML5Backend)(
   connect(mapStateToProps, mapDispatchToProps)(AppContainer)

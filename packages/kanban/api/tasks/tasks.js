@@ -52,7 +52,7 @@ Tasks.schema = new SimpleSchema({
 Tasks.attachSchema(Tasks.schema)
 
 Tasks.publicFields = {
-  name: 1,
+  title: 1,
   details: 1,
   laneId: 1,
   createdBy: 1,

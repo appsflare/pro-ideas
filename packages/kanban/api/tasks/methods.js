@@ -8,10 +8,10 @@ import { Tasks } from './tasks.js'
 
 let validations = {
     validateTaskTitle(title) {
-        const count = Tasks.find({ title }).count()
-        if (count > 1) {
-            throw new Meteor.Error('task.name.alreadyExist', 'Task with the specified name already exist')
-        }
+        // const count = title && title.length
+        // if (count > 1) {
+        //     throw new Meteor.Error('task.name.alreadyExist', 'Task with the specified name already exist')
+        // }
     }
 };
 

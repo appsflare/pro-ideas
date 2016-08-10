@@ -3,12 +3,12 @@ import Lane from '../containers/Lane.jsx';
 
 export default class Lanes extends React.Component {
   render() {
-    const {taksByLaneId} = this.props;
+    const {allTasks} = this.props;
     const lanes = this.props.lanes.map(lane => (
       <Lane
         key={lane._id}
         lane={lane}
-        tasks={taksByLaneId(lane._id)}
+        tasks={allTasks.filter(task=> task.laneId === lane._id)}
         onEditLane={this.props.onEditLane}
         onDeleteLane={this.props.onDeleteLane}
         onMoveLane={this.props.onMoveLane}
@@ -25,7 +25,7 @@ export default class Lanes extends React.Component {
 
 Lanes.propTypes = {
   lanes: PropTypes.array.isRequired,
-  taksByLaneId: PropTypes.func.isRequired,
+  allTasks: PropTypes.array.isRequired,
   onEditLane: PropTypes.func.isRequired,
   onDeleteLane: PropTypes.func.isRequired,
   onMoveLane: PropTypes.func.isRequired,
