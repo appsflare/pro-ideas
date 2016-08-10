@@ -4,9 +4,15 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
 import { _ } from 'meteor/underscore'
 
+import { Boards } from '../boards/boards'
 import { TaskStates } from './taskstates.js'
 
 let validations = {
+    validateBoard(boardId) {
+        if (Boards.find({ _id: boardId }).count() > 0) {
+            throw new Meteor.Error('taskstate.invalid.board', 'Invalid board')
+        }
+    },
     validateLaneName(name) {
         const count = TaskStates.find({ name }).count()
         if (count > 1) {
@@ -24,11 +30,14 @@ const LANE_ID_ONLY = new SimpleSchema({
 export const insert = new ValidatedMethod({
     name: 'taskstates.insert',
     validate: new SimpleSchema({
+        boardId: { type: String, regEx: SimpleSchema.RegEx.Id },
         name: { type: String, optional: true },
         description: { type: String, optional: true }
     }).validator(),
-    run({name, description, tasks = 0}) {
+    run({boardId, name, description, tasks = 0}) {
         if (!this.userId) { throw new Error('not-authorized'); }
+
+        validations.validateBoard(boardId)
 
         validations.validateLaneName(name)
 

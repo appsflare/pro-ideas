@@ -16,6 +16,7 @@ import {MarkIdeaAsCompleted} from '../components/MarkIdeaAsCompleted.jsx';
 
 import IdeaCommentsListContainer from '../containers/IdeaCommentsListContainer.jsx';
 import {IdeaCommentForm} from '../components/IdeaCommentForm.jsx';
+import {ViewKanbanBoardButton} from '../components/kanban/ViewKanbanBoardButton.jsx';
 
 
 import InlineEdit from 'react-edit-inline';
@@ -94,6 +95,7 @@ export class IdeaPage extends Component {
             {this._renderVoteControls(idea) }
           </ButtonGroup>
           {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
+          {<ViewKanbanBoardButton className="pull-right" ideaId={idea._id}/>}
         </div>
 
         <div className="idea-details-container">

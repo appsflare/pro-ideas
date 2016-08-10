@@ -66,6 +66,11 @@ Ideas.schema = new SimpleSchema({
     allowedValues: ['new','completed'],
     defaultValue: 'new'
   },
+  kanbanBoardId:{
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
   comments: {
     type: Number,
     optional: true,
@@ -94,7 +99,8 @@ Ideas.publicFields = {
   ownerId: 1,
   ownerName: 1,
   status: 1,
-  comments: 1,
+  kanbanBoardId:1, 
+  comments: 1,  
   upVotes: 1,
   downVotes: 1
 }
@@ -111,6 +117,9 @@ Ideas.helpers({
   },
   getTeam() {
     return Teams.find({ideaId: this._id})
+  },
+  hasKanbanBoard(userId) {
+    return !!this.kanbanBoardId
   },
   editableBy(userId) {
     if (!this.ownerId) {

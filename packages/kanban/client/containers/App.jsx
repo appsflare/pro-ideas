@@ -85,9 +85,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-const AppContainer = createContainer(({onCreateLane, onDeleteLane, onEditLane, onMoveLane, onReset}) => {
-  const taskStatesSub = Meteor.subscribe('taskstates.public');
-  const tasksSub = Meteor.subscribe('tasks.public');
+const AppContainer = createContainer(({onCreateLane, onDeleteLane, onEditLane, onMoveLane, onReset, boardId}) => {
+  const taskStatesSub = Meteor.subscribe('taskstates.public', boardId);
 
   let taksByLaneId = (id) => {
     return Tasks.find({ laneId: id }).fetch() || []
@@ -96,35 +95,21 @@ const AppContainer = createContainer(({onCreateLane, onDeleteLane, onEditLane, o
 
 
   let lanes = TaskStates.find({}, { limit: 10 }).fetch();
-  if (!lanes.length) {
-    lanes = [
-      {
-        _id: uuid.v4(),
-        name: 'Todo',
-        description: '',
-        tasks: 0
-      },
-      {
-        _id: uuid.v4(),
-        name: 'In Progress',
-        description: '',
-        tasks: 0
-      },
-      {
-        _id: uuid.v4(),
-        name: 'Review',
-        description: '',
-        tasks: 0
-      }
-    ];
+
+  let lanesSubReady = taskStatesSub.ready();
+
+  if (lanes.length) {
+    const tasksSub = Meteor.subscribe('tasks.public', lanes.map(lane => lane._id));
+    if (tasksSub.ready()) {
+      lanesSubReady = true;
+    }
   }
 
   return {
-    lanesSubReady: taskStatesSub.ready(),
-    tasksSubReady: tasksSub.ready(),
-    lanes: lanes,
-    taksByLaneId: taksByLaneId,
-    onCreateLane, onDeleteLane, onEditLane, onMoveLane, onReset
+    lanesSubReady,
+    lanes,
+    taksByLaneId,
+    onCreateLane, onDeleteLane, onEditLane, onMoveLane, onReset, boardId
   };
 }, App);
 

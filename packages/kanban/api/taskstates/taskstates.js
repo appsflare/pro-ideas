@@ -3,6 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Factory } from 'meteor/factory'
 import { Tasks } from '../tasks/tasks'
 
+
 class TaskStatesCollection extends Mongo.Collection {
   insert(lane, callback) {
     return super.insert(lane, callback)
@@ -29,14 +30,19 @@ TaskStates.schema = new SimpleSchema({
     type: String,
     defaultValue: ''
   },
-  order:{
+  order: {
     type: Number
   },
   createdAt: {
     type: Date
   },
   updatedAt: {
-    type: Date
+    type: Date,
+    optional: true
+  },
+  boardId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
   },
   ownerId: {
     type: String,
@@ -54,9 +60,11 @@ TaskStates.attachSchema(TaskStates.schema)
 TaskStates.publicFields = {
   name: 1,
   description: 1,
+  order:1,
   tasks: 1,
   createdAt: 1,
   updatedAt: 1,
+  boardId: 1,
   ownerId: 1
 }
 
@@ -73,7 +81,7 @@ TaskStates.helpers({
     }
 
     return this.ownerId === userId
-  },
+  },  
   tasks() {
     return Tasks.find({ laneId: this._id }, { sort: { createdAt: -1 } })
   },

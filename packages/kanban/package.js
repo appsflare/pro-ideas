@@ -1,7 +1,7 @@
 Package.describe({
     name: 'pro-ideas:kanban',
     version: '1.0.0',
-    summary: 'kanaban board for ideaboard', 
+    summary: 'kanaban board for ideaboard',
     documentation: null,
 });
 
@@ -14,8 +14,8 @@ Package.onUse(function (api) {
         'meteor-base@1.0.4',
         'mongo',
         'tracker',
-        'service-configuration',        
-        'modules@0.5.2',        
+        'service-configuration',
+        'modules@0.5.2',
         'check',
         'http',
         'tracker',
@@ -34,9 +34,9 @@ Package.onUse(function (api) {
         //# i18n
         'tap:i18n',
         'universe:react-markdown-wysiwyg',
-        'universe:modules',      
-        'fourseven:scss'  
-        
+        'universe:modules',
+        'fourseven:scss'
+
 
     ];
 
@@ -44,7 +44,9 @@ Package.onUse(function (api) {
     api.imply(packages);
 
     api.addFiles('api/index.js', 'server');
-    api.mainModule('client/index.jsx', ['client']);    
+    api.mainModule('client/index.jsx', 'client');
+    api.mainModule('api/kanban.js', 'server');
+
     //api.export('Factory');
 });
 
