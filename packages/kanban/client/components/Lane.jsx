@@ -36,20 +36,20 @@ export default class Lane extends React.Component {
       connectDropTarget(
         <div className="lane">
           <h2 className="lane__name">
-            <Editable
-              editing={lane.editing}
-              id={lane._id}
-              value={lane.name}
-              onEdit={this.props.onEditLane}
-              onValueClick={this.props.onEditLane}
-            />
+            <span>
+              <input
+                id={lane._id}
+                value={lane.name}
+                readOnly
+                />
+            </span>
             <button
-              className="lane__delete"
+              className="lane__delete hidden"
               onClick={this.handleDeleteLane}
-            >-</button>
+              >-</button>
             {
               connectDragSource(
-                <button className="lane__drag" />
+                <button className="lane__drag hidden" />
               )
             }
           </h2>
@@ -59,10 +59,10 @@ export default class Lane extends React.Component {
             onEditTask={this.props.onEditTask}
             onValueClick={this.props.onEditTask}
             onMoveTask={this.props.onMoveTask}
-          />
-          <button className="add-note" onClick={this.handleCreateTask} >
+            />
+          { lane.order === 0 ? <button className="add-note" onClick={this.handleCreateTask} >
             + task
-          </button>
+          </button> : '' }
         </div>
       )
     );
@@ -74,7 +74,7 @@ Lane.propTypes = {
   tasks: PropTypes.array.isRequired,
   connectDragPreview: PropTypes.func.isRequired,
   connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,  
+  connectDropTarget: PropTypes.func.isRequired,
   onCreateTask: PropTypes.func.isRequired,
   onDeleteLane: PropTypes.func.isRequired,
   onDeleteTask: PropTypes.func.isRequired,

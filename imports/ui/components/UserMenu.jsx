@@ -26,10 +26,10 @@ export default class UserMenu extends React.Component {
 
   renderLoggedOut() {
     return (
-      <Nav>
-        <NavItem eventKey="4.1" href="/join">Join</NavItem>
-        <NavItem eventKey="4.2" href="/signin">Sign In</NavItem>
-      </Nav>
+      <NavDropdown eventKey={4} title="Join/Sign In" id="nav-dropdown">
+        <MenuItem eventKey="4.1" href="/join">Join</MenuItem>
+        <MenuItem eventKey="4.2" href="/signin">Sign In</MenuItem>
+      </NavDropdown>
     );
   }
 

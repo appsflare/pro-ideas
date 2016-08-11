@@ -16,15 +16,16 @@ const taskSource = {
 };
 
 const taskTarget = {
+
   hover(targetProps, monitor) {
     const targetId = targetProps.id;
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
 
-    if(sourceId !== targetId) {
-      targetProps.onMoveTask(sourceId, targetId);
+    if (sourceId !== targetId) {
+      //targetProps.onMoveTask(sourceId, targetId);
     }
-  },
+  }
 };
 
 const collectDragSource = (connect, monitor) => ({

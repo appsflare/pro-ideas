@@ -8,7 +8,7 @@ export default class Tasks extends React.Component {
       <Task
         id={task._id}
         key={task._id}
-        onMoveNote={this.props.onMoveTask}
+        onMoveTask={this.props.onMoveTask}
       >
         <Editable
           editing={task.editing}

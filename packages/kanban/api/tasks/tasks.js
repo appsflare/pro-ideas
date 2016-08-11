@@ -44,7 +44,7 @@ Tasks.schema = new SimpleSchema({
     optional: true,
     regEx: SimpleSchema.RegEx.Id
   },
-  laneId: {
+  state: {
     type: SimpleSchema.RegEx.Id
   }
 })
@@ -54,7 +54,7 @@ Tasks.attachSchema(Tasks.schema)
 Tasks.publicFields = {
   title: 1,
   details: 1,
-  laneId: 1,
+  state: 1,
   createdBy: 1,
   lockedBy: 1,
   createdAt: 1,
@@ -70,6 +70,6 @@ Tasks.helpers({
     return !!this.lockedBy
   },
   editableBy(userId) {
-    return this.lockedBy ? this.lockedBy === userId : true
+    return this.lockedBy ? this.lockedBy === userId : this.createdBy === userId
   }
 })

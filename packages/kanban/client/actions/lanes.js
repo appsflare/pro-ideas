@@ -47,7 +47,7 @@ function createLane(name) {
  * })
  */
 function updateLane(updatedLane) {
-  if((typeof updatedLane !== 'object') || (!isV4(updatedLane.id))) {
+  if((typeof updatedLane !== 'object') || (!updatedLane.id)) {
     throw new Error(`params ${updatedLane}`);
   }
 
@@ -120,7 +120,7 @@ function detachFromLane(laneId, noteId) {
  * @return {Object}
  */
 function move(target, sourceId, targetId) {
-  if((typeof target !== 'string') || (!isV4(sourceId)) || (!isV4(targetId))) {
+  if((typeof target !== 'string') || (!sourceId) || (!targetId)) {
     throw new Error(`params ${target} ${sourceId} ${targetId}`);
   }
 

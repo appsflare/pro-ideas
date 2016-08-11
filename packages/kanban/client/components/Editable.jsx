@@ -7,6 +7,7 @@ export default class Editable extends React.Component {
     this.handleValueClick = this.handleValueClick.bind(this);
     this.handleFinishEdit = this.handleFinishEdit.bind(this);
     this.selectToEnd = this.selectToEnd.bind(this);
+    this.state = { editing: false };
   }
 
   handleDelete() {
@@ -14,37 +15,39 @@ export default class Editable extends React.Component {
   }
 
   handleValueClick() {
-    this.props.onValueClick(this.props.id);
+    //this.props.onValueClick(this.props.id);
+    this.setState({ editing: true });
   }
 
   handleFinishEdit(e) {
-    if((e.type === 'keypress') && (e.key !== 'Enter')) {
+    if ((e.type === 'keypress') && (e.key !== 'Enter')) {
       return;
     }
 
     const value = e.target.value;
 
-    if(this.props.onEdit && value.trim().length) {
+    if (this.props.onEdit && value.trim().length) {
+      this.setState({ editing: false });
       this.props.onEdit(this.props.id, value);
     }
   }
 
   selectToEnd(input) {
-    if(input) {
+    if (input) {
       input.selectionEnd = this.props.value.length;
     }
   }
 
   renderEdit() {
     return (
-        <input
-          type="text"
-          autoFocus
-          className="editing"
-          ref={this.selectToEnd}
-          defaultValue={this.props.value}
-          onBlur={this.handleFinishEdit}
-          onKeyPress={this.handleFinishEdit}
+      <input
+        type="text"
+        autoFocus
+        className="editing"
+        ref={this.selectToEnd}
+        defaultValue={this.props.value}
+        onBlur={this.handleFinishEdit}
+        onKeyPress={this.handleFinishEdit}
         />
     );
   }
@@ -59,20 +62,20 @@ export default class Editable extends React.Component {
 
   renderValue() {
     return (
-        <span>
-          <input
-            type="text"
-            onClick={this.handleValueClick}
-            defaultValue={this.props.value}
-            readOnly
+      <span>
+        <input
+          type="text"
+          onClick={this.handleValueClick}
+          value={this.props.value}
+          readOnly
           />
-          {this.props.onDelete ? this.renderDelete() : null}
-        </span>
+        {this.props.onDelete ? this.renderDelete() : null}
+      </span>
     );
   }
 
   render() {
-    if(this.props.editing) {
+    if (this.state.editing) {
       return this.renderEdit();
     }
 

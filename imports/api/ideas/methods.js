@@ -92,8 +92,8 @@ export const createKanbanBoard = new ValidatedMethod({
     const idea = Ideas.findOne(ideaId)
 
     if (!idea.editableBy(this.userId)) {
-      throw new Meteor.Error('ideas.remove.accessDenied',
-        "You don't have permission to mark this idea as completed.")
+      throw new Meteor.Error('ideas.viewKanban.accessDenied',
+        "You don't have permission to view the kanban board.")
     }
 
     if (idea.hasKanbanBoard()) {

@@ -39,14 +39,14 @@ function createTask(text) {
  * have a valid id.
  * @return {Object}
  */
-function updateTask(updatedNote) {
-  if((typeof updatedNote !== 'object') || (!isV4(updatedNote.id))) {
-    throw new Error(`params ${updatedNote}`);
+function updateTask(updatedTask) {
+  if((typeof updatedTask !== 'object') || (!updatedTask.id)) {
+    throw new Error(`params ${updatedTask}`);
   }
 
   return {
     type: actionTypes.UPDATE_NOTE,
-    payload: updatedNote,
+    payload: updatedTask,
   };
 }
 

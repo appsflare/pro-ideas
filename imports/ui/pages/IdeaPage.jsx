@@ -94,8 +94,8 @@ export class IdeaPage extends Component {
           <ButtonGroup className="btn-group-raised">
             {this._renderVoteControls(idea) }
           </ButtonGroup>
-          {<MarkIdeaAsCompleted className="pull-right" idea={idea}/>}
-          {<ViewKanbanBoardButton className="pull-right" ideaId={idea._id}/>}
+          {<MarkIdeaAsCompleted className="pull-right hidden" idea={idea}/>}
+          {this.currentUser? <ViewKanbanBoardButton className="pull-right" ideaId={idea._id}/>:''}
         </div>
 
         <div className="idea-details-container">
@@ -144,7 +144,7 @@ export class IdeaPage extends Component {
               </Col>
             </Row>
             {team ?
-              <Row className="show-grid">
+              <Row className="show-grid hidden">
                 <Col md={12}>
                   <SprintRoadMap teamId={team._id}/>
                 </Col>

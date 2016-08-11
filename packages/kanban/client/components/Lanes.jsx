@@ -8,7 +8,7 @@ export default class Lanes extends React.Component {
       <Lane
         key={lane._id}
         lane={lane}
-        tasks={allTasks.filter(task=> task.laneId === lane._id)}
+        tasks={allTasks.filter(task=> task.state === lane._id)}
         onEditLane={this.props.onEditLane}
         onDeleteLane={this.props.onDeleteLane}
         onMoveLane={this.props.onMoveLane}

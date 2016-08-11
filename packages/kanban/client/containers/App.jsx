@@ -18,17 +18,11 @@ class App extends React.Component {
       <div className="react-kanban">
         <h1 className="app-title">Tasks</h1>
         <button
-          className="add-lane"
+          className="add-lane hidden"
           onClick={this.props.onCreateLane}
           >
           + Lane
-        </button>
-        <button
-          className="reset-store"
-          onClick={this.props.onReset}
-          >
-          Reset persisted store
-        </button>
+        </button>      
         <Lanes
           lanes={this.props.lanes}
           allTasks={this.props.allTasks}
