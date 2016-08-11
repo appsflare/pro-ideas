@@ -32,9 +32,9 @@ export class TeamDisplayComponent extends Component {
 
     render() {
         const {loading, idea, team} = this.props;
-        return <Panel header="Team Info" bsStyle="primary">
+        return <div className="idea-details-content">
             {loading ? <p>Checking...</p> : this.renderContent(idea, team) }
-        </Panel>
+        </div>
 
     }
 }

@@ -87,21 +87,21 @@ export class CreateTeamForm extends Component {
             {error}
           </div> : ''}
 
-        <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
+        <form onSubmit={this.handleSubmit.bind(this) } >
           <div className="form-group">
-            <div className="col-sm-6">
+            <div className="col-sm-12">
               <input type="text" name="name" value={this.state.name} onChange={this.onInputChange.bind(this) } ref="nameInput" className="form-control" placeholder="Name your team"/>
             </div>
           </div>
           <div className="form-group">
-            <div className="col-sm-6">
-              <UserPicker multi={true} value={members} onChange={this.memberSelected} />
+            <div className="col-sm-12">
+              <UserPicker multi={true} placeholder="Select team members" value={members} onChange={this.memberSelected} />
             </div>
           </div>
 
           <div className="form-group">
             <div className="col-sm-12">
-              <button type="submit" className="btn btn-primary">Create Team!</button>
+              <button type="submit" className="btn btn-raised btn-primary">Create Team!</button>
             </div>
           </div>
         </form>

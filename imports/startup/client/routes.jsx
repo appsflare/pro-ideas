@@ -8,7 +8,9 @@ import IdeasContainer from '../../ui/containers/IdeasContainer.jsx';
 import IdeaContainer from '../../ui/containers/IdeaContainer.jsx';
 import AuthPageSignIn from '../../ui/pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../../ui/pages/AuthPageJoin.jsx';
+import ChangePasswordPage from '../../ui/pages/ChangePasswordPage.jsx';
 import NotFoundPage from '../../ui/pages/NotFoundPage.jsx';
+import KanbanPageContainer from '../../ui/containers/KanbanPageConainer.jsx';
 
 export const renderRoutes = () => {
   return (
@@ -19,6 +21,8 @@ export const renderRoutes = () => {
         <Route name="idea" path="idea/:id" component={IdeaContainer}/>
         <Route path="signin" component={AuthPageSignIn}/>
         <Route path="join" component={AuthPageJoin}/>
+        <Route path="change-password" component={ChangePasswordPage}/>
+        <Route path="idea/:ideaId/kanban" component={KanbanPageContainer}/>        
         <Route path="*" component={NotFoundPage}/>
       </Route>
     </Router>

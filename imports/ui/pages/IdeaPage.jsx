@@ -1,19 +1,28 @@
+
+import { IdeaComments } from '../../api/idea-comments/idea-comments';
+
 import React, { Component, PropTypes } from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import {Meteor} from 'meteor/meteor';
+
+import {Grid, Row, Col, Well, ButtonGroup} from 'react-bootstrap';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Ideas } from '../../api/ideas/ideas';
 import { update } from '../../api/ideas/methods';
 import {TeamDisplay} from '../components/teams/TeamDisplay.jsx';
+import SprintRoadMap from '../components/sprints/SprintRoadMap.jsx';
 import {VoteIdea} from '../components/VoteIdea.jsx';
-import { IdeaComments } from '../../api/idea-comments/idea-comments';
-import IdeaCommentsListContainer from '../containers/idea-comments-list-container.jsx';
-import {IdeaCommentForm} from '../components/idea-comment-form.jsx';
+import {MarkIdeaAsCompleted} from '../components/MarkIdeaAsCompleted.jsx';
 
-import ReactDOM from 'react-dom';
-import {Meteor} from 'meteor/meteor';
+import IdeaCommentsListContainer from '../containers/IdeaCommentsListContainer.jsx';
+import {IdeaCommentForm} from '../components/IdeaCommentForm.jsx';
+import {ViewKanbanBoardButton} from '../components/kanban/ViewKanbanBoardButton.jsx';
+
+
 import InlineEdit from 'react-edit-inline';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import textUtils from '../helpers/text'
+import './IdeaPage.scss'
 
 export class IdeaPage extends Component {
 
@@ -31,18 +40,6 @@ export class IdeaPage extends Component {
 
   get currentUser() {
     return Meteor.userId();
-  }
-
-  castVote(isUpVote, idea) {
-    idea && this.currentUser && Meteor.call('votes.cast', idea._id, isUpVote);
-  }
-
-  upVote() {
-    this.castVote(true, idea);
-  }
-
-  downVote() {
-    this.castVote(false, idea);
   }
 
   validate(text) {
@@ -76,12 +73,12 @@ export class IdeaPage extends Component {
     return (<VoteIdea idea={idea}/>);
   }
 
-  renderIdeaDetails(idea) {
+  renderIdeaDetails(idea, team) {
     this.state = idea;
     const isCurrentUserTheOwner = this.currentUser === idea.ownerId
     return (
       <div key={idea._id}>
-        <div class="page-header">
+        <div className="page-header">
           <h1>
             { isCurrentUserTheOwner ?
               (<InlineEdit
@@ -94,77 +91,91 @@ export class IdeaPage extends Component {
             }
 
             <small> by {idea.ownerName}</small></h1>
-          {this._renderVoteControls(idea) }
+          <ButtonGroup className="btn-group-raised">
+            {this._renderVoteControls(idea) }
+          </ButtonGroup>
+          {<MarkIdeaAsCompleted className="pull-right hidden" idea={idea}/>}
+          {this.currentUser? <ViewKanbanBoardButton className="pull-right" ideaId={idea._id}/>:''}
         </div>
 
-        <Grid>
-          <Row className="show-grid">
-            <Col md={6} mdPush={6}>
-              <TeamDisplay multi={true} idea={idea}/>
-            </Col>
-            <Col md={6} mdPull={6}>
-              <div className="bs-callout bs-callout-info">
-                <h4>Business value</h4>
-                { isCurrentUserTheOwner ?
-                  <ReactMarkdownMediumEditor ref="businessValue"
-                    options={{ placeholder: { text: 'Click here to describe Business value' } }}
-                    markdown={idea.businessValue}
-                    onChange={this.businessValueUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
-                }
-              </div>
+        <div className="idea-details-container">
 
+          <Grid className="idea-details-content-container">
+            <Row className="show-grid">
+              <Col md={8} className="idea-details-contents">
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Business value</h4>
+                  { isCurrentUserTheOwner ?
+                    <ReactMarkdownMediumEditor ref="businessValue"
+                      options={{ placeholder: { text: 'Click here to describe Business value' } }}
+                      markdown={idea.businessValue}
+                      onChange={this.businessValueUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue || 'Nothing defined yet!') }/>
+                  }
+                </div>
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Definition of Success</h4>
+                  { isCurrentUserTheOwner ?
+                    <ReactMarkdownMediumEditor ref="definitionOfSuccess"
+                      options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
+                      markdown={idea.definitionOfSuccess}
+                      onChange={this.definitionOfSuccessUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
+                  }
+                </div>
+                <div className="idea-details-content">
+                  <h4 className="idea-detail-heading upper-case bottom-border">Funding Requirement</h4>
 
-              <div className="bs-callout bs-callout-info">
-                <h4>Definition of Success</h4>
-                { isCurrentUserTheOwner ?
-                  <ReactMarkdownMediumEditor ref="definitionOfSuccess"
-                    options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
-                    markdown={idea.definitionOfSuccess}
-                    onChange={this.definitionOfSuccessUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.definitionOfSuccess || 'Nothing defined yet!') }/>
-                }
-              </div>
-
-
-
-              <div className="bs-callout bs-callout-info">
-                <h4>Funding Requirement </h4>
-
-                { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
-                  options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
-                  markdown={idea.fundingRequirement}
-                  onChange={this.fundingRequirementUpdated}/>
-                  :
-                  <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
-                }
-              </div>
-            </Col>
-          </Row>
-        </Grid>
-
-
-        <div>
-          <h4>Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''} </h4>
-          <hr/>
-          {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
-          <IdeaCommentsListContainer ideaId={idea._id}/>
+                  { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor ref="fundingRequirement"
+                    options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
+                    markdown={idea.fundingRequirement}
+                    onChange={this.fundingRequirementUpdated}/>
+                    :
+                    <div dangerouslySetInnerHTML={textUtils.createMarkup(idea.fundingRequirement || 'Nothing defined yet!') }/>
+                  }
+                </div>
+              </Col>
+              <Col md={4} className="idea-details-contents">
+                <div>
+                  <TeamDisplay multi={true} idea={idea}/>
+                </div>
+              </Col>
+            </Row>
+            {team ?
+              <Row className="show-grid hidden">
+                <Col md={12}>
+                  <SprintRoadMap teamId={team._id}/>
+                </Col>
+              </Row>
+              : ''}
+            <Row className="show-grid">
+              <Col md={12}>
+                <h4>
+                  <span className="upper-case bottom-border">Discussions  { idea.comments ? <span className="badge">{idea.comments}</span> : ''}
+                  </span>
+                </h4>
+                <hr/>
+                {this.currentUser ? <IdeaCommentForm ideaId={idea._id} /> : ''}
+                <IdeaCommentsListContainer ideaId={idea._id}/>
+              </Col>
+            </Row>
+          </Grid>
         </div>
 
       </div>
     );
   }
 
-  renderIdea() {
-    return this.props.ideas.map(idea => this.renderIdeaDetails(idea));
+  renderIdea(idea, team) {
+    return this.renderIdeaDetails(idea, team);
   }
 
   render() {
     return (
       <div className="container">
-        {this.renderIdea() }
+        {this.renderIdea(this.props.idea, this.props.team) }
       </div>
     );
   }
@@ -173,5 +184,5 @@ export class IdeaPage extends Component {
 
 
 IdeaPage.propTypes = {
-  ideas: PropTypes.array.isRequired
+  idea: PropTypes.object.isRequired
 };

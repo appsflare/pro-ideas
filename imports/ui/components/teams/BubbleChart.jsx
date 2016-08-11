@@ -1,6 +1,6 @@
-import React, {Component}            from 'react';
+import React, {Component} from 'react';
 import ReactBubbleChart from 'react-bubble-chart';
-import './BubbleChart.less';
+import './BubbleChart.scss';
 
 
 var colorLegend = [

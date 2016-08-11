@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router';
 import {VoteIdea} from './VoteIdea.jsx'
+import {MarkIdeaAsCompleted} from './MarkIdeaAsCompleted.jsx'
 import {remove} from '../../api/ideas/methods'
 import textUtils from '../helpers/text'
 
@@ -29,20 +31,22 @@ export default class Idea extends Component {
         <h4 className="list-group-item-heading">
 
           <Link to={`/idea/${idea._id}`}>
-            {idea.name}<small> by {idea.ownerName} </small>
+            <i className="material-icons">{idea.isCompleted()?'done':'hourglass_empty'}</i> {idea.name}<small> by {idea.ownerName} </small>
           </Link>
 
         </h4>
-        <p class="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue)}/>
+        <p className="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue) }/>
 
-        {idea.ownerId === this.currentUser ?
-          <button type="button" className="btn btn-default" aria-label="Left Align" onClick={this.deleteThisIdea.bind(this) }>
-            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </button>
-          : ''
-        }
+        <ButtonGroup className="btn-group-raised">
+          {idea.ownerId === this.currentUser ?
+            <Button bsSize="xs" onClick={this.deleteThisIdea.bind(this) }>
+              <i className="material-icons">delete</i>
+            </Button>
+            : ''
+          }
 
-        {this.renderVoteControls(idea) }
+          {this.renderVoteControls(idea) }          
+        </ButtonGroup>       
 
         <span className="pull-right badge">{idea.comments}</span>
 

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import {FormGroup,FormControl} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {update} from '../../../api/teams/methods';
@@ -112,9 +113,14 @@ export class EditTeamForm extends Component {
           </div> : ''}
 
         <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
-          <div className="form-group">
-            <div className="col-sm-6">
+          <FormGroup>
+            <div className="col-sm-12">
               <h4>
+                <span className="idea-detail-heading upper-case bottom-border">
+                  Team Name
+                </span>
+              </h4>
+              <div>
                 { isCurrentUserTheOwner ?
                   (<InlineEdit
                     text={this.state.name}
@@ -124,14 +130,15 @@ export class EditTeamForm extends Component {
                   :
                   <span>{team.name}</span>
                 }
-              </h4>
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-6">
-              <UserPicker multi={true} value={members} disabled={!isCurrentUserTheOwner} onChange={this.memberSelected} />
+          </FormGroup>
+          <FormGroup>
+            <div className="col-sm-12">
+              <h4><span className="idea-detail-heading upper-case bottom-border">Members</span></h4>
+              <UserPicker multi={true} placeholder="Select team members" value={members} disabled={!isCurrentUserTheOwner} onChange={this.memberSelected} />
             </div>
-          </div>
+          </FormGroup>
         </form>
       </div>
     );
