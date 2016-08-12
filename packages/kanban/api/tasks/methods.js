@@ -26,9 +26,9 @@ export const insert = new ValidatedMethod({
     validate: new SimpleSchema({
         title: { type: String },
         details: { type: String, optional: true },
-        state: { type: String }
+        stateId: { type: String }
     }).validator(),
-    run({title, details, state}) {
+    run({title, details, stateId}) {
         if (!this.userId) { throw new Error('not-authorized'); }
 
         validations.validateTaskTitle(title)
@@ -36,7 +36,7 @@ export const insert = new ValidatedMethod({
         const createdBy = this.userId
         const createdAt = Date.now()
 
-        return Tasks.insert({ title, details, state, createdAt, createdBy })
+        return Tasks.insert({ title, details, state: stateId, createdAt, createdBy })
     },
 })
 

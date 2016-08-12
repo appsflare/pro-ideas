@@ -58,9 +58,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-  onCreateTask(laneId) {
-    insert.call({ laneId, title: 'New Task' }, (err, res) => {
-
+  onCreateTask(stateId) {
+    insert.call({ stateId, title: 'New Task' }, (err, res) => {
+      if (err)
+      { console.error(err) }
     })
   },
 
