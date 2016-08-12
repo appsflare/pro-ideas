@@ -1,4 +1,4 @@
-FROM appsflare/pro-ideas:node-4
+FROM node:4.4.7-slim
 RUN mkdir /var/www -p
 ADD dist/pro-ideas.tar.gz /var/www/
 RUN cd /var/www/bundle/programs/server && \
