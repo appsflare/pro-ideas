@@ -14,10 +14,9 @@ export class KanbanPage extends Component {
 
   render() {
     const { idea } = this.props;
-    return (
-      <div className="container">
-        <KanbanApp boardId={idea.kanbanBoardId}/>
-      </div>
+    return (<div className="container-fluid">
+      <KanbanApp boardId={idea.kanbanBoardId}/>
+    </div>
     );
   }
 }

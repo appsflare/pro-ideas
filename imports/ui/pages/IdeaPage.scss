@@ -9,6 +9,10 @@
     {
         border-right: 1px solid #eee;
         padding-left: 0;
+
+        &:last-child{
+            padding-left: 12px;
+        }
     } 
 
     .idea-details-content

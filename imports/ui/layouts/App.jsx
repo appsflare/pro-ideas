@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showConnectionIssue: false,
+      showConnectionIssue: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.logout = this.logout.bind(this);    

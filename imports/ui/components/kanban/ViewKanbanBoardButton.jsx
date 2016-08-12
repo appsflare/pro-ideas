@@ -23,7 +23,7 @@ export class ViewKanbanBoardButton extends Component {
             if (err) {
                 return console.error(err)
             }
-            browserHistory.push(`idea/${ideaId}/kanban`)
+            browserHistory.push(`/idea/${ideaId}/kanban`)
         })
 
     }

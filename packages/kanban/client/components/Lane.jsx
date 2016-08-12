@@ -26,7 +26,7 @@ export default class Lane extends React.Component {
 
   render() {
     const lane = this.props.lane;
-    const {tasks } = this.props;
+    const {tasks, canAddTask } = this.props;
     const laneTasks = (tasks || []).filter(task => task); // filter out undefined notes
     const connectDragSource = this.props.connectDragSource;
     const connectDragPreview = this.props.connectDragPreview;
@@ -34,15 +34,9 @@ export default class Lane extends React.Component {
 
     return connectDragPreview(
       connectDropTarget(
-        <div className="lane">
-          <h2 className="lane__name">
-            <span>
-              <input
-                id={lane._id}
-                value={lane.name}
-                readOnly
-                />
-            </span>
+        <div className={`lane panel ${ canAddTask? 'panel-default':'panel-success'}`}>
+          <div className="panel-heading">
+            <span className="lane__name">{lane.name}</span>
             <button
               className="lane__delete hidden"
               onClick={this.handleDeleteLane}
@@ -52,7 +46,11 @@ export default class Lane extends React.Component {
                 <button className="lane__drag hidden" />
               )
             }
-          </h2>
+            { canAddTask ? <button className="add-note pull-right" onClick={this.handleCreateTask} >
+              + task
+            </button> : '' }
+          </div>
+
           <Tasks
             tasks={laneTasks}
             onDeleteTask={this.handleDeleteTask}
@@ -60,9 +58,7 @@ export default class Lane extends React.Component {
             onValueClick={this.props.onEditTask}
             onMoveTask={this.props.onMoveTask}
             />
-          { lane.order === 0 ? <button className="add-note" onClick={this.handleCreateTask} >
-            + task
-          </button> : '' }
+
         </div>
       )
     );

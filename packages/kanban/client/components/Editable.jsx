@@ -63,12 +63,7 @@ export default class Editable extends React.Component {
   renderValue() {
     return (
       <span>
-        <input
-          type="text"
-          onClick={this.handleValueClick}
-          value={this.props.value}
-          readOnly
-          />
+        <span onClick={this.handleValueClick}>{this.props.value}</span>
         {this.props.onDelete ? this.renderDelete() : null}
       </span>
     );
