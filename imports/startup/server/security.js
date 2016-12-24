@@ -40,8 +40,8 @@ if (Meteor.isServer) {
 
 
 
-  var appId = '225787677866487';
-  var appSecret = '4cbf0bf65ae691e8e218007e5ebabf21';
+  var appId = '';
+  var appSecret = '';
 
 
   console.log('configuring facebbok');
