@@ -1,6 +1,8 @@
 import { Accounts } from 'meteor/accounts-base'
 import { DefaultLayout } from '../ui/shared/default-layout'
 
+
+
 // Accounts.ui.config({
 //   requestPermissions: {},
 //   // extraSignupFields: [
