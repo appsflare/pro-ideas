@@ -55,9 +55,10 @@ if (Meteor.isServer) {
 
 
   Accounts.onCreateUser((options, user) => {
-
+    
+    user.profile = options.profile;
     providers.forEach(p => user = p.getUser(options, user));
-
+    
     return user;
   });
 }

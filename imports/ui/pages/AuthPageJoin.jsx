@@ -43,7 +43,7 @@ export default class JoinPage extends React.Component {
       email,
       password,
       profile: {
-        fullName: fullName
+        fullName: fullName        
       }
     }, err => {
       if (err) {
