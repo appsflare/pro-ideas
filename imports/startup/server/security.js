@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 import { _ } from 'meteor/underscore';
+import { FacebookAuthServiceProvider, GoogleAuthServiceProvider, GitHubAuthServiceProvider } from './authentication/auth-service-providers';
 
 // Don't let people write arbitrary data to their 'profile' field from the client
 Meteor.users.deny({
@@ -44,42 +45,18 @@ if (Meteor.isServer) {
   var appSecret = '';
 
 
-  console.log('configuring facebbok');
+  console.log('configuring external authentication services');
 
+  let providers = [new FacebookAuthServiceProvider(),
+  new GoogleAuthServiceProvider(),
+  new GitHubAuthServiceProvider()];
 
-
-  ServiceConfiguration.configurations.upsert(
-    { service: 'facebook' },
-    {
-      $set: {
-        appId: appId,
-        secret: appSecret
-      }
-    });
+  providers.forEach(provider => provider.configure());
 
 
   Accounts.onCreateUser((options, user) => {
-    
-    let profile = options.profile;
 
-    //Modules.server.sendWelcomeEmail(user, profile);
-
-
-    if (profile) {
-      if (profile.name) {
-        profile.fullName = profile.name;
-      }
-      user.profile = profile;
-    }
-
-    if (user.services && user.services.facebook) {
-      user.emails = [{
-        address: user.services.facebook.email,
-        verified: false
-      }];
-    }
-
-    console.log(user);
+    providers.forEach(p => user = p.getUser(options, user));
 
     return user;
   });
