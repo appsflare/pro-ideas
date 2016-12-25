@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {remove, updateText} from '../../api/idea-comments/methods';
+import { remove, updateText } from '../../api/idea-comments/methods';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import textUtils from '../helpers/text'
 
@@ -33,32 +33,32 @@ export default class IdeaComment extends Component {
     this.state.comment = comment;
     const isCurrentUserTheOwner = comment.ownerId === this.currentUser;
     return (
-
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          {comment.ownerName}
-
-          {comment.updatedOn ?
-            <small> commented {moment(comment.updatedOn).fromNow() }</small>
-            :
-            <small> commented {moment(comment.createdAt).fromNow() }</small>
-          }
-
-          {isCurrentUserTheOwner ?
-            <button type="button" className="close" aria-label="Close" onClick={this.deleteThisComment.bind(this) }>
+      <div className="direct-chat-msg">
+        <div className="direct-chat-info clearfix">
+          <span className="direct-chat-name pull-left">{comment.ownerName}</span>
+           {isCurrentUserTheOwner ?
+            <button type="button" className="close pull-right" aria-label="Close" onClick={this.deleteThisComment.bind(this)}>
               <span aria-hidden="true">&times; </span>
             </button>
             : ''
           }
-        </div>
-        <div className="panel-body">
+          <span className="direct-chat-timestamp pull-right">
+            {comment.updatedOn ?
+              <small> {moment(comment.updatedOn).fromNow()}</small>
+              :
+              <small> {moment(comment.createdAt).fromNow()}</small>
+            }
+          </span>
 
-          { isCurrentUserTheOwner ? <ReactMarkdownMediumEditor
+        </div>
+        {/*<img className="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image" />*/}
+        <div className="direct-chat-text">
+          {isCurrentUserTheOwner ? <ReactMarkdownMediumEditor
             options={{ placeholder: { text: 'Click here to add your comment' } }}
-            markdown={this.state.comment.text || '' }
-            onChange={this.commentTextUpdated}/>
+            markdown={this.state.comment.text || ''}
+            onChange={this.commentTextUpdated} />
             :
-            <div dangerouslySetInnerHTML={textUtils.createMarkup(this.state.comment.text) }/>
+            <div dangerouslySetInnerHTML={textUtils.createMarkup(this.state.comment.text)} />
           }
         </div>
       </div>

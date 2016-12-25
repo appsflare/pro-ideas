@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {Meteor} from 'meteor/meteor';
-import {insert} from '../../api/idea-comments/methods';
+import { Meteor } from 'meteor/meteor';
+import { insert } from '../../api/idea-comments/methods';
 import ReactMarkdownMediumEditor from 'meteor/universe:react-markdown-wysiwyg/ReactMarkdownMediumEditor'
 import './IdeaCommentForm.scss';
 
@@ -13,8 +13,8 @@ export class IdeaCommentForm extends Component {
     this.state = { text: '' }
   }
 
-  commentTextUpdated(data) {
-    this.setState({ text: data })
+  commentTextUpdated() {
+    this.setState({ text: this.refs.comment.value })
   }
 
   handleSubmit(event) {
@@ -23,8 +23,7 @@ export class IdeaCommentForm extends Component {
     const text = this.state.text.trim();
 
     insert.call({ ideaId: this.props.ideaId, text }, err => {
-      err && console.error(err);
-      this.refs.editor.medium.setContent('')
+      err && console.error(err);      
       this.setState({ text: '' })
     });
 
@@ -41,20 +40,12 @@ export class IdeaCommentForm extends Component {
     return (
       <div>
 
-        <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) } >
-
-          <div className="form-group">
-            <div className="col-sm-10 comment-box-container">
-              <div className="form-control auto-height">
-                <ReactMarkdownMediumEditor ref="editor"
-                  options={{ placeholder: { text: 'Click here to add your comment' } }}
-                  markdown={this.state.text}
-                  onChange={this.commentTextUpdated}/>
-              </div>
-            </div>
-            <div className="col-sm-2">
-              <button type="submit" className="btn btn-raised btn-default">Comment</button>
-            </div>
+        <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this)}>
+          <div className="input-group">
+            <input type="text" onChange={this.commentTextUpdated} value={this.state.text} ref="comment" name="comment" placeholder="Comment" className="form-control" />
+            <span className="input-group-btn">
+              <button type="submit" className="btn btn-primary btn-flat">Comment</button>
+            </span>
           </div>
         </form>
       </div>

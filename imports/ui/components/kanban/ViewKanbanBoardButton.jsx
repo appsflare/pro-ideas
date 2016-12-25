@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {createKanbanBoard} from '../../../api/ideas/methods';
+import React, { Component, PropTypes } from 'react';
+import { createKanbanBoard } from '../../../api/ideas/methods';
 import { browserHistory } from 'react-router'
 
 
@@ -30,6 +30,6 @@ export class ViewKanbanBoardButton extends Component {
 
     render() {
         const { className } = this.props
-        return <button className={'btn btn-default btn-primary ' + (className || '') } onClick={this._createKanbanBoard}>View kanban board</button>
+        return <button className={`btn btn-success btn-flat ${className || ''}`} onClick={this._createKanbanBoard}>View kanban board</button>
     }
 }

@@ -93,9 +93,6 @@ export default class CreateIdeaForm extends Component {
       panelSel = `#${panelId}`,
       {error} = this.state;
 
-      setTimeout(()=> {
-        $.material.init();
-      });
     return (
       <div ref="formContainer">
 
@@ -165,7 +162,7 @@ export default class CreateIdeaForm extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-12">
-              <button type="submit" className="btn btn-raised btn-primary">Post it!</button>
+              <button type="submit" className="btn btn-raised btn-primary btn-flat">Post it!</button>
             </div>
           </div>
         </form>

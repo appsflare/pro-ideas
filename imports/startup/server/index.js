@@ -20,6 +20,7 @@ Meteor.startup(() => {
 
     ['fonts.googleapis.com',
         'fonts.gstatic.com',
+        'cdnjs.cloudflare.com',
         'at.alicdn.com']
         .forEach(origin => BrowserPolicy.content.allowOriginForAll(origin));
 

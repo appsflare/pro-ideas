@@ -1,3 +1,4 @@
+import './IdeaCommentsList.scss';
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
@@ -15,8 +16,9 @@ export class IdeaCommentsList extends Component {
 
   render() {    
     return (
-      <div>
-        {this.renderComments() }
+      <div className="direct-chat-messages">
+
+        {this.props.comments.length? this.renderComments(): 'Start a discussion here!' }
       </div>
     );
   }

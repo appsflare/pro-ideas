@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router';
-import {VoteIdea} from './VoteIdea.jsx'
-import {MarkIdeaAsCompleted} from './MarkIdeaAsCompleted.jsx'
-import {remove} from '../../api/ideas/methods'
+import { VoteIdea } from './VoteIdea.jsx'
+import { MarkIdeaAsCompleted } from './MarkIdeaAsCompleted.jsx'
+import { remove } from '../../api/ideas/methods'
 import textUtils from '../helpers/text'
 
 // Task component - represents a single todo item
@@ -20,7 +20,7 @@ export default class Idea extends Component {
   }
 
   renderVoteControls(idea) {
-    return (<VoteIdea idea={idea}/>);
+    return (<VoteIdea idea={idea} />);
   }
 
 
@@ -31,22 +31,22 @@ export default class Idea extends Component {
         <h4 className="list-group-item-heading">
 
           <Link to={`/idea/${idea._id}`}>
-            <i className="material-icons">{idea.isCompleted()?'done':'hourglass_empty'}</i> {idea.name}<small> by {idea.ownerName} </small>
+            <i className="material-icons">{idea.isCompleted() ? 'done' : 'hourglass_empty'}</i> {idea.name}<small> by {idea.ownerName} </small>
           </Link>
 
         </h4>
-        <p className="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue) }/>
+        <p className="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue)} />
 
         <ButtonGroup className="btn-group-raised">
           {idea.ownerId === this.currentUser ?
-            <Button bsSize="xs" onClick={this.deleteThisIdea.bind(this) }>
-              <i className="material-icons">delete</i>
+            <Button bsSize="small" className="btn-flat" onClick={this.deleteThisIdea.bind(this)}>
+              <i className="fa fa-fw fa-trash-o"></i>
             </Button>
             : ''
           }
-
-          {this.renderVoteControls(idea) }          
-        </ButtonGroup>       
+        </ButtonGroup>        
+          {this.renderVoteControls(idea)}
+        
 
         <span className="pull-right badge">{idea.comments}</span>
 

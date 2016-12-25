@@ -1,8 +1,13 @@
-@import "./vendor/_variables.scss";
-@import './_colors.scss';
-@import './_variables.scss';
+// @import "./vendor/_variables.scss";
+// @import './_colors.scss';
+// @import './_variables.scss';
 
-@import "./vendor/_mixins.scss";
-@import "./vendor/_shadows.scss";
-@import './vendor/_core.scss';
-@import './vendor/ripples.scss';
+// @import "./vendor/_mixins.scss";
+// @import "./vendor/_shadows.scss";
+// @import './vendor/_core.scss';
+// @import './vendor/ripples.scss';
+
+// @import "./plugins/iCheck/all.scss";
+
+@import "./vendor/adminlte/AdminLTE.scss";
+@import "./vendor/adminlte/skins/_all-skins.scss";

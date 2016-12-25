@@ -2,7 +2,8 @@ import './App.scss';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
-import 'admin-lte/dist/js/app.js';
+import 'bootstrap-material-design/dist/js/material.js';
+import 'bootstrap-material-design/dist/js/ripples.js';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Ideas } from '../../api/ideas/ideas.js';
@@ -13,7 +14,7 @@ import IdeasContainer from '../containers/IdeasContainer.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 50000;
 
-export default class App extends React.Component {
+export default class AppAuth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,48 +80,51 @@ export default class App extends React.Component {
     return (
 
       <div>
-        <header className="main-header">
-          <a href="/" className="logo"><span><img src="/icons/logo.svg" /></span>Pro-Ideas</a>
-          <Navbar staticTop>            
+        <header>
+          <Navbar>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="/">
+                  <span><img src="/icons/logo.svg" /></span>
+                  Pro-Ideas
+                </a>
+              </Navbar.Brand>
+            </Navbar.Header>
             <Nav>
               <NavItem eventKey={1} href="/ideas">Ideas</NavItem>
             </Nav>
             <Nav pullRight>
               <UserMenu user={user} logout={this.logout} />
             </Nav>
-          </Navbar>
+          </Navbar>         
 
         </header>
-        <section className="container">
-          {this.props.content}
-        </section>
-        <div id="container" className={menuOpen ? 'content-wrapper menu-open' : 'content-wrapper'}>
-          <section id="menu">
 
-          </section>
-          <div className="content-overlay" onClick={closeMenu}></div>
-          <section className="content" id="content-container">
-            <ReactCSSTransitionGroup
-              transitionName="fade"
-              transitionEnterTimeout={200}
-              transitionLeaveTimeout={200}
-              >
-              {loading
-                ? <Loading key="loading" />
-                : clonedChildren}
-            </ReactCSSTransitionGroup>
-          </section>
-        </div>
-        <footer>
-          {this.props.footer || ''}
-        </footer>
+            <div id="container" className={menuOpen ? 'menu-open' : ''}>
+
+              <div className="content-overlay" onClick={closeMenu}></div>
+
+              <ReactCSSTransitionGroup
+                transitionName="fade"
+                transitionEnterTimeout={200}
+                transitionLeaveTimeout={200}
+                >
+                {loading
+                  ? <Loading key="loading" />
+                  : clonedChildren}
+              </ReactCSSTransitionGroup>
+
+            </div>
+            <footer>
+              {this.props.footer || ''}
+            </footer>
       </div>
-    );
+          );
   }
 }
 
 App.propTypes = {
-  user: React.PropTypes.object,      // current meteor user
+            user: React.PropTypes.object,      // current meteor user
   connected: React.PropTypes.bool,   // server connection status
   loading: React.PropTypes.bool,     // subscription status
   menuOpen: React.PropTypes.bool,    // is side menu open?
@@ -131,5 +135,5 @@ App.propTypes = {
 };
 
 App.contextTypes = {
-  router: React.PropTypes.object,
+            router: React.PropTypes.object,
 };

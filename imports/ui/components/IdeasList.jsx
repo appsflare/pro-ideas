@@ -2,7 +2,7 @@ import './IdeasList.scss';
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
-import Idea from './idea';
+import Idea from './Idea';
 
 export class IdeasList extends Component {
 

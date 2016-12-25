@@ -10,9 +10,9 @@ export class FacebookAuthServiceProvider extends BaseAuthServiceProvider {
             { service: this.serviceProviderName },
             {
                 $set: {
-                    appId: process.env.FB_CLIENTID,
+                    appId: process.env.FACEBOOK_CLIENTID,
                     loginStyle: process.env.LOGIN_STYLE,
-                    secret: process.env.FB_CLIENTSECRET
+                    secret: process.env.FACEBOOK_CLIENTSECRET
                 }
             });
     }
