@@ -7,6 +7,7 @@ import AppContainer from '../../ui/containers/AppContainer.jsx';
 import AppAuthContainer from '../../ui/containers/AppAuthContainer.jsx';
 import IdeasContainer from '../../ui/containers/IdeasContainer.jsx';
 import IdeaContainer from '../../ui/containers/IdeaContainer.jsx';
+import ProfileContainer from '../../ui/containers/ProfileContainer.jsx';
 import AuthPageSignIn from '../../ui/pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../../ui/pages/AuthPageJoin.jsx';
 import ChangePasswordPage from '../../ui/pages/ChangePasswordPage.jsx';
@@ -23,6 +24,7 @@ export const renderRoutes = () => {
       <Route path="/" component={AppContainer}>
         <Route path="ideas" component={IdeasContainer} params={{ all: true }} />
         <Route path="my-ideas" component={IdeasContainer} params={{ all: false }} />
+        <Route path="profile/:ownerId" component={ProfileContainer} params={{ all: false }} />
         <Route name="idea" path="idea/:id" component={IdeaContainer} />
 
         <Route path="change-password" component={ChangePasswordPage} />

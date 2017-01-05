@@ -142,9 +142,8 @@ const followers_METHODS = _.pluck([
   getFollowersCount,
   getFollowing,
   getFollowingCount,
-  checkIfFollowing,
-  deleteUserData
-], 'name')
+  checkIfFollowing
+], 'name');
 
 if (Meteor.isServer) {
   // Only allow 5 list operations per connection per second

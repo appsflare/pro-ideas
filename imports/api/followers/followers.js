@@ -2,8 +2,14 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/factory';
 
+import followersCountDenormalizer from './followersCountDenormalizer';
 
 class FollowersCollection extends Mongo.Collection {
+  insert (follower, callback) {
+    const result = super.insert(follower,callback);
+    followersCountDenormalizer.updateFollowersCount(follower);
+    return result;
+  }
   remove(selector, callback) {
     return super.remove(selector, callback);
   }

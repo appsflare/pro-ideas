@@ -27,30 +27,26 @@ export default class Idea extends Component {
   render() {
     const idea = this.props.idea;
     return (
-      <div>
-        <h4 className="list-group-item-heading">
+      <div className="post">
+          <div className="user-block">
+            <img className="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image" />
+            <span className="username">
+            <Link to={`/idea/${idea._id}`}>{idea.name}</Link>
+              {/*<a href="#" className="pull-right btn-box-tool"><i className="fa fa-times" /></a>*/}
+            </span>
+            <span className="description">Shared by {idea.ownerName}</span>
+          </div>
+          {/* /.user-block */}
+          <p dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue)} />
+          <ul className="list-inline">            
+            <li>{this.renderVoteControls(idea)}
+            </li>
+            <li className="pull-right">
+              <a href="#" className="link-black text-sm"><i className="fa fa-comments-o margin-r-5" /> Comments ({idea.comments})</a></li>
+          </ul>          
+        </div>       
 
-          <Link to={`/idea/${idea._id}`}>
-            <i className="material-icons">{idea.isCompleted() ? 'done' : 'hourglass_empty'}</i> {idea.name}<small> by {idea.ownerName} </small>
-          </Link>
-
-        </h4>
-        <p className="list-group-item-text" dangerouslySetInnerHTML={textUtils.createMarkup(idea.businessValue)} />
-
-        <ButtonGroup className="btn-group-raised">
-          {idea.ownerId === this.currentUser ?
-            <Button bsSize="small" className="btn-flat" onClick={this.deleteThisIdea.bind(this)}>
-              <i className="fa fa-fw fa-trash-o"></i>
-            </Button>
-            : ''
-          }
-        </ButtonGroup>        
-          {this.renderVoteControls(idea)}
-        
-
-        <span className="pull-right badge">{idea.comments}</span>
-
-      </div>
+      
     );
   }
 }

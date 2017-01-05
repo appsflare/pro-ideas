@@ -28,8 +28,7 @@ export const update = new ValidatedMethod({
     return Profiles.upsert({ ownerId: this.userId }, {
       $set: {
         userName,
-        location,
-        skills,
+        location,        
         ownerId: this.userId
       }
     });
@@ -39,10 +38,7 @@ export const update = new ValidatedMethod({
 // Get list of all method names on ideas
 const profiles_METHODS = _.pluck([
 
-  update,
-  remove,
-  markAsCompleted,
-  createKanbanBoard
+  update
 ], 'name')
 
 if (Meteor.isServer) {

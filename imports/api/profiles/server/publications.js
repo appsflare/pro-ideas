@@ -2,11 +2,11 @@
 
 import { Meteor } from 'meteor/meteor';
 
-import { Ideas } from '../ideas.js';
+import { Profiles } from '../profiles';
 
- Meteor.publish('ideas.public', function () {
-    return Ideas.find({}, { fields: Ideas.publicFields, sort: { createdAt: -1 } })
-  })
-  Meteor.publish('ideas.public.findOne', function (ideaId) {
-    return Ideas.find({_id: ideaId}, { fields: Ideas.publicFields})
-  });
+Meteor.publish('profiles.public', function () {
+  return Profiles.find({}, { fields: Profiles.publicFields, sort: { createdAt: -1 } })
+})
+Meteor.publish('profiles.public.findOne', function (ownerId) {
+  return Profiles.find({ ownerId }, { fields: Profiles.publicFields })
+});

@@ -9,13 +9,13 @@ class ProfilesCollection extends Mongo.Collection {
   }
 }
 
-export const Profiles = new ProfilesCollection('Ideas');
+export const Profiles = new ProfilesCollection('profiles');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Profiles.deny({
   insert() { return true; },
   update() { return true; },
-  remove() { return true; },
+  remove() { return true; }
 });
 
 Profiles.schema = new SimpleSchema({
@@ -25,6 +25,7 @@ Profiles.schema = new SimpleSchema({
   },
   education: {
     type: String,
+    optional: true,
     defaultValue: ''
   },
   location: {
@@ -62,31 +63,21 @@ Profiles.publicFields = {
   education: 1,
   location: 1,
   ownerId: 1,
+
   ideasCount: 1,
   followersCount: 1,
-  followingCount: 1,
-  followers: 0,
-  following: 0
+  followingCount: 1
 };
 
 Factory.define('Profile', Profiles, {})
 
 Profiles.helpers({
-  // A Idea is considered to be private if it has a userId set
-
-  getFollowers() {
-    return Profiles.find({ _id: { $in: this.followers }, fields: Profile.publicFields })
-  },
-
-  getFollowingUsers() {
-    return Profiles.find({ _id: { $in: this.following }, fields: Profile.publicFields })
-  },
 
   editableBy(userId) {
     if (!this.ownerId) {
-      return true
+      return true;
     }
 
     return this.ownerId === userId
   }
-})
+});
