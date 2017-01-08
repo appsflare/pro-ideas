@@ -29,7 +29,7 @@ export default class Idea extends Component {
     return (
       <div className="post">
           <div className="user-block">
-            <img className="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image" />
+            <img className="img-circle img-bordered-sm" src="https://www.gravatar.com/avatar/00000000000000000000000000000000" alt="user image" />
             <span className="username">
             <Link to={`/idea/${idea._id}`}>{idea.name}</Link>
               {/*<a href="#" className="pull-right btn-box-tool"><i className="fa fa-times" /></a>*/}

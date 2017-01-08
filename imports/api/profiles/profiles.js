@@ -38,7 +38,11 @@ Profiles.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
     denyUpdate: true,
   },
-
+  profileImage: {
+    type: String,
+    optional: true,
+    defaultValue: 'https://www.gravatar.com/avatar/00000000000000000000000000000000'
+  },
   ideasCount: {
     type: Number,
     optional: true,
@@ -63,6 +67,7 @@ Profiles.publicFields = {
   education: 1,
   location: 1,
   ownerId: 1,
+  profileImage: 1,
 
   ideasCount: 1,
   followersCount: 1,

@@ -6,7 +6,9 @@ import faker from 'faker';
 import votesCountDenormalizer from './votesCountDenormalizer';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+import emitter from '../events';
 
+import { Ideas } from '../ideas/ideas';
 
 
 class VotesCollection extends Mongo.Collection {
@@ -15,11 +17,17 @@ class VotesCollection extends Mongo.Collection {
     ourDoc.createdAt = ourDoc.createdAt || new Date();
     const result = super.insert(ourDoc, callback);
     votesCountDenormalizer.afterInsertVote(ourDoc);
+
+    emitter.emit('ideas.votes', super.findOne({ _id: result }));
+
     return result;
   }
   update(selector, modifier) {
     const result = super.update(selector, modifier);
     votesCountDenormalizer.afterUpdateVote(selector, modifier);
+
+    emitter.emit('ideas.votes', super.findOne(selector));
+
     return result;
   }
   remove(selector) {
@@ -65,4 +73,11 @@ Votes.deny({
   remove() { return true; },
 });
 
-Factory.define('Vote', Votes, {})
+Factory.define('Vote', Votes, {
+});
+
+Votes.helpers({
+  getIdea() {
+    return Ideas.findOne(this.ideaId);
+  }
+});

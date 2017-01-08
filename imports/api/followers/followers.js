@@ -4,18 +4,39 @@ import { Factory } from 'meteor/factory';
 
 import followersCountDenormalizer from './followersCountDenormalizer';
 
+function runDenormalizations(selector) {
+  console.log('updating followers count!!', selector);
+  var entry = Followers.findOne(selector);
+  if (!entry) { return; }
+  followersCountDenormalizer.updateFollowersCount(entry.follower);
+  followersCountDenormalizer.updateFollowersCount(entry.followee);
+}
+
 class FollowersCollection extends Mongo.Collection {
-  insert (follower, callback) {
-    const result = super.insert(follower,callback);
-    followersCountDenormalizer.updateFollowersCount(follower);
+  insert(follower, callback) {
+    const result = super.insert(follower, callback);
+    runDenormalizations({ _id: result });
+    return result;
+  }
+  update(selector) {
+    const result = super.update(...arguments);
+    runDenormalizations(selector);
     return result;
   }
   remove(selector, callback) {
-    return super.remove(selector, callback);
+    const entries = super.find(selector).fetch();
+    const result = super.remove(selector, callback);
+
+    entries.forEach(entry => {
+      followersCountDenormalizer.updateFollowersCount(entry.follower);
+      followersCountDenormalizer.updateFollowersCount(entry.followee);
+    });
+
+    return result;
   }
 }
 
-export const Followers = new FollowersCollection('Followers');
+export const Followers = new FollowersCollection('followers');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Followers.deny({
@@ -42,4 +63,4 @@ Followers.publicFields = {
   follower: 0
 };
 
-Factory.define('Followers', Followers, {})
+Factory.define('Follower', Followers, {})
