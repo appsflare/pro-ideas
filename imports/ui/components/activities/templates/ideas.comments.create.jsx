@@ -25,7 +25,7 @@ class IdeasCommentCreateActivity extends Component {
                 </h3>
                 <div className="timeline-body">{body}</div>
                 <div className="timeline-footer">
-                    <a className="btn btn-warning btn-flat btn-xs">View idea</a>
+                    <a href={`/idea/${itemId}`} className="btn btn-warning btn-flat btn-xs">View idea</a>
                 </div>
             </div></li>
     }
