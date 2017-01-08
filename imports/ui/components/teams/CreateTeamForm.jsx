@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {Meteor} from 'meteor/meteor';
-import {insert} from '../../../api/teams/methods';
+import { Meteor } from 'meteor/meteor';
+import { insert } from '../../../api/teams/methods';
 import uuid from 'uuid';
 import Select from 'react-select';
 import UserPicker from '../UserPicker'
@@ -20,8 +20,8 @@ export class CreateTeamForm extends Component {
 
   _setInitialState() {
     this.state = {
-      error:'',
-      name: '',      
+      error: '',
+      name: '',
       members: []
     };
   }
@@ -43,7 +43,7 @@ export class CreateTeamForm extends Component {
         return { memberId: mem };
       }),
       ideaId: this.props.ideaId
-    };    
+    };
 
     insert.call(newTeam, err => {
 
@@ -87,21 +87,26 @@ export class CreateTeamForm extends Component {
             {error}
           </div> : ''}
 
-        <form onSubmit={this.handleSubmit.bind(this) } >
+        <form onSubmit={this.handleSubmit.bind(this)} >
           <div className="form-group">
-            <div className="col-sm-12">
-              <input type="text" name="name" value={this.state.name} onChange={this.onInputChange.bind(this) } ref="nameInput" className="form-control" placeholder="Name your team"/>
+            <div className="row">
+              <div className="col-sm-12">
+                <input type="text" name="name" value={this.state.name} onChange={this.onInputChange.bind(this)} ref="nameInput" className="form-control" placeholder="Name your team" />
+              </div>
             </div>
           </div>
           <div className="form-group">
-            <div className="col-sm-12">
-              <UserPicker multi={true} placeholder="Select team members" value={members} onChange={this.memberSelected} />
+            <div className="row">
+              <div className="col-sm-12">
+                <UserPicker multi={true} placeholder="Select team members" value={members} onChange={this.memberSelected} />
+              </div>
             </div>
           </div>
-
-          <div className="form-group">
-            <div className="col-sm-12">
-              <button type="submit" className="btn btn-raised btn-primary">Create Team!</button>
+          <div className="row">
+            <div className="form-group">
+              <div className="col-sm-12">
+                <button type="submit" className="btn btn-raised btn-primary">Create Team!</button>
+              </div>
             </div>
           </div>
         </form>
