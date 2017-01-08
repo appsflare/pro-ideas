@@ -128,11 +128,11 @@ export class ProfilePage extends Component {
                             </ul>
                             <div className="tab-content">
                                 <div className="tab-pane" id="activity">
-                                    <ActivityTimeline activityStreams={contributionStreams} />
+                                    {contributionStreams && contributionStreams.length ? <ActivityTimeline activityStreams={contributionStreams} /> : 'No contributions made yet!!'}
                                 </div>
                                 {/* /.tab-pane */}
                                 <div className="tab-pane active" id="timeline">
-                                    <ActivityTimeline activityStreams={activityStreams} />
+                                    {activityStreams && activityStreams.length ? <ActivityTimeline activityStreams={activityStreams} /> : 'No Activities done yet!!'}
                                 </div>
                                 {/* /.tab-pane */}
                                 <div className="tab-pane" id="settings">
