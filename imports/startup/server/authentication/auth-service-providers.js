@@ -29,9 +29,9 @@ export class GoogleAuthServiceProvider extends BaseAuthServiceProvider {
             { service: this.serviceProviderName },
             {
                 $set: {
-                    appId: process.env.GOOGLE_CLIENTID,
-                    loginStyle: process.env.LOGIN_STYLE,
-                    secret: process.env.GOOGLE_CLIENTSECRET
+                    clientId: process.env.GOOGLE_CLIENTID,
+                    loginStyle: 'redirect',
+                    clientSecret: process.env.GOOGLE_CLIENTSECRET
                 }
             });
     }
@@ -47,9 +47,9 @@ export class GitHubAuthServiceProvider extends BaseAuthServiceProvider {
             { service: this.serviceProviderName },
             {
                 $set: {
-                    appId: process.env.GITHUB_CLIENTID,
+                    clientId: process.env.GITHUB_CLIENTID,
                     loginStyle: process.env.LOGIN_STYLE,
-                    secret: process.env.GITHUB_CLIENTSECRET
+                    clientSecret: process.env.GITHUB_CLIENTSECRET
                 }
             });
     }

@@ -18,10 +18,10 @@ class IdeasCreateActivity extends Component {
             <i className="fa fa-flash bg-blue"></i>
             <div className="timeline-item">
                 <span className="time"><i className="fa fa-clock-o" /> {moment(createdAt).fromNow()}</span>
-                <h3 className="timeline-header"><a href={`/profile/${ownerId}`}>{this.currentUser == ownerId ? 'You' : ownerName}</a> shared an idea</h3>
+                <h3 className="timeline-header"><a href={`/profile/${ownerId}`}>{this.currentUser == ownerId ? 'You' : ownerName}</a> shared an <a href={`/idea/${itemId}`}> idea</a></h3>
                 <div className="timeline-body">{body}</div>
                 <div className="timeline-footer">
-                    <a className="btn btn-primary btn-xs">View idea</a>
+                    <a href={`/idea/${itemId}`} className="btn btn-primary btn-xs">View idea</a>
                 </div>
             </div>
         </li>
