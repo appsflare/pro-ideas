@@ -14,13 +14,17 @@ import './security.js';
 // as an API to the client.
 import './register-api.js';
 
+import './migrations/index';
+
 
 
 Meteor.startup(() => {
+    Migrations.migrateTo('latest');    
 
     ['fonts.googleapis.com',
-        'fonts.gstatic.com',
-        'cdnjs.cloudflare.com',
+    'fonts.gstatic.com',
+    'cdnjs.cloudflare.com',
+    'www.gravatar.com',
         'at.alicdn.com']
         .forEach(origin => BrowserPolicy.content.allowOriginForAll(origin));
 

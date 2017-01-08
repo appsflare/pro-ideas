@@ -1,10 +1,12 @@
-import { Mongo } from 'meteor/mongo'
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
-import { Factory } from 'meteor/factory'
-import { Teams } from '../teams/teams'
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Factory } from 'meteor/factory';
+import { Teams } from '../teams/teams';
+
+import emitter from '../events';
 
 class IdeasCollection extends Mongo.Collection {
-  insert (Idea, callback) {
+  insert(Idea, callback) {
     const ourIdea = Idea
     if (!ourIdea.name) {
       let nextLetter = 'A'
@@ -16,10 +18,11 @@ class IdeasCollection extends Mongo.Collection {
         ourIdea.name = `Idea ${nextLetter}`
       }
     }
-
-    return super.insert(ourIdea, callback)
+    const result = super.insert(ourIdea, callback);
+    emitter.emit('ideas.create', super.findOne({ _id: result }));
+    return result;
   }
-  remove (selector, callback) {
+  remove(selector, callback) {
     return super.remove(selector, callback)
   }
 }
@@ -61,12 +64,12 @@ Ideas.schema = new SimpleSchema({
   ownerName: {
     type: String
   },
-  status:{
+  status: {
     type: String,
-    allowedValues: ['new','completed'],
+    allowedValues: ['new', 'completed'],
     defaultValue: 'new'
   },
-  kanbanBoardId:{
+  kanbanBoardId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     optional: true
@@ -99,8 +102,8 @@ Ideas.publicFields = {
   ownerId: 1,
   ownerName: 1,
   status: 1,
-  kanbanBoardId:1, 
-  comments: 1,  
+  kanbanBoardId: 1,
+  comments: 1,
   upVotes: 1,
   downVotes: 1
 }
@@ -112,11 +115,11 @@ Ideas.helpers({
   isPrivate() {
     return !!this.ownerId
   },
-  isCompleted(){
+  isCompleted() {
     return this.status === 'completed';
   },
   getTeam() {
-    return Teams.find({ideaId: this._id})
+    return Teams.find({ ideaId: this._id })
   },
   hasKanbanBoard(userId) {
     return !!this.kanbanBoardId

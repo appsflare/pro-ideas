@@ -24,8 +24,7 @@ export default class App extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-  componentDidMount() {
-    $.material.init();
+  componentDidMount() {    
     setTimeout(() => {
       /* eslint-disable react/no-did-mount-set-state */
       this.setState({ showConnectionIssue: true });
@@ -78,7 +77,7 @@ export default class App extends React.Component {
 
     return (
 
-      <div>
+      <div className="wrapper">
         <header className="main-header">
           <a href="/" className="logo"><span><img src="/icons/logo.svg" /></span>Pro-Ideas</a>
           <Navbar staticTop>            

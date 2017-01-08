@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import {Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
+import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 
 export default class UserMenu extends React.Component {
   constructor(props) {
@@ -8,6 +8,10 @@ export default class UserMenu extends React.Component {
     this.state = {
       open: false,
     };
+  }
+
+  get currentUser() {
+    return Meteor.userId();
   }
 
   renderLoggedIn() {
@@ -19,6 +23,7 @@ export default class UserMenu extends React.Component {
     return (<NavDropdown eventKey={4} title={fullName} id="nav-dropdown">
       <MenuItem href="/my-ideas">My Ideas</MenuItem>
       <MenuItem divider />
+      <MenuItem href={`/profile/${this.currentUser}`}>Profile</MenuItem>
       <MenuItem href="/change-password">Change Password</MenuItem>
       <MenuItem onClick={logout}>Sign Out</MenuItem>
     </NavDropdown>);

@@ -6,12 +6,17 @@ import commentsCountDenormalizer from './commentsCountDenormalizer';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Ideas } from '../ideas/ideas';
 
+import emitter from '../events';
+
+
 class IdeaCommentsCollection extends Mongo.Collection {
   insert(doc, callback) {
     const ourDoc = doc;
     ourDoc.createdAt = ourDoc.createdAt || new Date();
     const result = super.insert(ourDoc, callback);
     commentsCountDenormalizer.afterInsertComment(ourDoc);
+    emitter.emit('ideas.comments.create', super.findOne({ _id: result }));
+
     return result;
   }
   update(selector, modifier) {
@@ -36,7 +41,7 @@ IdeaComments.schema = new SimpleSchema({
     denyUpdate: true,
   },
   text: {
-    type: String    
+    type: String
   },
   createdAt: {
     type: Date,
