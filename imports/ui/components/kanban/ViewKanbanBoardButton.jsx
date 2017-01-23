@@ -8,6 +8,8 @@ export class ViewKanbanBoardButton extends Component {
 
     static get propTypes() {
         return {
+            isCurrentUserTheOwner: PropTypes.bool.isRequired,
+            isCreated: PropTypes.bool.isRequired,
             ideaId: PropTypes.string.isRequired
         }
     };
@@ -18,18 +20,27 @@ export class ViewKanbanBoardButton extends Component {
     }
 
     _createKanbanBoard() {
-        const { ideaId } = this.props
+        const { ideaId, isCreated, isCurrentUserTheOwner } = this.props
+
+        if (isCreated) {
+            browserHistory.push(`/idea/${ideaId}/kanban`);
+            return;
+        }
+
+        if (!isCurrentUserTheOwner)
+        { return; }
+
         createKanbanBoard.call({ ideaId }, (err, result) => {
             if (err) {
                 return console.error(err)
             }
             browserHistory.push(`/idea/${ideaId}/kanban`)
-        })
+        });
 
     }
 
     render() {
-        const { className } = this.props
-        return <button className={`btn btn-success btn-flat ${className || ''}`} onClick={this._createKanbanBoard}>View kanban board</button>
+        const { className, isCreated, isCurrentUserTheOwner } = this.props
+        return isCurrentUserTheOwner ? <button className={`btn btn-success btn-flat ${className || ''}`} onClick={this._createKanbanBoard}>View kanban board</button> : <span />;
     }
 }

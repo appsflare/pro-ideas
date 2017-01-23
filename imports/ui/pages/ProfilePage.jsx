@@ -122,16 +122,16 @@ export class ProfilePage extends Component {
                     <div className="col-md-9">
                         <div className="nav-tabs-custom">
                             <ul className="nav nav-tabs">
-                                <li className><a href="#activity" data-toggle="tab" aria-expanded="false">Contributions</a></li>
-                                <li className="active"><a href="#timeline" data-toggle="tab" aria-expanded="true">Timeline</a></li>
+                                <li className="active"><a href="#activity" data-toggle="tab" aria-expanded="false">Contributions</a></li>
+                                <li className><a href="#timeline" data-toggle="tab" aria-expanded="true">Timeline</a></li>
                                 <li><a href="#settings" data-toggle="tab">Settings</a></li>
                             </ul>
                             <div className="tab-content">
-                                <div className="tab-pane" id="activity">
+                                <div className="tab-pane active" id="activity">
                                     {contributionStreams && contributionStreams.length ? <ActivityTimeline activityStreams={contributionStreams} /> : 'No contributions made yet!!'}
                                 </div>
                                 {/* /.tab-pane */}
-                                <div className="tab-pane active" id="timeline">
+                                <div className="tab-pane" id="timeline">
                                     {activityStreams && activityStreams.length ? <ActivityTimeline activityStreams={activityStreams} /> : 'No Activities done yet!!'}
                                 </div>
                                 {/* /.tab-pane */}

@@ -42,7 +42,7 @@ export default class Idea extends Component {
             <li>{this.renderVoteControls(idea)}
             </li>
             <li className="pull-right">
-              <a href="#" className="link-black text-sm"><i className="fa fa-comments-o margin-r-5" /> Comments ({idea.comments})</a></li>
+              <a href={`/idea/${idea._id}`} className="link-black text-sm"><i className="fa fa-comments-o margin-r-5" /> Comments ({idea.comments})</a></li>
           </ul>          
         </div>       
 
