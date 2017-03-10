@@ -95,7 +95,7 @@ export class IdeaPage extends Component {
             {this._renderVoteControls(idea)}
           </ButtonGroup>
           {<MarkIdeaAsCompleted className="pull-right hidden" idea={idea} />}
-          {idea.kanbanBoardId ? <ViewKanbanBoardButton className="pull-right" ideaId={idea._id} /> : ''}
+           <ViewKanbanBoardButton className="pull-right" isCreated={idea.hasKanbanBoard()} isCurrentUserTheOwner={isCurrentUserTheOwner} ideaId={idea._id} />
         </div>
 
         <div className="idea-details-container">

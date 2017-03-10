@@ -24,7 +24,15 @@ export default class App extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-  componentDidMount() {    
+  get currentUser() {
+    return Meteor.userId();
+  }
+
+  componentDidMount() {
+    if (!this.currentUser) {
+      this.context.router.push('/auth/signin');
+      return;
+    }
     setTimeout(() => {
       /* eslint-disable react/no-did-mount-set-state */
       this.setState({ showConnectionIssue: true });
@@ -79,8 +87,8 @@ export default class App extends React.Component {
 
       <div className="wrapper">
         <header className="main-header">
-          <a href="/" className="logo"><span><img src="/icons/logo.svg" /></span>Pro-Ideas</a>
-          <Navbar staticTop>            
+          <a href="/" className="logo"><img src="/icons/logo_white.png"/></a>
+          <Navbar staticTop>
             <Nav>
               <NavItem eventKey={1} href="/ideas">Ideas</NavItem>
             </Nav>

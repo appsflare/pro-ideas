@@ -15,6 +15,7 @@ export class KanbanPage extends Component {
   render() {
     const { idea } = this.props;
     return (<div className="container-fluid">
+      <h1>Manage Tasks for {idea.name}</h1>
       <KanbanApp boardId={idea.kanbanBoardId}/>
     </div>
     );

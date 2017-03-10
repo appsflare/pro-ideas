@@ -14,18 +14,18 @@ emitter.on(IDEAS_CREATE, idea => {
     }, err => err => console.error(err));
 });
 
-emitter.on(IDEAS_COMMENTS_CREATE, comment => {    
+emitter.on(IDEAS_COMMENTS_CREATE, comment => {
     add({
         type: IDEAS_COMMENTS_CREATE,
         body: comment.text,
         itemId: comment._id,
-        itemOwnerId: comment.ownerId,        
+        itemOwnerId: comment.ownerId,
         itemDetails: { ideaId: comment.ideaId },
         targetOwnerId: comment.getIdea().ownerId
     }, err => err => console.error(err));
 });
 
-emitter.on(IDEAS_VOTES, vote => {    
+emitter.on(IDEAS_VOTES, vote => {
     add({
         type: IDEAS_VOTES,
         body: '',

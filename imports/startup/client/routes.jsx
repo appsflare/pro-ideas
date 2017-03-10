@@ -28,7 +28,7 @@ export const renderRoutes = () => {
         <Route name="idea" path="idea/:id" component={IdeaContainer} />
 
         <Route path="change-password" component={ChangePasswordPage} />
-        <Route path="idea/:ideaId/kanban" component={KanbanPageContainer} />
+        <Route path="idea/:ideaId/tasks" component={KanbanPageContainer} />
         <Route path="*" component={NotFoundPage} />
       </Route>
     </Router>

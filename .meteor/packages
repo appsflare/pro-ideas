@@ -84,3 +84,4 @@ accounts-facebook
 accounts-google
 accounts-github
 percolate:migrations
+email

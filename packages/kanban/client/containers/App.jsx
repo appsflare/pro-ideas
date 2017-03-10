@@ -15,8 +15,7 @@ import {Tasks} from '../../api/tasks/tasks';
 class App extends React.Component {
   render() {
     return (
-      <div className="react-kanban">
-        <h1 className="app-title">Tasks</h1>
+      <div className="react-kanban">        
         <button
           className="add-lane hidden"
           onClick={this.props.onCreateLane}
