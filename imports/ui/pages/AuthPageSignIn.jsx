@@ -63,7 +63,7 @@ export default class SignInPage extends React.Component {
   }
 
   render() {
-    const { errors } = this.state;    
+    const { errors } = this.state;
     const errorMessages = Object.keys(errors).map(key => errors[key]);
     const errorClass = key => errors[key] && 'error';
     let errorIndex = 0;
@@ -106,6 +106,7 @@ export default class SignInPage extends React.Component {
         </form>
         <div className="social-auth-links text-center">
           <p>- OR -</p>
+          <br />
           <button className="btn btn-block btn-social btn-github btn-flat" onClick={this.signinUsingGitHub.bind(this)}><i className="fa fa-github" /> Sign in using
             GitHub</button>
           <button className="btn btn-block btn-social btn-facebook btn-flat" onClick={this.signinUsingFacebook.bind(this)}><i className="fa fa-facebook" /> Sign in using

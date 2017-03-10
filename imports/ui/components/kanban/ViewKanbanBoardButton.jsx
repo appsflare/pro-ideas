@@ -23,7 +23,7 @@ export class ViewKanbanBoardButton extends Component {
         const { ideaId, isCreated, isCurrentUserTheOwner } = this.props
 
         if (isCreated) {
-            browserHistory.push(`/idea/${ideaId}/kanban`);
+            browserHistory.push(`/idea/${ideaId}/tasks`);
             return;
         }
 
@@ -34,13 +34,13 @@ export class ViewKanbanBoardButton extends Component {
             if (err) {
                 return console.error(err)
             }
-            browserHistory.push(`/idea/${ideaId}/kanban`)
+            browserHistory.push(`/idea/${ideaId}/tasks`)
         });
 
     }
 
     render() {
         const { className, isCreated, isCurrentUserTheOwner } = this.props
-        return isCurrentUserTheOwner ? <button className={`btn btn-success btn-flat ${className || ''}`} onClick={this._createKanbanBoard}>View kanban board</button> : <span />;
+        return isCurrentUserTheOwner ? <button className={`btn btn-success btn-flat ${className || ''}`} onClick={this._createKanbanBoard}>View Tasks</button> : <span />;
     }
 }

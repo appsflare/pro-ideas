@@ -84,10 +84,7 @@ export default class AppAuth extends React.Component {
           <Navbar>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="/">
-                  <span><img src="/icons/logo.svg" /></span>
-                  Pro-Ideas
-                </a>
+                <a href="/"><img src="/icons/logo_while.png" /></a>
               </Navbar.Brand>
             </Navbar.Header>
             <Nav>
@@ -96,35 +93,35 @@ export default class AppAuth extends React.Component {
             <Nav pullRight>
               <UserMenu user={user} logout={this.logout} />
             </Nav>
-          </Navbar>         
+          </Navbar>
 
         </header>
 
-            <div id="container" className={menuOpen ? 'menu-open' : ''}>
+        <div id="container" className={menuOpen ? 'menu-open' : ''}>
 
-              <div className="content-overlay" onClick={closeMenu}></div>
+          <div className="content-overlay" onClick={closeMenu}></div>
 
-              <ReactCSSTransitionGroup
-                transitionName="fade"
-                transitionEnterTimeout={200}
-                transitionLeaveTimeout={200}
-                >
-                {loading
-                  ? <Loading key="loading" />
-                  : clonedChildren}
-              </ReactCSSTransitionGroup>
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionEnterTimeout={200}
+            transitionLeaveTimeout={200}
+          >
+            {loading
+              ? <Loading key="loading" />
+              : clonedChildren}
+          </ReactCSSTransitionGroup>
 
-            </div>
-            <footer>
-              {this.props.footer || ''}
-            </footer>
+        </div>
+        <footer>
+          {this.props.footer || ''}
+        </footer>
       </div>
-          );
+    );
   }
 }
 
 App.propTypes = {
-            user: React.PropTypes.object,      // current meteor user
+  user: React.PropTypes.object,      // current meteor user
   connected: React.PropTypes.bool,   // server connection status
   loading: React.PropTypes.bool,     // subscription status
   menuOpen: React.PropTypes.bool,    // is side menu open?
@@ -135,5 +132,5 @@ App.propTypes = {
 };
 
 App.contextTypes = {
-            router: React.PropTypes.object,
+  router: React.PropTypes.object,
 };
