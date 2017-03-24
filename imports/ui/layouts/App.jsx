@@ -87,7 +87,7 @@ export default class App extends React.Component {
 
       <div className="wrapper">
         <header className="main-header">
-          <a href="/" className="logo"><img src="/icons/logo_white.png"/></a>
+          <a href="/" className="logo"><img src="/icons/logo.png"/></a>
           <Navbar staticTop>
             <Nav>
               <NavItem eventKey={1} href="/ideas">Ideas</NavItem>

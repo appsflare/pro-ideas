@@ -20,7 +20,7 @@ export default class AppAuthContainer extends Component {
             <div className="hold-transition login-page">
                 <div className="login-box">
                     <div className="login-logo">
-                        <a href="/"><img src="/icons/logo_blue.png" /></a>
+                        <a href="/"><img src="/icons/logo.png" /></a>
                     </div>
                     {this.props.children}
                 </div>

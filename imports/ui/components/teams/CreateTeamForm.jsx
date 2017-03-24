@@ -105,7 +105,7 @@ export class CreateTeamForm extends Component {
           <div className="row">
             <div className="form-group">
               <div className="col-sm-12">
-                <button type="submit" className="btn btn-raised btn-primary">Create Team!</button>
+                <button type="submit" className="btn btn-raised btn-flat btn-primary">Create Team!</button>
               </div>
             </div>
           </div>
