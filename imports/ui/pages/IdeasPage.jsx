@@ -28,7 +28,7 @@ export class IdeasPage extends Component {
     const {ideas} = this.props;
     return (
       <div className="container">
-        <div ref="createIdeaBox" className="box box-solid box-primary">
+        <div ref="createIdeaBox" className="box box-solid box-default">
           <div className="box-header with-border">
             <h3 className="box-title">Have an idea flashing in your head?</h3>
             <div className="box-tools pull-right">

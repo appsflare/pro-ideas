@@ -152,7 +152,7 @@ export class IdeaPage extends Component {
               : ''}
             <Row className="show-grid">
               <Col md={12}>
-                <div className="box box-primary box-solid direct-chat direct-chat-primary">
+                <div className="box box-default box-solid direct-chat direct-chat-primary">
                   <div className="box-header">
                     <h3 className="box-title">Discussions  {idea.comments ? <span className="badge">{idea.comments}</span> : ''}</h3>
                     <div className="box-tools pull-right">
