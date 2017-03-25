@@ -1,9 +1,12 @@
-import { Mongo } from 'meteor/mongo'
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
-import { Factory } from 'meteor/factory'
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Factory } from 'meteor/factory';
+import { Teams } from '../teams/teams';
+
+import emitter from '../events';
 
 class IdeasCollection extends Mongo.Collection {
-  insert (Idea, callback) {
+  insert(Idea, callback) {
     const ourIdea = Idea
     if (!ourIdea.name) {
       let nextLetter = 'A'
@@ -15,10 +18,11 @@ class IdeasCollection extends Mongo.Collection {
         ourIdea.name = `Idea ${nextLetter}`
       }
     }
-
-    return super.insert(ourIdea, callback)
+    const result = super.insert(ourIdea, callback);
+    emitter.emit('ideas.create', super.findOne({ _id: result }));
+    return result;
   }
-  remove (selector, callback) {    
+  remove(selector, callback) {
     return super.remove(selector, callback)
   }
 }
@@ -38,13 +42,13 @@ Ideas.schema = new SimpleSchema({
   },
   businessValue: {
     type: String,
-    defaultValue:''
+    defaultValue: ''
   },
   definitionOfSuccess: {
     type: String,
     optional: true,
-    defaultValue:''
-  },  
+    defaultValue: ''
+  },
   fundingRequirement: {
     type: String,
     optional: true,
@@ -59,6 +63,16 @@ Ideas.schema = new SimpleSchema({
   },
   ownerName: {
     type: String
+  },
+  status: {
+    type: String,
+    allowedValues: ['new', 'completed'],
+    defaultValue: 'new'
+  },
+  kanbanBoardId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
   },
   comments: {
     type: Number,
@@ -79,7 +93,6 @@ Ideas.schema = new SimpleSchema({
 
 Ideas.attachSchema(Ideas.schema)
 
-
 Ideas.publicFields = {
   name: 1,
   businessValue: 1,
@@ -88,6 +101,8 @@ Ideas.publicFields = {
   createdAt: 1,
   ownerId: 1,
   ownerName: 1,
+  status: 1,
+  kanbanBoardId: 1,
   comments: 1,
   upVotes: 1,
   downVotes: 1
@@ -99,6 +114,15 @@ Ideas.helpers({
   // A Idea is considered to be private if it has a userId set
   isPrivate() {
     return !!this.ownerId
+  },
+  isCompleted() {
+    return this.status === 'completed';
+  },
+  getTeam() {
+    return Teams.find({ ideaId: this._id })
+  },
+  hasKanbanBoard(userId) {
+    return !!this.kanbanBoardId
   },
   editableBy(userId) {
     if (!this.ownerId) {

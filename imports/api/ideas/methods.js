@@ -3,8 +3,16 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
 import { _ } from 'meteor/underscore'
+import Kanban  from 'meteor/pro-ideas:kanban'
 
 import { Ideas } from './ideas.js'
+
+function validateIdeaName(name) {
+  const count = Ideas.find({ name }).count()
+  if (count > 1) {
+    throw new Meteor.Error('idea.name.alreadyExist', 'Idea with the specified name already exist')
+  }
+}
 
 const IDEA_ID_ONLY = new SimpleSchema({
   ideaId: { type: String },
@@ -19,7 +27,9 @@ export const insert = new ValidatedMethod({
     fundingRequirement: { type: String, optional: true }
   }).validator(),
   run(newIdea) {
-    if (!this.userId) {throw new Error('not-authorized');}
+    if (!this.userId) { throw new Error('not-authorized'); }
+
+    validateIdeaName(newIdea.name)
 
     newIdea.ownerId = this.userId
     newIdea.ownerName = Meteor.user().profile.fullName
@@ -38,7 +48,7 @@ export const update = new ValidatedMethod({
     fundingRequirement: { type: String, optional: true },
   }).validator(),
   run(data) {
-    const ideaId= data.ideaId
+    const ideaId = data.ideaId
     const idea = Ideas.findOne(ideaId)
 
     if (!idea.editableBy(this.userId)) {
@@ -46,6 +56,9 @@ export const update = new ValidatedMethod({
         "You don't have permission to edit this idea.")
     }
 
+    if (idea.name !== data.name) {
+      validateIdeaName(data.name)
+    }
     // XXX the security check above is not atomic, so in theory a race condition could
     // result in exposing private data
 
@@ -53,6 +66,50 @@ export const update = new ValidatedMethod({
       $set: data,
     })
   },
+})
+
+export const markAsCompleted = new ValidatedMethod({
+  name: 'ideas.markAsCompleted',
+  validate: IDEA_ID_ONLY,
+  run({ ideaId }) {
+    const idea = Ideas.findOne(ideaId)
+
+    if (!idea.editableBy(this.userId)) {
+      throw new Meteor.Error('ideas.remove.accessDenied',
+        "You don't have permission to mark this idea as completed.")
+    }
+
+    Ideas.update(ideaId, {
+      $set: { status: 'completed' }
+    })
+  }
+})
+
+export const createKanbanBoard = new ValidatedMethod({
+  name: 'ideas.createKanbanBoard',
+  validate: IDEA_ID_ONLY,
+  run({ ideaId }) {
+    const idea = Ideas.findOne(ideaId)
+
+    if (!idea.editableBy(this.userId)) {
+      throw new Meteor.Error('ideas.viewKanban.accessDenied',
+        "You don't have permission to view the kanban board.")
+    }
+
+    if (idea.hasKanbanBoard()) {
+      return idea.kanbanBoardId
+    }
+
+    if (Meteor.isServer) {
+      const kanbanBoardId = Kanban.getBoardId(idea._id)
+
+      Ideas.update(ideaId, {
+        $set: { kanbanBoardId }
+      })
+
+      return kanbanBoardId
+    }
+  }
 })
 
 export const remove = new ValidatedMethod({
@@ -75,6 +132,8 @@ const ideas_METHODS = _.pluck([
   insert,
   update,
   remove,
+  markAsCompleted,
+  createKanbanBoard
 ], 'name')
 
 if (Meteor.isServer) {

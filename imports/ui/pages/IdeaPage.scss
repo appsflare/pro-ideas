@@ -1,0 +1,28 @@
+.idea-details-container{
+    margin:15px 0px 15px 0px; 
+}
+
+.idea-details-content-container{     
+    margin:15px 0px 15px 0px;
+
+    .idea-details-contents
+    {
+        border-right: 1px solid #eee;
+        padding-left: 0;
+
+        &:last-child{
+            padding-left: 12px;
+        }
+    } 
+
+    .idea-details-content
+    {
+        margin: 35px 0;        
+    }
+
+    .idea-detail-heading 
+    {
+        font-weight: 500;
+    }
+}
+

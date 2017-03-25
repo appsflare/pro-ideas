@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import {Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
+import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 
 export default class UserMenu extends React.Component {
   constructor(props) {
@@ -10,6 +10,10 @@ export default class UserMenu extends React.Component {
     };
   }
 
+  get currentUser() {
+    return Meteor.userId();
+  }
+
   renderLoggedIn() {
     const { open } = this.state;
     const { user, logout } = this.props;
@@ -17,18 +21,20 @@ export default class UserMenu extends React.Component {
 
 
     return (<NavDropdown eventKey={4} title={fullName} id="nav-dropdown">
-      <MenuItem eventKey="4.1" href="/my-ideas">My Ideas</MenuItem>
+      <MenuItem href="/my-ideas">My Ideas</MenuItem>
       <MenuItem divider />
-      <MenuItem eventKey="4.2" onClick={logout}>Sign Out</MenuItem>
+      <MenuItem href={`/profile/${this.currentUser}`}>Profile</MenuItem>
+      <MenuItem href="/change-password">Change Password</MenuItem>
+      <MenuItem onClick={logout}>Sign Out</MenuItem>
     </NavDropdown>);
   }
 
   renderLoggedOut() {
     return (
-      <Nav>
-        <NavItem eventKey="4.1" href="/join">Join</NavItem>
-        <NavItem eventKey="4.2" href="/signin">Sign In</NavItem>
-      </Nav>
+      <NavDropdown eventKey={4} title="Join/Sign In" id="nav-dropdown">
+        <MenuItem eventKey="4.1" href="/auth/join">Join</MenuItem>
+        <MenuItem eventKey="4.2" href="/auth/signin">Sign In</MenuItem>
+      </NavDropdown>
     );
   }
 

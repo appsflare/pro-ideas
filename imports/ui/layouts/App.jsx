@@ -1,11 +1,12 @@
+import './App.scss';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
+import { Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
+import 'admin-lte/dist/js/app.js';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Ideas } from '../../api/ideas/ideas.js';
 import UserMenu from '../components/UserMenu.jsx';
-import {IdeasList} from '../components/ideas-list.jsx';
 import ConnectionNotification from '../components/ConnectionNotification';
 import Loading from '../components/Loading.jsx';
 import IdeasContainer from '../containers/IdeasContainer.jsx';
@@ -17,13 +18,21 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showConnectionIssue: false,
+      showConnectionIssue: false
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.logout = this.logout.bind(this);
   }
 
+  get currentUser() {
+    return Meteor.userId();
+  }
+
   componentDidMount() {
+    if (!this.currentUser) {
+      this.context.router.push('/auth/signin');
+      return;
+    }
     setTimeout(() => {
       /* eslint-disable react/no-did-mount-set-state */
       this.setState({ showConnectionIssue: true });
@@ -70,28 +79,21 @@ export default class App extends React.Component {
     // clone route components with keys so that they can
     // have transitions   
 
-    const clonedChildren = React.cloneElement(children || <IdeasContainer route={{ params: { all: true } }}/>, {
+    const clonedChildren = React.cloneElement(children || <IdeasContainer route={{ params: { all: true } }} />, {
       key: location.pathname,
     });
 
     return (
 
-      <div>
-        <header>
-          <Navbar>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">
-                  <span><img src="/icons/logo.svg"/></span>
-                  Pro-Ideas
-                </a>
-              </Navbar.Brand>
-            </Navbar.Header>
+      <div className="wrapper">
+        <header className="main-header">
+          <a href="/" className="logo"><img src="/icons/logo.png"/></a>
+          <Navbar staticTop>
             <Nav>
               <NavItem eventKey={1} href="/ideas">Ideas</NavItem>
             </Nav>
             <Nav pullRight>
-              <UserMenu user={user} logout={this.logout}/>
+              <UserMenu user={user} logout={this.logout} />
             </Nav>
           </Navbar>
 
@@ -99,28 +101,26 @@ export default class App extends React.Component {
         <section className="container">
           {this.props.content}
         </section>
-        <footer>
-          {this.props.footer || ''}
-        </footer>
-
-
-        <div id="container" className={menuOpen ? 'menu-open' : ''}>
+        <div id="container" className={menuOpen ? 'content-wrapper menu-open' : 'content-wrapper'}>
           <section id="menu">
 
           </section>
           <div className="content-overlay" onClick={closeMenu}></div>
-          <section id="content-container">
+          <section className="content" id="content-container">
             <ReactCSSTransitionGroup
               transitionName="fade"
               transitionEnterTimeout={200}
               transitionLeaveTimeout={200}
               >
               {loading
-                ? <Loading key="loading"/>
+                ? <Loading key="loading" />
                 : clonedChildren}
             </ReactCSSTransitionGroup>
           </section>
         </div>
+        <footer>
+          {this.props.footer || ''}
+        </footer>
       </div>
     );
   }

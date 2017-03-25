@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import {cast} from '../../api/votes/methods'
+import { Button, ButtonGroup } from 'react-bootstrap';
+import { cast } from '../../api/votes/methods'
 
 export class VoteIdea extends Component {
     castVote(isUpVote) {
-        this.currentUser && cast.call( {ideaId:this.props.idea._id, isUpVote}, err=>{
-            
+        this.currentUser && cast.call({ ideaId: this.props.idea._id, isUpVote }, err => {
+
         });
     }
 
@@ -22,14 +23,16 @@ export class VoteIdea extends Component {
 
 
     _renderVoteControls(idea) {
-        return (<span> <button type="button" className={'btn btn-default' + (this.currentUser ? '' : 'disabled') } aria-label="Left Align" onClick={this.castVote.bind(this, true) }>
-            <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true">{idea.upVotes ? ' ' + idea.upVotes : ''}</span>
-        </button>
+        return (<ButtonGroup className="btn-group-raised">
+            <Button bsSize="small" className={`btn-flat${(this.currentUser ? '' : 'disabled')}`} onClick={this.castVote.bind(this, true)}>
+                <i className="fa fa-fw fa-thumbs-o-up"></i><span>{idea.upVotes ? ' ' + idea.upVotes : ''}</span>
+            </Button>
 
-            <button type="button" className={'btn btn-default' + (this.currentUser ? '' : 'disabled') } aria-label="Left Align" onClick={this.castVote.bind(this, false) }>
-                <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true">{idea.downVotes ? ' ' + idea.downVotes : ''}</span>
-            </button>
-        </span>);
+            <Button bsSize="small" className={`btn-flat${(this.currentUser ? '' : 'disabled')}`} onClick={this.castVote.bind(this, false)}>
+                <i className="fa fa-fw fa-thumbs-o-down"></i><span>{idea.downVotes ? ' ' + idea.downVotes : ''}</span>
+            </Button>
+        </ButtonGroup>
+        );
     }
 
     render() {
