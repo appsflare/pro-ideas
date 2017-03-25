@@ -1,0 +1,4 @@
+tabSize: 2
+storybook: false
+generateComponentTests: true
+generateContainerTests: true

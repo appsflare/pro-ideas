@@ -1,0 +1,14 @@
+@import '{}/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import './theme.scss';
+@import './Loading.scss';
+@import './fade-transition.scss';
+@import './spin-transition.scss';
+@import './forms.scss';
+
+html,body{
+    background: #d2d6de;  
+}
+
+// body{
+//     padding-top: 65px;
+// }
