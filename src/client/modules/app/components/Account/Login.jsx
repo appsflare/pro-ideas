@@ -55,7 +55,7 @@ export default class Login extends Component {
         const { errorMessages = [] } = this.props;
         return (<form className="form" method action>
                   <div className="header header-primary text-center">
-                    <h4 className="card-title">Log in</h4>
+                    <h4 className="card-title">Log In</h4>
                     <div className="social-line">
                       <a href="#pablo" className="btn btn-just-icon btn-simple">
                         <i className="fa fa-facebook-square" />
@@ -69,13 +69,7 @@ export default class Login extends Component {
                     </div>
                   </div>
                   <p className="description text-center">Or Be Classical</p>
-                  <div className="content">
-                    <div className="input-group">
-                      <span className="input-group-addon">
-                        <i className="material-icons">face</i>
-                      </span>
-                      <div className="form-group is-empty"><input type="text" className="form-control" placeholder="First Name..." /><span className="material-input" /></div>
-                    </div>
+                  <div className="content">                    
                     <div className="input-group">
                       <span className="input-group-addon">
                         <i className="material-icons">email</i>

@@ -16,12 +16,12 @@ export default class extends React.Component {
                         <div className="col-md-5 col-md-offset-1">
                             <div className="info info-horizontal">
                                 <div className="icon icon-rose">
-                                    <i className="material-icons">timeline</i>
+                                    <i className="material-icons">flash_on</i>
                                 </div>
                                 <div className="description">
-                                    <h4 className="info-title">Marketing</h4>
+                                    <h4 className="info-title">Share Your Ideas</h4>
                                     <p className="description">
-                                        We've created the marketing campaign of the website. It was a very interesting collaboration.
+                                        Have an idea flashing in your head? Get in and share your ideas with everyone.
                     </p>
                                 </div>
                             </div>
@@ -30,7 +30,7 @@ export default class extends React.Component {
                                     <i className="material-icons">code</i>
                                 </div>
                                 <div className="description">
-                                    <h4 className="info-title">Fully Coded in HTML5</h4>
+                                    <h4 className="info-title">Explain What It Is</h4>
                                     <p className="description">
                                         We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
                     </p>
@@ -41,8 +41,8 @@ export default class extends React.Component {
                                     <i className="material-icons">group</i>
                                 </div>
                                 <div className="description">
-                                    <h4 className="info-title">Built Audience</h4>
-                                    <p className="description">There is also a Fully Customizable CMS Admin Dashboard for this product.</p>
+                                    <h4 className="info-title">Start Collaborating</h4>
+                                    <p className="description">Build a team to realize your ideas.</p>
                                 </div>
                             </div>
                         </div>
