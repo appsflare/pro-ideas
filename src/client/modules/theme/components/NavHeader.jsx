@@ -16,7 +16,7 @@ export default React.createClass({
     return (
 
       <header className="main-header">
-        <div className="navbar navbar-fixed-top navbar-color-on-scroll">
+        <div className="navbar navbar-fixed-top navbar-inverse navbar-color-on-scroll">
 
           <div className="container">
 

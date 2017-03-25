@@ -15,28 +15,23 @@ export default class extends React.Component {
     let navAdmin = React.createElement(DropDown, { name: 'Admin', links: links4 });
 
     var links5 = [];
-    links5.push({ url: '/login', name: 'Login' });
-    links5.push({ url: '/password', name: 'Forgot passoword' });
-    links5.push({ url: '/register', name: 'Register' });
-    links5.push({ url: '/Logout', name: 'Logout' });
+    links5.push({ url: '/categories/technology', name: 'Development' });
+    links5.push({ url: '/categories/dev-ops', name: 'Dev Ops' });
+    links5.push({ url: '/categories/qa', name: 'QA' });
+    links5.push({ url: '/categories/agile', name: 'Agile' });
 
-    links5.push({ url: '/account', name: 'Account' });
-    links5.push({ url: '/profile', name: 'Profile' });
+    links5.push({ url: '/categories/iot', name: 'IoT' });
+    links5.push({ url: '/categories/mobility', name: 'Mobility' });
+    links5.push({ url: '/categories/entertainment', name: 'Entertainment' });
+    links5.push({ url: '/categories/other', name: 'Other' });
 
-    let navAccounts = React.createElement(DropDown, { name: 'Accounts', links: links5 });
+    let navCategories = React.createElement(DropDown, { name: 'Categories', links: links5 });
 
     return (
       <ul className="nav navbar-nav">
 
-        <li className="">
-          <a aria-expanded="false" role="button" href="/" target="">Start</a>
-        </li>
+        {navCategories}       
 
-        <li className="">
-          <a aria-expanded="false" role="button" href="/blog" target="">Blog</a>
-        </li>
-
-        {navAccounts}
 
         {userId ? navAdmin : null}
 

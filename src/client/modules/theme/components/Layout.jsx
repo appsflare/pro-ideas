@@ -12,11 +12,11 @@ export default class extends React.Component {
     } = this.props;
 
     return (
-      <div id="app" className="skin-black fixed sidebar-collapse">
+      <div id="app" className="fixed sidebar-collapse app-page">
 
         <NavHeader />
 
-        <div className="container">
+        <div className="wrapper">
 
           <div className="main main-raised">
 
