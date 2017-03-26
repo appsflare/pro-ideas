@@ -1,6 +1,6 @@
 import React from 'react';
 
-import dataComposer from '../../lib/Login';
+import dataComposer from '../../lib/Register';
 import Component from './Signup.jsx';
 
 const ComponentCtx = dataComposer(Component);

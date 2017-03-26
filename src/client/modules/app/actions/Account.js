@@ -1,7 +1,7 @@
 
 export default {
 
-  login({Meteor, LocalState, FlowRouter, Accounts}, email, password) {
+  login({ Meteor, LocalState, FlowRouter, Accounts }, email, password) {
 
     if (!email || !password) {
       return LocalState.set('LOGIN_ERROR', 'Login & Password are required!');
@@ -18,21 +18,17 @@ export default {
 
   },
 
-  loginErrorClear({LocalState}) {
+  loginErrorClear({ LocalState }) {
     return LocalState.set('LOGIN_ERROR', null);
   },
 
-  register({Meteor, LocalState, FlowRouter, Accounts}, email, password1, password2) {
+  register({ Meteor, LocalState, FlowRouter, Accounts }, firstName, email, password) {
 
-    if (!email || !password1 || !password2) {
+    if (!firstName || !email || !password) {
       return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fileds!');
     }
 
-    if (password1 !== password2 ) {
-      return LocalState.set('REGISTER_ERROR', 'Passwords do not match!');
-    }
-
-    Accounts.createUser({email, password: password1}, (err) => {
+    Accounts.createUser({ firstName, email, password }, (err) => {
       if (err && err.reason) {
         return LocalState.set('REGISTER_ERROR', err.reason);
       }
@@ -40,7 +36,7 @@ export default {
     });
   },
 
-  registerErrorClear({LocalState}) {
+  registerErrorClear({ LocalState }) {
     return LocalState.set('REGISTER_ERROR', null);
   },
 

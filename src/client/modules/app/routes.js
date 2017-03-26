@@ -8,7 +8,7 @@ import {
   NotFound,
   LayoutSignup,
   LayoutSignIn
-} from '/client/configs/components.js';
+} from '/client/configs/components';
 
 import Register from './components/Account/SignupWrapper.jsx';
 import Login from './components/Account/LoginWrapper.jsx';
