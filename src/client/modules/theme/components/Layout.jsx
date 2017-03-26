@@ -18,7 +18,7 @@ export default class extends React.Component {
 
         <div className="wrapper">
 
-          <div className="main main-raised">
+          <div className="main">
 
             {content()}
 

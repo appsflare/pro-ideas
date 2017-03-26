@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormsyReact from 'formsy-react';
-import { ExtendedInput } from './ExtendedInput.jsx';
+import { ExtendedInput } from '/client/lib/ExtendedInput.jsx';
 
 export default class Signup extends Component {
 

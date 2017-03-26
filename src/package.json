@@ -20,12 +20,15 @@
     "formsy-react-components": "^0.10.1",
     "mantra-core": "^1.7.0",
     "medium-editor": "^5.23.0",
+    "quill": "^1.2.2",
     "react": "^15.3.0",
     "react-addons-pure-render-mixin": "^15.4.2",
     "react-dom": "^15.3.0",
     "react-komposer": "^1.3.0",
     "react-mounter": "^1.0.0",
+    "react-quill": "^1.0.0-beta-3",
     "react-simple-di": "^1.0.1",
+    "react-stepzilla": "^4.3.4",
     "to-markdown": "^3.0.4"
   },
   "devDependencies": {
