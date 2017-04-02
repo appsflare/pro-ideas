@@ -1,8 +1,11 @@
 import React from 'react';
 import Formsy from 'formsy-react';
 import { RichTextEditor } from '/client/lib/RichTextEditor.jsx';
+import { ExtendedInput } from '/client/lib/ExtendedInput.jsx';
 
-class IdeaInfo extends React.Component {
+import editorConfig from '/client/configs/editor';
+
+export default class IdeaInfo extends React.Component {
 
     constructor() {
         super(...arguments);
@@ -11,9 +14,12 @@ class IdeaInfo extends React.Component {
 
     _setInitialState() {
         this.state = {
+            layout: 'elementOnly',
+            validatePristine: true,
+            disabled: false,
+            canSubmit: false,
             name: '',
-            businessValue: '',
-            definitionOfSuccess: '',
+            description: '',
             isFundingRequired: false,
             fundingRequirement: '',
             error: ''
@@ -30,28 +36,60 @@ class IdeaInfo extends React.Component {
         this.setState({ isFundingRequired: !this.state.isFundingRequired });
     }
 
+    onDescriptionChanged(description) {
+        this.setState({ description });
+    }
+
     validSubmit() {
 
+    }
+
+    onFormValid() {
+        // console.log('enable button');
+        this.setState({ canSubmit: true });
+    }
+
+    onFormInvalid() {
+        // console.log('disable button');
+        this.setState({ canSubmit: false });
+    }
+
+    isValid() {
+        return this.state.canSubmit;
     }
 
     render() {
         const panelId = 'info-panel';
         const panelSel = `#${panelId}`;
+        const sharedProps = {
+            layout: this.state.layout,
+            validatePristine: this.state.validatePristine,
+            disabled: this.state.disabled
+        };
+        const {shortText} = editorConfig;
         return (
             <Formsy.Form ref="form"
-                onValidSubmit={this.validSubmit.bind(this)}
-            >
-
-                
-
+                onValid={this.onFormValid.bind(this)}
+                onInvalid={this.onFormInvalid.bind(this)}
+                onValidSubmit={this.validSubmit.bind(this)}>
                 <div className="form-group">
                     <div className="col-sm-12">
-                        <input type="text" name="name" value={this.state.name} onChange={this.onInputChange} ref="nameInput" className="form-control" placeholder="New Idea" />
+                        <ExtendedInput
+                            {...sharedProps}
+                            className="form-control"
+                            name="name"
+                            type="text"
+                            placeholder="Name your idea..."
+                            autoComplete="off"
+                            validationError="Ides name is required"
+                            value={this.state.name} onChange={this.onInputChange.bind(this)}
+                            required
+                        />
                     </div>
                 </div>
                 <div className="form-group">
-                    <div className="col-sm-12">
-                        <RichTextEditor placeholder="Decribe your idea" onChange={this.businessValueUpdated} />
+                    <div className="col-sm-12 short-text">
+                        <RichTextEditor modules={shortText.modules} formats={shortText.formats} placeholder="Decribe your idea" onChange={this.onDescriptionChanged.bind(this)} />
                     </div>
                 </div>
 
@@ -61,50 +99,27 @@ class IdeaInfo extends React.Component {
                     </div>
                 </div>*/}
 
-                <div className="collapse" id={panelId}>
-                    <div className="well">
-                        <div className="form-group">
-                            <div className="col-sm-12">
-                                <div className="form-control auto-height">
-                                    {/*<ReactMarkdownMediumEditor ref="definitionOfSuccess"
-                                        options={{ placeholder: { text: 'Click here to describe Definition of Success' } }}
-                                        markdown={this.state.definitionOfSuccess}
-                                        onChange={this.definitionOfSuccessUpdated} />*/}
-                                </div>
 
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-sm-12">
-                                <div className="checkbox">
-                                    <label><input type="checkbox" onChange={this.onIsFundingRequiredChanged.bind(this)} checked={this.state.isFundingRequired} /> Funding required?</label>
-                                </div>
-                            </div>
-                        </div>
-                        {this.state.isFundingRequired ?
-                            <div className="form-group">
-                                <div className="col-sm-12">
-                                    <div className="form-control auto-height">
-                                        {/*<ReactMarkdownMediumEditor ref="fundingRequirement"
-                                            options={{ placeholder: { text: 'Click here to Explain your fuding requirement in detail' } }}
-                                            markdown={this.state.fundingRequirement}
-                                            onChange={this.fundingRequirementUpdated} />*/}
-                                    </div>
-                                </div>
-                            </div>
-                            : ''}
-
-                    </div>
-                </div>
                 <div className="form-group">
                     <div className="col-sm-12">
-                        <button type="submit" className="btn btn-raised btn-primary btn-flat">Post it!</button>
+                        <div className="checkbox">
+                            <div className="togglebutton">
+                                <label>
+                                    My idea requires funding &nbsp;
+                                    <input type="checkbox" onChange={this.onIsFundingRequiredChanged.bind(this)} checked={this.state.isFundingRequired} />
+                                    <span className="toggle" />
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                {this.state.isFundingRequired ?
+                    <div className="col-sm-12 short-text">
+                        <RichTextEditor modules={shortText.modules} formats={shortText.formats} placeholder="Decribe your funding requirement" onChange={this.onDescriptionChanged.bind(this)}>
+                        </RichTextEditor>
+                    </div>
+                    : ''}
             </Formsy.Form>);
     }
 
 }
-
-export default IdeaInfo;

@@ -5,6 +5,7 @@ import ideaComments from './idea-comments';
 import ideas from './ideas';
 import profiles from './profiles';
 import teams from './teams';
+import files from './files';
 
 export default function () {
     currentUser();
@@ -14,4 +15,5 @@ export default function () {
     ideas();
     profiles();
     teams();
+    files();
 };

@@ -19,6 +19,7 @@ caching-compiler@1.1.9
 caching-html-compiler@1.0.7
 callback-hook@1.0.10
 check@1.2.4
+coffeescript@1.11.1_4
 dburles:collection-helpers@1.1.0
 ddp@1.2.5
 ddp-client@1.2.9
@@ -64,6 +65,8 @@ npm-bcrypt@0.9.2
 npm-mongo@2.2.11_2
 observe-sequence@1.0.14
 ordered-dict@1.0.9
+ostrio:cookies@2.2.0
+ostrio:files@1.7.13
 percolate:migrations@0.9.8
 promise@0.8.8
 raix:eventemitter@0.1.3

@@ -10,7 +10,7 @@ export class RichTextEditor extends React.Component {
     }
 
     handleChange(html) {
-        this.setState({ editorHtml: html });        
+        this.setState({ editorHtml: html });
     }
 
     render() {
@@ -18,12 +18,13 @@ export class RichTextEditor extends React.Component {
             <ReactQuill
                 theme={'snow'}
                 onChange={this.handleChange}
-                value={this.state.editorHtml}
-                modules={RichTextEditor.modules}
-                formats={RichTextEditor.formats}
+                readOnly={this.props.readOnly}
+                value={this.state.editorHtml}                
+                modules={this.props.modules || RichTextEditor.modules}
+                formats={this.props.formats || RichTextEditor.formats}
                 placeholder={this.props.placeholder}
             >
-
+                <div className="form-control"/>
             </ReactQuill>
         )
     }
@@ -33,16 +34,16 @@ export class RichTextEditor extends React.Component {
  * Quill modules to attach to editor
  * See http://quilljs.com/docs/modules/ for complete options
  */
-RichTextEditor.modules = {
-    toolbar: [
-        [{ 'header': [1, 2, false] }, { 'font': [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' },
-        { 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image', 'video'],
-        ['clean']
-    ]
-}
+    RichTextEditor.modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }, { 'font': [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' },
+            { 'indent': '-1' }, { 'indent': '+1' }],
+            ['link', 'image', 'video'],
+            ['clean']
+        ]
+    }
 /* 
  * Quill editor formats
  * See http://quilljs.com/docs/formats/
@@ -59,4 +60,6 @@ RichTextEditor.formats = [
  */
 RichTextEditor.propTypes = {
     placeholder: React.PropTypes.string,
+    modules: React.PropTypes.object,
+    formats: React.PropTypes.array
 }
