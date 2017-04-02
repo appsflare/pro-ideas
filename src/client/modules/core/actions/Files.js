@@ -1,5 +1,16 @@
 export default {
 
+    removeImageFile({ Meteor, LocalState }, imageId) {
+        return new Promise((resolve, reject) => {
+            Meteor.call('images.remove', { imageId }, (err, res) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(res);
+            })
+        });
+    },
+
     uploadImage({ Meteor, LocalState, FlowRouter, Collections: { Images } }, file, linkedDocId) {
 
         const userId = Meteor.userId();

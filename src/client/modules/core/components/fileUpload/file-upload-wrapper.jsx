@@ -33,6 +33,7 @@ class FileUploadWrapper extends Component {
     }
 
     resetState() {
+        this.state = {};
         this.setState(this._getInitialState());
     }
 
@@ -79,12 +80,26 @@ class FileUploadWrapper extends Component {
         this.bindState(uploadInstance);
     }
 
+    removeFile() {
+        const { uploadedFile } = this.state;
+
+        if (!uploadedFile)
+        { return; }
+
+        const { removeFile } = this.props;
+
+        removeFile(uploadedFile._id)
+            .then(() => {
+                this.resetState();
+            });
+    }
+
     renderPreview() {
         const { uploadedFile } = this.state;
         return (
             <div className="row">
-                <div className="col-md-12">
-                    <FilePreviewer imageId={uploadedFile._id} />
+                <div className="col-md-10">
+                    <FilePreviewer imageId={uploadedFile._id} removeFile={this.removeFile.bind(this)} />
                 </div>
             </div>
         );

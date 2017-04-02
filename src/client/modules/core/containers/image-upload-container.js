@@ -10,6 +10,7 @@ export const composer = ({ context, clearErrors }, onData) => {
 
 export const depsMapper = (context, actions) => ({
     upload: actions.Files.uploadImage,
+    removeFile: actions.Files.removeImageFile,
     clearErrors: actions.Files.uploadImageClearErrors,
     context: () => context
 });
